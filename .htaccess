@@ -1,0 +1,19 @@
+RewriteEngine on
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+Rewriterule ^plantas-medicinales/?$ plantasmedicinales.php?clave=0
+Rewriterule ^plantas-medicinales/(.*)/(.*)/?$ plantasmedicinales.php?clave=$2
+Rewriterule ^propiedades-terapeuticas-y-medicinales/(.*)/(.*)/?$ perfilplanta.php?clave=$2
+
+Rewriterule ^lista-enfermedades/?$ enfermedades.php?clave=0
+Rewriterule ^lista-enfermedades/(.*)/(.*)/?$ enfermedades.php?clave=$2
+Rewriterule ^causas-sintomas-prevencion-diagnostico-tratamiento/(.*)/(.*)/?$ perfilenfermedad.php?clave=$2
+
+Rewriterule ^metodos-preparacion-plantas-medicinales/?$ metodosdepreparacion.php?clave=0
+Rewriterule ^metodos-preparacion-plantas-medicinales/(.*)/(.*)/?$ metodosdepreparacion.php?clave=$2
+Rewriterule ^metodo-de-preparacion/(.*)/(.*)/?$ metodo.php?clave=$2
+
+Rewriterule ^blog-medicina-natural/?$ blog.php?clave=0
+Rewriterule ^blog-medicina-natural/(.*)/(.*)/?$ blog.php?clave=$2
+Rewriterule ^articulo/(.*)/(.*)/?$ articulo.php?clave=$2

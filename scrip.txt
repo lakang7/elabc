@@ -1,0 +1,260 @@
+/*Comoposiciones quimicas de las plantas*/
+CREATE TABLE comquimica (
+    idcomquimica mediumint(8) unsigned auto_increment,
+    nombre varchar(20) not null,
+    descripcion varchar(600) not null,
+    PRIMARY KEY (idcomquimica)
+);
+
+/*Familias Botanicas*/
+CREATE TABLE fambotanica (
+    idfambotanica mediumint(8) unsigned auto_increment,
+    nombre varchar(20) not null,
+    descripcion varchar(600),
+    PRIMARY KEY (idfambotanica)
+);
+
+/*Propiedades farmacologicas*/
+CREATE TABLE profarmacologica (
+    idprofarmacologica mediumint(8) unsigned auto_increment,
+    nombre varchar(20) not null,    
+    descripcion varchar(600) not null,
+    mostrar varchar(30) not null,
+    PRIMARY KEY (idprofarmacologica)
+);
+
+CREATE TABLE parplanta (
+    idparplanta mediumint(8) unsigned auto_increment,
+    nombre varchar(20) not null,
+    descripcion varchar(600),
+    PRIMARY KEY (idparplanta)
+);
+
+CREATE TABLE planta (
+    idplanta mediumint(8) unsigned auto_increment,
+    idfambotanica mediumint(8) unsigned not null,
+    nombrecomun varchar(40) not null,
+    nombrecientifico varchar(40) not null,
+    nombremostrar varchar(40) not null,
+    organografia varchar(200),
+    originariode varchar(600),
+    imagenperfil varchar(60) not null,
+    imagencatalogo varchar(60) not null,
+    descripcionperfil varchar(1200) not null,
+    descripcioncatalogo varchar(200) not null,
+    conocidacomo varchar(250),
+    precaucionesplanta varchar(3000),
+    propiedadesmagicas varchar(3000),
+    numerolecturas mediumint(8) unsigned not null,
+    PRIMARY KEY (idplanta),
+    FOREIGN KEY (idfambotanica) REFERENCES fambotanica(idfambotanica) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+
+/*Tabla que referencia plantas con composiciones quimicas*/
+CREATE TABLE planta_comquimica (
+    idplanta_comquimica mediumint(8) unsigned auto_increment,
+    idplanta mediumint(8) unsigned not null,
+    idcomquimica mediumint(8) unsigned not null,
+    PRIMARY KEY (idplanta_comquimica),
+    FOREIGN KEY (idplanta) REFERENCES planta(idplanta) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idcomquimica) REFERENCES comquimica(idcomquimica) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+/*Tabla que referencia plantas con propiedades farmacologicas*/
+CREATE TABLE planta_profarmacologica (
+    idplanta_profarmacologica mediumint(8) unsigned auto_increment,
+    idplanta mediumint(8) unsigned not null,
+    idprofarmacologica mediumint(8) unsigned not null,
+    PRIMARY KEY (idplanta_profarmacologica),
+    FOREIGN KEY (idplanta) REFERENCES planta(idplanta) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idprofarmacologica) REFERENCES profarmacologica(idprofarmacologica) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+/*Tabla que referencia plantas con partes utilizadas de las plantas*/
+CREATE TABLE planta_parplanta (
+    idplanta_parplanta mediumint(8) unsigned auto_increment,
+    idplanta mediumint(8) unsigned not null,
+    idparplanta mediumint(8) unsigned not null,
+    PRIMARY KEY (idplanta_parplanta),
+    FOREIGN KEY (idplanta) REFERENCES planta(idplanta) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idparplanta) REFERENCES parplanta(idparplanta) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE sistema (
+    idsistema mediumint(8) unsigned auto_increment,
+    nombre varchar(30) not null,
+    mostrar varchar(30) not null,
+    descripcion varchar(1200),
+    PRIMARY KEY (idsistema)
+);
+
+CREATE TABLE organo (
+    idorgano mediumint(8) unsigned auto_increment,
+    idsistema mediumint(8) unsigned not null,
+    nombre varchar(20) not null,
+    mostrar varchar(20) not null,
+    descripcion varchar(1200),
+    PRIMARY KEY (idorgano),
+    FOREIGN KEY (idsistema) REFERENCES sistema(idsistema) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE enfermedad (
+    idenfermedad mediumint(8) unsigned auto_increment,
+    idorgano mediumint(8) unsigned not null,
+    nombrecomun varchar(30) not null,
+    nombrecientifico varchar(60) not null,
+    descripcioncatalogo varchar(200) not null,
+    descripcionperfil varchar(3000) not null,
+    causas varchar(3000) not null,
+    sintomas varchar(3000) not null,
+    prevencion varchar(3000) not null,
+    diagnostico varchar(3000) not null,
+    ortodoxo varchar(3000) not null,
+    evitecomplicaciones varchar(3000),
+    tiposde varchar(3000),
+    numerolecturas mediumint(8) unsigned not null,
+    PRIMARY KEY (idenfermedad),
+    FOREIGN KEY (idorgano) REFERENCES organo(idorgano) ON UPDATE CASCADE ON DELETE RESTRICT    
+);
+
+CREATE TABLE clasificacionmetodo (
+    idclasificacionmetodo mediumint(8) unsigned auto_increment,
+    nombre varchar(30) not null,
+    mostrar varchar(30) not null,
+    descripcion varchar(3000) not null,
+    PRIMARY KEY (idclasificacionmetodo)
+);
+
+CREATE TABLE metodo (
+    idmetodo mediumint(8) unsigned auto_increment,
+    idclasificacionmetodo mediumint(8) unsigned not null,
+    nombre varchar(30) not null,
+    mostrar varchar(30) not null,
+    descripcionperfil varchar(3000) not null,
+    descripcioncatalogo varchar(200) not null,
+    imagenperfil varchar(60) not null,
+    imagencatalogo varchar(60) not null,
+    ingredientes varchar(3000),
+    procedimiento varchar(3000),
+    numerolecturas mediumint(8) unsigned not null,
+    PRIMARY KEY (idmetodo),
+    FOREIGN KEY (idclasificacionmetodo) REFERENCES clasificacionmetodo(idclasificacionmetodo) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE tiposmetodo (
+    idtiposmetodo mediumint(8) unsigned auto_increment,
+    idmetodo mediumint(8) unsigned not null,
+    nombre varchar(30) not null,
+    descripcion varchar(3000) not null,
+    ingredientes varchar(3000),
+    procedimientos varchar(3000),
+    PRIMARY KEY (idtiposmetodo),
+    FOREIGN KEY (idmetodo) REFERENCES metodo(idmetodo) ON UPDATE CASCADE ON DELETE RESTRICT  
+);
+
+CREATE TABLE asociacion (
+    idasociacion mediumint(8) unsigned auto_increment,
+    idplanta mediumint(8) unsigned not null,
+    idmetodo mediumint(8) unsigned not null,
+    descripcion varchar(2000) not null,
+    PRIMARY KEY (idasociacion),
+    FOREIGN KEY (idplanta) REFERENCES planta(idplanta) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idmetodo) REFERENCES metodo(idmetodo) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+
+CREATE TABLE asociacion_enf (
+    idasociacion_enf mediumint(8) unsigned auto_increment,
+    idasociacion mediumint(8) unsigned not null,
+    idenfermedad mediumint(8) unsigned not null,
+    descripcion varchar(1200),
+    PRIMARY KEY (idasociacion_enf),
+    FOREIGN KEY (idasociacion) REFERENCES asociacion(idasociacion) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idenfermedad) REFERENCES enfermedad(idenfermedad) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE administrador (
+    idadministrador mediumint(8) unsigned auto_increment,
+    nombre varchar(60) not null,
+    correo varchar(60) not null,
+    contrasena varchar(12) not null,
+    ultimoacceso TIMESTAMP,
+    PRIMARY KEY (idadministrador)
+);
+
+CREATE TABLE catblog (
+    idcatblog mediumint(8) unsigned auto_increment,
+    nombre varchar(40) not null,
+    descripcion varchar(200) not null,
+    PRIMARY KEY (idcatblog)
+);
+
+CREATE TABLE articulo (
+    idarticulo mediumint(8) unsigned auto_increment,
+    idadministrador mediumint(8) unsigned not null,
+    titulo varchar(200) not null,
+    fechacreacion TIMESTAMP not null,
+    fechapublicacion TIMESTAMP not null,
+    resumen varchar(200) not null,
+    catalogo varchar(1200) not null,
+    contenido varchar(20000) not null,
+    imaresumen varchar(60) not null,
+    imacatalogo varchar(60) not null,
+    imacontenido varchar(60) not null,    
+    numerolecturas mediumint(8) unsigned not null,
+    PRIMARY KEY (idarticulo),
+    FOREIGN KEY (idadministrador) REFERENCES administrador(idadministrador) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE articulo_cat (
+    idarticulo_cat mediumint(8) unsigned auto_increment,
+    idarticulo mediumint(8) unsigned not null,
+    idcatblog mediumint(8) unsigned not null,
+    PRIMARY KEY (idarticulo_cat),
+    FOREIGN KEY (idarticulo) REFERENCES articulo(idarticulo) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idcatblog) REFERENCES catblog(idcatblog) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE paciente (
+    idpaciente mediumint(8) unsigned auto_increment,
+    nombre varchar(200) not null,
+    fechanacimiento DATE not null,
+    sexo mediumint(8) unsigned not null,
+    email varchar(60) not null,
+    contra varchar(12) not null,
+    ocupacion varchar(60) not null,
+    pais varchar(45) not null,
+    direccion varchar(200) not null,
+    fecharegistro TIMESTAMP not null,
+    codigoconfirmacion varchar(20) not null,
+    estatuconfirmacion mediumint(8) unsigned not null, 
+    PRIMARY KEY (idpaciente)
+);
+
+CREATE TABLE consulta (
+    idconsulta mediumint(8) unsigned auto_increment,
+    idpaciente mediumint(8) unsigned,
+    fechacreacion TIMESTAMP not null,
+    pregunta01 varchar(600),
+    pregunta02 varchar(600),
+    pregunta03 varchar(600),
+    pregunta04 varchar(600),
+    pregunta05 varchar(600),
+    pregunta06 varchar(600),
+    PRIMARY KEY (idconsulta),
+    FOREIGN KEY (idpaciente) REFERENCES paciente(idpaciente) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE mensaje (
+    idmensaje mediumint(8) unsigned auto_increment,
+    idconsulta mediumint(8) unsigned,
+    origen mediumint(8) unsigned,
+    idadministrador mediumint(8) unsigned,
+    fechaemision TIMESTAMP not null,
+    contenido VARCHAR(12000) not null,
+    PRIMARY KEY (idmensaje),
+    FOREIGN KEY (idconsulta) REFERENCES consulta(idconsulta) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY (idadministrador) REFERENCES administrador(idadministrador) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+

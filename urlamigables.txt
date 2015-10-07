@@ -1,0 +1,19 @@
+/plantas-medicinales/
+/plantas-medicinales/antiflamatorias/PF1
+/plantas-medicinales/que-contienen-Vitamina-A/CQ1
+/propiedades-terapeuticas-y-medicinales/el-ajo/1
+/lista-enfermedades/
+/lista-enfermedades/sistema-circulatorio/sh1
+/lista-enfermedades/corazon/oh1
+/causas-sintomas-prevencion-diagnostico-tratamiento/diabetes/1
+/metodos-preparacion-plantas-medicinales/
+/metodos-preparacion-plantas-medicinales/de-uso-externo/1
+/metodo-de-preparacion/aceite-medicinal/1
+
+Preguntas para la encuesta
+01.- ¿Cuál es el problema de salud que quiere consultar?
+02.- ¿Cuándo inició su problema de salud?
+03.- ¿Cuáles son los signos y síntomas que más le afectan?
+04.- ¿En qué situación se encuentra ahora su problema?
+05.- ¿Sobre el problema, le han realizado análisis clínicos?¿Si afirmativo, ¿cuáles y qué resultado?
+06.- En cualquiera de los casos  ¿cuál fue el diagnóstico y tratamiento

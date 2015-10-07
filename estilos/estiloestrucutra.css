@@ -1,0 +1,282 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18/08/2015, 05:38:09 PM
+    Author     : Jc Global
+*/
+
+.texto_menu{
+    font-family: 'Shadows Into Light', cursive; 
+    font-weight: 400; 
+    text-align: center; 
+    font-size: 18px; 
+    line-height: 18px; 
+    color: #5e5e5e;        
+}
+
+h4{    
+    font-family: 'Open Sans Condensed', sans-serif;
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+p{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 18px;
+    text-align: justify;
+    color: #000;
+}
+
+.titulo_carousel{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 22px;
+    line-height: 32px;
+    font-weight: bold;
+    background-color: #9DEB00;
+}
+
+.subtitulo_principal{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 24px; 
+    padding-left: 0px;
+}
+
+.top4_titulo{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 20px; 
+    line-height: 18px;
+    font-weight: bold;
+}
+
+.top4_resumen{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 16px; 
+    text-align: justify;
+    color: #000;
+}
+
+.pie_pagina{
+    background-color: #4c7d00;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 15px;
+    color: #97FA00;
+    text-align: center;
+}
+
+.titulo_piepagina{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 25px;
+    color: #97FA00;
+    text-align: center;        
+}
+
+.letra{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 50px; 
+    line-height: 55px;
+    font-weight: bold;   
+}
+
+.opcion_menu_lateral{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 18px;
+    line-height: 25px;
+    padding-left: 0px;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.opcion_menu_lateral:hover{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 18px;
+    line-height: 25px;
+    padding-left: 0px;
+    border-bottom: 1px solid #CCCCCC;
+    cursor: pointer;
+    background-color: #dddddd;
+}
+
+.planta{
+    cursor: pointer;    
+}
+
+.planta:hover{
+    background-color: #dddddd;
+}
+
+
+
+.planta_titpre{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 20px; 
+    padding-left: 0px;
+    border-bottom: 1px solid #CCCCCC;
+    font-weight: bold;
+}
+
+.plata_preparacion{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 18px;
+    text-align: justify;
+    padding: 0px;
+    color: #000;
+    
+}
+
+.enfenlista{
+}
+
+.enfenlista:hover{
+    cursor: pointer;
+    background-color: #dddddd;
+}
+
+.blog_titulo{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 36px; 
+    padding-left: 0px;  
+    font-weight: bold;
+    background-color:#eae6e7;
+    padding: 10px;
+}
+
+.blog_titicono{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.blog_resumen{
+    margin-top: 10px; 
+    padding: 0px; 
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 16px;
+    text-align: justify;
+}
+
+.blog_continuar{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 16px;  
+    text-align: center;
+    border: 1px solid #CCCCCC;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.blog_continuar:hover{
+    cursor: pointer;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 16px;  
+    text-align: center;
+    border: 1px solid #CCCCCC;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+.subscribete_tit{
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    line-height: 18px;
+}
+
+.subscribete_boton{
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    line-height: 18px;
+    cursor: pointer;
+}
+
+.precaucion{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 18px;
+    color: #000;
+}
+
+div.tooltip-inner {
+    max-width: 350px;
+    background-color: #000;
+    color: #fff;
+    text-align: justify;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.opmenuprincipal{
+    cursor: pointer;
+}
+
+.opcpiepagina1{
+    cursor: pointer;
+}
+.opcpiepagina1:hover{
+    cursor: pointer;
+    background-color: #009900;
+    font-weight: bold;
+    color: #fff;
+}
+
+.opcpiepagina2{
+    cursor: pointer;
+}
+.opcpiepagina2:hover{
+    cursor: pointer;
+    background-color: #BE80FF;
+    font-weight: bold;
+    color: #fff;
+}
+
+.opcpiepagina3{
+    cursor: pointer;
+}
+.opcpiepagina3:hover{
+    cursor: pointer;
+    background-color: #24F2F2;
+    font-weight: bold;
+    color: #fff;
+}
+
+.opcpiepagina4{
+    cursor: pointer;
+}
+.opcpiepagina4:hover{
+    cursor: pointer;
+    background-color: #FF0066;
+    font-weight: bold;
+    color: #fff;
+}
+
+.opcpiepagina5{
+    cursor: pointer;
+}
+.opcpiepagina5:hover{
+    cursor: pointer;
+    background-color: #FFD700;
+    font-weight: bold;
+    color: #fff;
+}
+
+.opcpiepagina6{
+    cursor: pointer;
+}
+.opcpiepagina6:hover{
+    cursor: pointer;
+    background-color: #FFFF00;
+    font-weight: bold;
+    color: #fff;
+}
+
+.artencatalogo{
+    cursor: pointer;
+    
+}
