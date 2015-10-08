@@ -31,6 +31,11 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="<?php echo trim($precede); ?>administracion/recursos/dist/js/bootstrap-select.js"></script>         
         <script src="http://oss.maxcdn.com/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>
+        
+        <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>   -->     
+        
     </head>
     <body>
         <div class="container">
@@ -55,7 +60,9 @@
                         <option value="1">Hombre</option>
                         <option value="2">Mujer</option>
                     </select>
-                    </div>                                        
+                    </div>
+                    <div class="col-md-12">Indique su Fecha de Nacimiento</div>
+                    <div class="col-md-12"><input type="date" class="form-control" name="fechanacimiento" id="fechanacimiento" required="required" /></div>                    
                     <div class="col-md-12">Ocupación</div>
                     <div class="col-md-12"><input type="text" class="form-control"  id="ocupacion" name="ocupacion" maxlength="60" required="required" /></div>
                     <div class="col-md-12">Indique su país de residencia</div>
@@ -93,6 +100,7 @@
                     <div class="col-md-12"><input type="password" class="form-control"  id="contra01" name="contra01" maxlength="12"  required="required" /></div>
                     <div class="col-md-12">Confirme su Contraseña</div>
                     <div class="col-md-12"><input type="password" class="form-control"  id="contra02" name="contra02" maxlength="12" required="required" /></div>
+                    
                     <div class="col-md-12" style="margin-top: 10px;"><button type="submit" class="btn btn-default">Registrarme</button></div>                    
                     </form>
                 </div>
@@ -104,6 +112,7 @@
         <?php piepagina();  ?>
    </div>  
     <script>
+                
         $(document).ready(function() {
             $('#formregistrapaciente').bootstrapValidator({
                     message: 'Este valor no es valido',
@@ -122,8 +131,8 @@
                                     }
                             }
                     }
-            });        
-        });
+            });                                                            
+        });              
     </script>        
     </body>
 </html>

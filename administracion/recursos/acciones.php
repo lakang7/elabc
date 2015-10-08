@@ -885,7 +885,59 @@
     /*Registro de paciente*/
     if($_GET["tarea"]==45){ 
         
+        $letras= array();
+        $letras[0]="A";
+        $letras[1]="B";
+        $letras[2]="C";
+        $letras[3]="D";
+        $letras[4]="E";
+        $letras[5]="F";
+        $letras[6]="G";
+        $letras[7]="H";
+        $letras[8]="I";
+        $letras[9]="J";
+        $letras[10]="K";
+        $letras[11]="L";
+        $letras[12]="M";
+        $letras[13]="N";
+        $letras[14]="O";
+        $letras[15]="P";
+        $letras[16]="Q";
+        $letras[17]="R";
+        $letras[18]="S";
+        $letras[19]="T";
+        $letras[20]="U";
+        $letras[21]="V";
+        $letras[22]="W";
+        $letras[23]="X";
+        $letras[24]="Y";
+        $letras[25]="Z";
+        $letras[26]="0";
+        $letras[27]="1";
+        $letras[28]="2";
+        $letras[29]="3";
+        $letras[30]="4";
+        $letras[31]="5";
+        $letras[32]="6";
+        $letras[33]="7";
+        $letras[34]="8";
+        $letras[35]="9";
         
+        $codigo="";
+        for($i=0;$i<20;$i++){
+            $codigo=$codigo.$letras[rand(0,34)];
+        }
+        
+        $con =  Conexion();
+        $sql_insertPACIENTE = "insert into paciente (nombre,fechanacimiento,sexo,email,contra,ocupacion,pais,direccion,fecharegistro,codigoconfirmacion,estatuconfirmacion) values ('".$_POST["nombre"]."','".$_POST["fechanacimiento"]."','".$_POST["sexo"]."','".$_POST["correo"]."','".$_POST["contra01"]."','".$_POST["ocupacion"]."','".$_POST["pais"]."','".$_POST["direccion"]."',now(),'".$codigo."',0);";
+	$result_insertPACIENTE = mysql_query($sql_insertPACIENTE,$con) or die(mysql_error());        
+        
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Su registro ha sido satisfactorio, por favor confirma tu correo haciendo click en el enlace que fue le fue enviado al mail que registro.");
+		location.href="../../";
+            </script>
+	<?php        
     }    
     
 ?>
