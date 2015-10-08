@@ -40,7 +40,7 @@
                             </div>
                         </div>
                 
-                        <div class="col-md-2 opmenuprincipal" style="padding-left: 0px; border-bottom: 3px solid #9DEB00">
+                        <div class="col-md-2 opmenuprincipal" title="Consulta un Naturopata Online" onclick=redirigir("<?php echo trim($precede)."consulta-naturista-online" ?>") style="padding-left: 0px; border-bottom: 3px solid #9DEB00">
                             <div class="col-md-12">
                                 <img class="img-responsive center-block" src="<?php echo $precede;?>imagenes/consultaunnaturopata.png">
                             </div>
@@ -49,7 +49,7 @@
                             </div>
                         </div> 
                 
-<div class="col-md-2 opmenuprincipal" style="padding-left: 0px; border-bottom: 3px solid #9DEB00" title="Blog @elabcnaturista" onclick=redirigir("<?php echo trim($precede)."blog-medicina-natural" ?>")>
+                        <div class="col-md-2 opmenuprincipal" style="padding-left: 0px; border-bottom: 3px solid #9DEB00" title="Blog @elabcnaturista" onclick=redirigir("<?php echo trim($precede)."blog-medicina-natural" ?>")>
                             <div class="col-md-12">
                                 <img class="img-responsive center-block" src="<?php echo $precede;?>imagenes/nuestroblog.png">
                             </div>

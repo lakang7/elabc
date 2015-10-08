@@ -40,7 +40,7 @@
     <body>
         <div class="container">
             <div class="row" style="margin-bottom: 15px;">
-                <div class="col-md-3"><img onclick=redirigir("<?php echo trim($precede) ?>") class="img-responsive center-block opmenuprincipal" src="imagenes/logoelabcnaturista.png"></div>
+                <div class="col-md-3"><img onclick=redirigir("<?php echo trim($precede) ?>") class="img-responsive center-block opmenuprincipal" src="<?php echo trim($precede); ?>imagenes/logoelabcnaturista.png"></div>
                 <div class="col-md-9" style="text-align: right; font-family: 'Open Sans Condensed', sans-serif; font-size: 14px; margin-bottom: 10px">Ciudad de Mexico, 18 de Agosto de 2015</div>                                
                 <div class="col-md-9">
                     <div class="row">
@@ -94,7 +94,7 @@
                     </div>                                        
                     <div class="col-md-12">Indique su dirección de habitación</div>
                     <div class="col-md-12"><input type="text" class="form-control"  id="direccion" name="direccion" maxlength="45" required="required" /></div>                    
-                    <div class="col-md-12">Correo Electronico</div>
+                    <div class="col-md-12">Correo Electrónico</div>
                     <div class="col-md-12"><input type="email" class="form-control"  id="correo" name="correo" maxlength="60" required="required" /></div>                    
                     <div class="col-md-12">Contraseña</div>
                     <div class="col-md-12"><input type="password" class="form-control"  id="contra01" name="contra01" maxlength="12"  required="required" /></div>

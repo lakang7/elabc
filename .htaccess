@@ -17,3 +17,5 @@ Rewriterule ^metodo-de-preparacion/(.*)/(.*)/?$ metodo.php?clave=$2
 Rewriterule ^blog-medicina-natural/?$ blog.php?clave=0
 Rewriterule ^blog-medicina-natural/(.*)/(.*)/?$ blog.php?clave=$2
 Rewriterule ^articulo/(.*)/(.*)/?$ articulo.php?clave=$2
+
+Rewriterule ^consulta-naturista-online/?$ consultaonline.php
