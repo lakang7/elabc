@@ -235,6 +235,7 @@ CREATE TABLE paciente (
 CREATE TABLE consulta (
     idconsulta mediumint(8) unsigned auto_increment,
     idpaciente mediumint(8) unsigned,
+    titulo varchar(120) not null,
     fechacreacion TIMESTAMP not null,
     pregunta01 varchar(600),
     pregunta02 varchar(600),

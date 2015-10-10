@@ -39,6 +39,13 @@ p{
     background-color: #9DEB00;
 }
 
+.titulo_consulta{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 22px;
+    line-height: 32px;
+    font-weight: bold;
+}
+
 .subtitulo_principal{
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: 24px; 

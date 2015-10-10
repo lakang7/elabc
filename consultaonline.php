@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html>
     <head>
         <script type="text/javascript" language="JavaScript" >
@@ -17,7 +18,7 @@
             
         ?>
         <meta charset="UTF-8">
-        <title>@elabcnaturista</title>    
+        <title>Consulta Naturista Online | @elabcnaturista</title>    
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo $precede; ?>bootstrap/js/bootstrap.js"></script>
         <script type="text/javascript" src="<?php echo $precede; ?>bootstrap/js/bootstrap.min.js"></script>
@@ -30,11 +31,7 @@
         <link rel="stylesheet" href="<?php echo trim($precede); ?>administracion/recursos/dist/css/bootstrap-select.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="<?php echo trim($precede); ?>administracion/recursos/dist/js/bootstrap-select.js"></script>         
-        <script src="http://oss.maxcdn.com/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>
-        
-        <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>   -->     
+        <script src="http://oss.maxcdn.com/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>            
         
     </head>
     <body>
@@ -50,24 +47,24 @@
             </div>
             <div class="row">
                 <div class="col-md-7">
-                    <form method="post" class="form-horizontal" id="formregistrapaciente" name="formregistrapaciente" action="<?php echo trim($precede) ?>administracion/recursos/acciones.php?tarea=45">
-                    <div class="col-md-12">Registrate en Nuestro Sistema de Consultas Online</div>
+                    <form method="post" style="font-family: 'Open Sans Condensed', sans-serif; font-size: 19px; color: #000" class="form-horizontal" id="formregistrapaciente" name="formregistrapaciente" action="<?php echo trim($precede) ?>administracion/recursos/acciones.php?tarea=45">
+                    <div class="col-md-12" >Registrate en Nuestro Sistema de Consultas Online</div>
                     <div class="col-md-12">Nombre y Apellido</div>
-                    <div class="col-md-12"><input type="text" class="form-control"  id="nombre" name="nombre" maxlength="40" required="required" /></div>                                        
+                    <div class="col-md-12"><input type="text" style="font-size: 17px;" class="form-control"  id="nombre" name="nombre" maxlength="40" required="required" /></div>                                        
                     <div class="col-md-12">Indique su Sexo</div>
                     <div class="col-md-12">
-                    <select id="sexo" name="sexo" class="selectpicker show-tick" data-live-search="true" data-width="100%" required="required">
+                    <select id="sexo" name="sexo" style="font-size: 17px;" class="selectpicker show-tick" data-live-search="true" data-width="100%" required="required">
                         <option value="1">Hombre</option>
                         <option value="2">Mujer</option>
                     </select>
                     </div>
                     <div class="col-md-12">Indique su Fecha de Nacimiento</div>
-                    <div class="col-md-12"><input type="date" class="form-control" name="fechanacimiento" id="fechanacimiento" required="required" /></div>                    
+                    <div class="col-md-12"><input type="date" style="font-size: 17px;" class="form-control" name="fechanacimiento" id="fechanacimiento" required="required" /></div>                    
                     <div class="col-md-12">Ocupación</div>
-                    <div class="col-md-12"><input type="text" class="form-control"  id="ocupacion" name="ocupacion" maxlength="60" required="required" /></div>
+                    <div class="col-md-12"><input type="text" style="font-size: 17px;" class="form-control"  id="ocupacion" name="ocupacion" maxlength="60" required="required" /></div>
                     <div class="col-md-12">Indique su país de residencia</div>
                     <div class="col-md-12">
-                    <select id="pais" name="pais" class="selectpicker show-tick" data-live-search="true" data-width="100%" required="required">
+                    <select id="pais" name="pais" style="font-size: 17px;" class="selectpicker show-tick" data-live-search="true" data-width="100%" required="required">
                         <option value="Argentina">Argentina</option>
                         <option value="Bolivia">Bolivia</option>
                         <option value="Chile">Chile</option>
@@ -93,19 +90,26 @@
                     </select>
                     </div>                                        
                     <div class="col-md-12">Indique su dirección de habitación</div>
-                    <div class="col-md-12"><input type="text" class="form-control"  id="direccion" name="direccion" maxlength="45" required="required" /></div>                    
+                    <div class="col-md-12"><input type="text"  class="form-control" style="font-size: 17px;"  id="direccion" name="direccion" maxlength="45" required="required" /></div>                    
                     <div class="col-md-12">Correo Electrónico</div>
-                    <div class="col-md-12"><input type="email" class="form-control"  id="correo" name="correo" maxlength="60" required="required" /></div>                    
+                    <div class="col-md-12"><input type="email" class="form-control" style="font-size: 17px;"  id="correo" name="correo" maxlength="60" required="required" /></div>                    
                     <div class="col-md-12">Contraseña</div>
-                    <div class="col-md-12"><input type="password" class="form-control"  id="contra01" name="contra01" maxlength="12"  required="required" /></div>
+                    <div class="col-md-12"><input type="password" class="form-control" style="font-size: 17px;"  id="contra01" name="contra01" maxlength="12"  required="required" /></div>
                     <div class="col-md-12">Confirme su Contraseña</div>
-                    <div class="col-md-12"><input type="password" class="form-control"  id="contra02" name="contra02" maxlength="12" required="required" /></div>
+                    <div class="col-md-12"><input type="password" class="form-control" style="font-size: 17px;"  id="contra02" name="contra02" maxlength="12" required="required" /></div>
                     
-                    <div class="col-md-12" style="margin-top: 10px;"><button type="submit" class="btn btn-default">Registrarme</button></div>                    
+                    <div class="col-md-12" style="margin-top: 10px;"><button type="submit" class="btn btn-default" style="font-size: 17px;">Registrarme</button></div>                    
                     </form>
                 </div>
                 <div class="col-md-5">                                                               
-                                                                                                                                                      
+                    <form method="post" class="form-horizontal" style="font-family: 'Open Sans Condensed', sans-serif; font-size: 19px; color: #000" id="formregistrapaciente" name="formregistrapaciente" action="<?php echo trim($precede) ?>administracion/recursos/acciones.php?tarea=47">
+                        <div class="col-md-12">Si ya estas registrado, Inicia Sesión</div>
+                        <div class="col-md-12">Correo Electrónico</div>
+                        <div class="col-md-12"><input type="email" class="form-control" style="font-size: 17px;"  id="inicorreo" name="inicorreo" maxlength="60" required="required" /></div>                    
+                        <div class="col-md-12">Contraseña</div>
+                        <div class="col-md-12"><input type="password" class="form-control" style="font-size: 17px;"  id="inicontra" name="inicontra" maxlength="12"  required="required" /></div>                        
+                        <div class="col-md-12" style="margin-top: 10px;"><button type="submit" class="btn btn-default" style="font-size: 17px;" >Iniciar Sesión</button></div>                    
+                    </form>
                 </div>                
             </div>
 
