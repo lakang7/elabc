@@ -186,7 +186,7 @@
     
     
     /*Registro de Planta*/
-    if($_GET["tarea"]==13){
+    if($_GET["tarea"]==13){                
         $con =  Conexion();
         $sql_insertPLANTA = "insert into planta (idfambotanica,nombrecomun,nombrecientifico,nombremostrar,organografia,originariode,imagenperfil,imagencatalogo,descripcionperfil,descripcioncatalogo,conocidacomo,precaucionesplanta,propiedadesmagicas,numerolecturas) values ('".$_POST["familiaBotanica"]."','".$_POST["nombreComun"]."','".$_POST["nombreCientifico"]."','".$_POST["nombreMostrar"]."','".$_POST["organografia"]."','".$_POST["originarioDe"]."','a','b','".$_POST["descripcionPerfil"]."','".$_POST["descripcionCatalogo"]."','".$_POST["conocidaComo"]."','".$_POST["precauciones"]."','".$_POST["propiedadesMagicas"]."',0);";	
         $result_insertPLANTA = mysql_query($sql_insertPLANTA,$con) or die(mysql_error());
@@ -885,6 +885,12 @@
     /*Registro de paciente*/
     if($_GET["tarea"]==45){ 
         
+        require_once "Mail.php";
+        include 'Mail/mime.php';  
+        
+        $fp = fopen("../../recursos/precede.txt", "r");
+        $precede = fgets($fp);        
+        
         $letras= array();
         $letras[0]="A";
         $letras[1]="B";
@@ -932,12 +938,43 @@
         $sql_insertPACIENTE = "insert into paciente (nombre,fechanacimiento,sexo,email,contra,ocupacion,pais,direccion,fecharegistro,codigoconfirmacion,estatuconfirmacion) values ('".$_POST["nombre"]."','".$_POST["fechanacimiento"]."','".$_POST["sexo"]."','".$_POST["correo"]."','".$_POST["contra01"]."','".$_POST["ocupacion"]."','".$_POST["pais"]."','".$_POST["direccion"]."',now(),'".$codigo."',0);";
 	$result_insertPACIENTE = mysql_query($sql_insertPACIENTE,$con) or die(mysql_error());        
         
+        $from = '<contacto@elabcnaturista.com>';
+        $to = '<'.$_POST["correo"].'>';
+        $subject = 'Confirme su registro en el sistema de consultas online del @elabcnaturista!';
+
+        $headers = array(
+            'From' => $from,
+            'To' => $to,
+            'Subject' => $subject
+        );
+
+        $mime = new Mail_mime();
+        $mime -> setHTMLBody("Hola ".$_POST["nombre"]."!, es para nosotros todo un gusto que hayas decidido registrarte en nuestro sistema de consultas online, lo unico que debes hacer para poder llevar a cabo tu primera consulta, es hacer click sobre el siguiente enlace ".trim($precede)."confirma-tu-correo-electronico/".trim($codigo)." con el proposito de que podamos confirmar tu email.\n");
+        $body = $mime->get();
+        $headers = $mime -> headers($headers);
+
+        $smtp = Mail::factory('smtp', array(
+            'host' => 'mail.elabcnaturista.com',
+            'port' => '26',
+            'auth' => true,
+            'username' => 'contacto@elabcnaturista.com',
+            'password' => '5346179guillermo'
+        ));
+
+        $mail = $smtp->send($to, $headers, $body);        
+                
 	?>
             <script type="text/javascript" language="JavaScript" >
-		alert("Su registro ha sido satisfactorio, por favor confirma tu correo haciendo click en el enlace que fue le fue enviado al mail que registro.");
+		alert("Su registro ha sido satisfactorio, por favor confirma tu correo haciendo click en el enlace que le fue enviado al mail que registro.");
 		location.href="../../";
             </script>
 	<?php        
-    }    
+    }  
+    
+    /*Activación de cuenta*/
+    if($_GET["tarea"]==46){ 
+        echo "activación de cuenta";
+    }
+        
     
 ?>
