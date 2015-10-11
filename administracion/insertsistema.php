@@ -1,3 +1,12 @@
+<?php session_start(); 
+    if (!isset($_SESSION['administrador'])){
+        ?>
+            <script type="text/javascript" language="JavaScript" >                
+                location.href="index.php";
+            </script>
+        <?php        
+    }
+?>
 <html>
     <head>
         <meta charset="UTF-8">

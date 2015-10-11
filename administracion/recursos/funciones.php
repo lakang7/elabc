@@ -11,6 +11,7 @@
     }
     
     function Menu(){
+        echo "<div class='col-md-12 itemMenu' onclick=redirigir('../administracion/recursos/acciones.php?tarea=58')>Cerrar Sessión</div>";
         echo "<div class='col-md-12 itemMenu' onclick=redirigir('listarcomposicionquimica.php')>Composicion Quimica</div>";
         echo "<div class='col-md-12 itemMenu' onclick=redirigir('listarfambotanica.php')>Familia Botanica</div>";
         echo "<div class='col-md-12 itemMenu' onclick=redirigir('listarparplanta.php')>Partes de la Planta</div>";

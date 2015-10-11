@@ -2,8 +2,12 @@
 <meta charset="UTF-8">
 <?php
   
-    function Conexion(){        
-        $conexion = mysql_connect("localhost", "root", "");
+    function Conexion(){       
+        $fp = fopen("../../recursos/precede.txt", "r");
+        $precede = fgets($fp);   
+        $atributos= fgets($fp);
+        $conecta=explode("|",$atributos);        
+        $conexion = mysql_connect($conecta[0],$conecta[1],$conecta[2]);
 	mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'", $conexion);
         mysql_select_db("elabcnaturista", $conexion);	        
 	return $conexion;
@@ -1247,6 +1251,40 @@
 		location.href="../listarsabiasque.php";
             </script>
 	<?php         
+    }
+    
+    /*Inicio de Sesión Administrador*/
+    if($_GET["tarea"]==57){
+        $con =  Conexion();
+        $sqlUsuario = "select * from administrador where correo='".$_POST["email"]."' and contrasena='".$_POST["passw"]."'";
+	$resultUsuario = mysql_query($sqlUsuario,$con) or die(mysql_error());
+        mysql_close($con); 
+        if(mysql_num_rows($resultUsuario)>0){
+            $usuario = mysql_fetch_assoc($resultUsuario);
+            $_SESSION['administrador']=$usuario["idadministrador"];
+            ?>
+                <script type="text/javascript" language="JavaScript" >                    
+                    location.href="../insertcomposicionquimica.php";
+                </script>
+            <?php           
+        }else{
+            ?>
+                <script type="text/javascript" language="JavaScript" >
+                    alert("Los datos que proporciono no son correctos, por favor veirifique su dirección de email y contraseña.");
+                    location.href="../index.php";
+                </script>
+            <?php 
+        }                
+    }    
+    
+    /*Cerrar Sesion*/
+    if($_GET["tarea"]==58){
+        session_destroy();
+        ?>
+            <script type="text/javascript" language="JavaScript" >                
+                location.href="../index.php";
+            </script>
+        <?php        
     }    
     
             
