@@ -29,6 +29,9 @@
             if(mysql_num_rows($resultconsulta)>0){
                 $consulta = mysql_fetch_assoc($resultconsulta);
                 $test = new DateTime($consulta["fechacreacion"]);
+                $sqlpaciente="select * from paciente where idpaciente='".$consulta["idpaciente"]."'";
+                $resultpaciente=mysql_query($sqlpaciente,$con) or die(mysql_error());
+                $paciente = mysql_fetch_assoc($resultpaciente);                
             } 
             
         ?>
@@ -46,7 +49,8 @@
         <link rel="stylesheet" href="<?php echo trim($precede); ?>administracion/recursos/dist/css/bootstrap-select.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="<?php echo trim($precede); ?>administracion/recursos/dist/js/bootstrap-select.js"></script>         
-        <script src="http://oss.maxcdn.com/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>            
+        <script src="http://oss.maxcdn.com/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>  
+        
         
     </head>
     <body>
@@ -66,8 +70,10 @@
                         <div class="btn-group" role="group" aria-label="...">
                             <button type="button" onclick=redirigir("<?php echo trim($precede); ?>crear-consulta-online") class="btn btn-default boton">Registrar una nueva consulta +</button>
                             <button type="button" onclick=redirigir("<?php echo trim($precede); ?>mis-consultas-online")  class="btn btn-default boton">Ver mis consultas</button>
+                            <button type="button" onclick=redirigir("<?php echo trim($precede); ?>cerrar-sesion")  class="btn btn-default boton">Cerrar Sesión</button>
                         </div>                        
-                    </div>                    
+                    </div> 
+                    <form method="post" class="form-horizontal" id="formregistrapaciente" name="formregistrapaciente" action="<?php echo trim($precede) ?>administracion/recursos/acciones.php?tarea=49&id=<?php echo $_GET["id"]."&origen=1" ?>">
                     <div class="col-md-12 tituloconsulta">Detalle de Consulta</div>
                     <div class="col-md-12 consultatitulo" style="margin-top: 10px;">Titulo</div>
                     <div class="col-md-12" style="font-style: italic"><?php echo $consulta["titulo"] ?></div>
@@ -93,9 +99,48 @@
                     <div class="col-md-12 consultatitulo" style="margin-top: 10px;">06.- En cualquiera de los casos  ¿cuál fue el diagnóstico y tratamiento?</div>
                     <div class="col-md-12" style="font-style: italic"><?php echo $consulta["pregunta06"] ?></div>                      
                     
-                    <div class="col-md-12 tituloconsulta">Respuesta a la consulta</div>     
                     
                     
+                    <?php
+                        $sql_mensajes = "select * from mensaje where idconsulta='".$_GET["id"]."'";
+                        $result_mensaje = mysql_query($sql_mensajes,$con) or die(mysql_error()); 
+                        if(mysql_num_rows($result_mensaje)>0){
+                            echo "<div class='col-md-12 tituloconsulta' style='border-bottom: 1px solid #CCCCCC; line-height: 35px;'>Respuesta a la consulta</div>";
+                            while ($mensaje = mysql_fetch_assoc($result_mensaje)){
+                                $test = new DateTime($mensaje["fechaemision"]);
+                            echo "<div class='col-md-12' style='margin-top: 10px; font-family: 'Open Sans Condensed', sans-serif;'>";
+                            if($mensaje["origen"]==0){
+                                echo "Escrito por: <b>Administrador</b> El:  <b>".$test->format('d M Y H:i')."</b>";
+                            }else{
+                                echo "Escrito por: <b>".$paciente["nombre"]."</b> El: <b>".$test->format('d M Y H:i')."</b>";
+                            }
+                            
+                            
+                            echo "</div>";                            
+                            echo "<div class='col-md-12' style='border-bottom: 1px solid #CCCCCC;'>";
+                            if($mensaje["origen"]==0){
+                                echo $mensaje["contenido"];
+                            }else{
+                               echo "<p>".$mensaje["contenido"]."</p>"; 
+                            }
+                            
+                            echo "</div>";
+                            }
+                            
+                            ?>
+                            <div class="col-md-12 consultatitulo" style="margin-top: 10px;">(*) Si lo deseas puedes enviarnos tus comentarios</div>
+                            <div class="col-md-12" style="margin-top: 10px">
+                                <textarea class="form-control" rows="4" maxlength="12000"  id="contenido" name="contenido" required="required" ></textarea>                        
+                            </div> 
+                            <div class="col-md-12" style="margin-top: 10px;"><button type="submit" class="btn btn-default">Enviar Comentario</button></div>
+                    
+                            <?php                                                        
+                        }
+                        
+                        
+                    ?>                    
+                    
+                </form>    
                 </div>
                 <div class="col-md-4">                                                               
 
@@ -103,6 +148,6 @@
             </div>
 
         <?php piepagina();  ?>
-   </div>         
+   </div>            
     </body>
 </html>

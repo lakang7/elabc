@@ -29,6 +29,7 @@
     
     </head>
     <body>
+<div id="fb-root"></div>        
         <div class="container">
             <div class="row" style="margin-bottom: 15px;">
                 <div class="col-md-3"><img onclick=redirigir("<?php echo trim($precede) ?>") class="img-responsive center-block opmenuprincipal" src="imagenes/logoelabcnaturista.png"></div>
@@ -118,6 +119,6 @@
         $(document).ready(function(){
             $('.carousel-example-generic').carousel();
         });                        
-    </script>            
+    </script> 
     </body>
 </html>

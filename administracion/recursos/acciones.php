@@ -1068,21 +1068,39 @@
             
             $sql_update = "update consulta set estatus=1 where idconsulta='".$_GET["id"]."';";
             $result_update = mysql_query($sql_update,$con) or die(mysql_error());
+            if($_GET["origen"]==0){
+                ?>
+                    <script type="text/javascript" language="JavaScript" >                
+                        alert("Mensaje registrado satisfactoriamente.");
+                        location.href="../responderconsulta.php?id=<?php echo $_GET["id"]; ?>";
+                    </script>
+                <?php                                
+            }else{
+                ?>
+                    <script type="text/javascript" language="JavaScript" >                
+                        alert("Mensaje registrado satisfactoriamente.");
+                        location.href="../../mi-consulta/<?php echo $_GET["id"]; ?>";
+                    </script>
+                <?php                                
+            }
             
-            ?>
-                <script type="text/javascript" language="JavaScript" >                
-                    alert("Mensaje registrado satisfactoriamente.");
-                    location.href="../responderconsulta.php?id=<?php echo $_GET["id"]; ?>";
-                </script>
-            <?php            
         }else{
         ?>
             <script type="text/javascript" language="JavaScript" >                
                 location.href="../responderconsulta.php?id=<?php echo $_GET["id"]; ?>";
             </script>
         <?php                        
-        }
-        
+        }        
+    } 
+    
+    /*Cerrar Sesion*/
+    if($_GET["tarea"]==50){
+        session_destroy();
+        ?>
+            <script type="text/javascript" language="JavaScript" >                
+                location.href="index.php";
+            </script>
+        <?php        
     }    
             
 ?>

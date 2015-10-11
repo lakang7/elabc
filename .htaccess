@@ -23,3 +23,4 @@ Rewriterule ^confirma-tu-correo-electronico/(.*)/?$ administracion/recursos/acci
 Rewriterule ^crear-consulta-online/?$ perfilonline.php
 Rewriterule ^mis-consultas-online/?$ misconsultasonline.php
 Rewriterule ^mi-consulta/(.*)/?$ consulta.php?id=$1
+Rewriterule ^cerrar-sesion/?$ administracion/recursos/acciones.php?tarea=50

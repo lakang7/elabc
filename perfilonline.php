@@ -26,7 +26,7 @@
             
         ?>
         <meta charset="UTF-8">
-        <title>Mi Perfil de Consultas Naturistas Online | @elabcnaturista</title>    
+        <title>Registrar una nueva consulta | @elabcnaturista</title>    
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo $precede; ?>bootstrap/js/bootstrap.js"></script>
         <script type="text/javascript" src="<?php echo $precede; ?>bootstrap/js/bootstrap.min.js"></script>
@@ -43,6 +43,7 @@
         
     </head>
     <body>
+        
         <div class="container">
             <div class="row" style="margin-bottom: 15px;">
                 <div class="col-md-3"><img onclick=redirigir("<?php echo trim($precede) ?>") class="img-responsive center-block opmenuprincipal" src="<?php echo trim($precede); ?>imagenes/logoelabcnaturista.png"></div>
@@ -59,6 +60,7 @@
                         <div class="btn-group" role="group" aria-label="...">
                             <button type="button" onclick=redirigir("<?php echo trim($precede); ?>crear-consulta-online") class="btn btn-default boton">Registrar una nueva consulta +</button>
                             <button type="button" onclick=redirigir("<?php echo trim($precede); ?>mis-consultas-online")  class="btn btn-default boton">Ver mis consultas</button>
+                            <button type="button" onclick=redirigir("<?php echo trim($precede); ?>cerrar-sesion")  class="btn btn-default boton">Cerrar Sesión</button>
                         </div>                        
                     </div>
                     <form method="post" style="font-family: 'Open Sans Condensed', sans-serif; font-size: 16px; color: #000" class="form-horizontal" id="formregistrapaciente" name="formregistrapaciente" action="<?php echo trim($precede) ?>administracion/recursos/acciones.php?tarea=48&id=<?php echo $_SESSION["paciente"]; ?>">

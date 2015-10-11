@@ -59,6 +59,7 @@
                         <div class="btn-group" role="group" aria-label="...">
                             <button type="button" onclick=redirigir("<?php echo trim($precede); ?>crear-consulta-online") class="btn btn-default boton">Registrar una nueva consulta +</button>
                             <button type="button" onclick=redirigir("<?php echo trim($precede); ?>mis-consultas-online")  class="btn btn-default boton">Ver mis consultas</button>
+                            <button type="button" onclick=redirigir("<?php echo trim($precede); ?>cerrar-sesion")  class="btn btn-default boton">Cerrar Sesión</button>
                         </div>                        
                     </div>                    
                     <div class="col-md-12 tituloconsulta">Historico de Mis Consultas</div>

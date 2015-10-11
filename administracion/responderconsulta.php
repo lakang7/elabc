@@ -102,11 +102,21 @@
                         $result_mensaje = mysql_query($sql_mensajes,$con) or die(mysql_error()); 
                         if(mysql_num_rows($result_mensaje)>0){
                             while ($mensaje = mysql_fetch_assoc($result_mensaje)){
+                                $test2 = new DateTime($mensaje["fechaemision"]);
                             echo "<div class='col-md-12' style='margin-top: 10px; font-family: 'Open Sans Condensed', sans-serif;'>";
-                            echo "<b>Escrito por:</b> Administrador <b>El: </b> ".$mensaje["fechaemision"];
+                            if($mensaje["origen"]==0){
+                                echo "<b>Escrito por:</b> Administrador <b>El: </b> ".$test2->format('d M Y H:i');
+                            }else{
+                                echo "<b>Escrito por:</b> ".$paciente["nombre"]." <b>El: </b> ".$test2->format('d M Y H:i');
+                            }                                                        
                             echo "</div>";                            
                             echo "<div class='col-md-12' style='border-bottom: 1px solid #CCCCCC;'>";
-                            echo $mensaje["contenido"];
+                            
+                            if($mensaje["origen"]==0){
+                                echo $mensaje["contenido"];
+                            }else{
+                                echo "<p>".$mensaje["contenido"]."</p>";
+                            }
                             echo "</div>";
                             }
                         }
