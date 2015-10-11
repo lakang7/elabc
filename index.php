@@ -67,7 +67,7 @@
                 
                 </div>
                 <div class="col-md-6" >                                                               
-                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">                    
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" >                    
                             <ol class="carousel-indicators">
                                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                                 <li data-target="#carousel-example-generic" data-slide-to="1"></li>
@@ -85,10 +85,11 @@
                                            echo "<div class='item active'>"; 
                                         }else{
                                            echo "<div class='item'>"; 
-                                        }                                        
-                                        echo "<img src='".trim($precede)."imagenes/blog/resumen/".$ultimo["imaresumen"]."'>";
+                                        }    
+                                        $dirige = str_replace(" ","-",$ultimo["titulo"]);
+                                        echo "<img style='cursor: pointer' src='".trim($precede)."imagenes/blog/resumen/".$ultimo["imaresumen"]."' onclick=redirigir('".trim($precede)."articulo/".$dirige."/".$ultimo["idarticulo"]."')>";
                                         echo "<div class='carousel-caption'>";
-                                        echo "<div class='titulo_carousel'>".$ultimo["titulo"]."</div>";
+                                        echo "<div class='titulo_carousel' style='cursor: pointer' onclick=redirigir('".trim($precede)."articulo/".$dirige."/".$ultimo["idarticulo"]."')>".$ultimo["titulo"]."</div>";
                                         echo "</div>";
                                         echo "</div>";
                                         $cont++;
