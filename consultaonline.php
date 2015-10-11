@@ -1,4 +1,12 @@
-<?php session_start(); ?>
+<?php session_start(); 
+    if (isset($_SESSION['paciente'])){
+        ?>
+            <script type="text/javascript" language="JavaScript" >                
+                location.href="crear-consulta-online";
+            </script>
+        <?php        
+    }
+?>
 <html>
     <head>
         <script type="text/javascript" language="JavaScript" >

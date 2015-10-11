@@ -39,11 +39,12 @@ p{
     background-color: #9DEB00;
 }
 
-.titulo_consulta{
+.tituloconsulta{
     font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 22px;
-    line-height: 32px;
+    font-size: 20px; 
+    line-height: 18px;
     font-weight: bold;
+    margin-top: 10px;
 }
 
 .subtitulo_principal{
@@ -283,7 +284,8 @@ div.tooltip-inner {
     color: #fff;
 }
 
-.artencatalogo{
-    cursor: pointer;
-    
+.consultatitulo{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: bold;   
 }

@@ -60,25 +60,46 @@
                             <button type="button" onclick=redirigir("<?php echo trim($precede); ?>crear-consulta-online") class="btn btn-default boton">Registrar una nueva consulta +</button>
                             <button type="button" onclick=redirigir("<?php echo trim($precede); ?>mis-consultas-online")  class="btn btn-default boton">Ver mis consultas</button>
                         </div>                        
-                    </div>
-                    <form method="post" style="font-family: 'Open Sans Condensed', sans-serif; font-size: 16px; color: #000" class="form-horizontal" id="formregistrapaciente" name="formregistrapaciente" action="<?php echo trim($precede) ?>administracion/recursos/acciones.php?tarea=48&id=<?php echo $_SESSION["paciente"]; ?>">
-                        <div class="col-md-12 tituloconsulta">Registrar una nueva consulta</div>
-                        <div class="col-md-12" style="margin-top:10px;">Indica un título general para tú consulta</div>
-                        <div class="col-md-12"><input type="text" style="font-size: 17px;" class="form-control"  id="titulo" name="titulo" maxlength="120" required="required" /></div>
-                        <div class="col-md-12" style="margin-top:10px;">01.- ¿Cuál es el problema de salud que quiere consultar?</div>
-                        <div class="col-md-12"><textarea class="form-control" style="font-size: 16px" rows="4" maxlength="600" id="pregunta01" name="pregunta01" required="required"></textarea></div>
-                        <div class="col-md-12" style="margin-top:10px;">02.- ¿Cuándo inició su problema de salud?</div>
-                        <div class="col-md-12"><textarea class="form-control" style="font-size: 16px" rows="4" maxlength="600" id="pregunta02" name="pregunta02" required="required"></textarea></div>
-                        <div class="col-md-12" style="margin-top:10px;">03.- ¿Cuáles son los signos y síntomas que más le afectan?</div>
-                        <div class="col-md-12"><textarea class="form-control" style="font-size: 16px" rows="4" maxlength="600" id="pregunta03" name="pregunta03" required="required"></textarea></div>
-                        <div class="col-md-12" style="margin-top:10px;">04.- ¿En qué situación se encuentra ahora su problema?</div>
-                        <div class="col-md-12"><textarea class="form-control" style="font-size: 16px" rows="4" maxlength="600" id="pregunta04" name="pregunta04" required="required"></textarea></div>
-                        <div class="col-md-12" style="margin-top:10px;">05.- ¿Sobre el problema, le han realizado análisis clínicos? Si es afirmativo, ¿cuáles han sido los resultados?</div>
-                        <div class="col-md-12"><textarea class="form-control" style="font-size: 16px" rows="4" maxlength="600" id="pregunta05" name="pregunta05" required="required"></textarea></div>
-                        <div class="col-md-12" style="margin-top:10px;">06.- En cualquiera de los casos  ¿cuál fue el diagnóstico y tratamiento?</div>
-                        <div class="col-md-12"><textarea class="form-control" style="font-size: 16px" rows="4" maxlength="600" id="pregunta06" name="pregunta06"></textarea></div>                        
-                        <div class="col-md-12" style="margin-top: 10px;"><button type="submit" class="btn btn-default" style="font-size: 17px;">Enviar Consulta</button></div>                        
-                    </form>
+                    </div>                    
+                    <div class="col-md-12 tituloconsulta">Historico de Mis Consultas</div>
+                    <div class="col-md-12">
+                            <table class="table table-hover" style="font-family: 'Open Sans Condensed', sans-serif; font-size: 16px; color: #000">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 60%">Titulo</th>
+                                        <th style="width: 20%">Fecha de Registro</th>
+                                        <th style="width: 20%">Estatus</th>
+                                    </tr>
+                                </thead>
+    
+                                <tbody style="border-top: 0px;">
+                                    <?php
+                                        $sql_listaMETODO="select * from consulta where idpaciente='".$_SESSION["paciente"]."' order by idconsulta";
+					$result_listaMETODO=mysql_query($sql_listaMETODO,$con) or die(mysql_error()); 
+                                                                                
+                                        
+                                        if(mysql_num_rows($result_listaMETODO)>0){
+                                            while ($fila = mysql_fetch_assoc($result_listaMETODO)) {
+                                                $test = new DateTime($fila["fechacreacion"]); 
+                                                $est="";
+                                                if($fila["estatus"]==0){
+                                                    $est="En espera de respuesta";
+                                                }
+                                                if($fila["estatus"]==1){
+                                                    $est="Respondida";
+                                                }                                                
+                                                echo "<tr style='cursor: pointer' onclick=redirigir('".trim($precede)."mi-consulta/".trim($fila["idconsulta"])."')>";
+                                                echo "<td style='width: 60%'>".$fila["titulo"]."</td>"; 
+                                                echo "<td style='width: 20%'>".$test->format('d M Y H:i')."</td>";
+                                                echo "<td style='width: 20%'>".$est."</td>";
+                                                echo "</tr>";                                                    
+                                            }
+					}	                                                                                
+                                    ?>
+                                </tbody>    
+                            </table>  
+                        </div>
+                        
                 </div>
                 <div class="col-md-4">                                                               
 

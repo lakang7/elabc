@@ -20,4 +20,6 @@ Rewriterule ^articulo/(.*)/(.*)/?$ articulo.php?clave=$2
 
 Rewriterule ^consulta-naturista-online/?$ consultaonline.php
 Rewriterule ^confirma-tu-correo-electronico/(.*)/?$ administracion/recursos/acciones.php?tarea=46&codigo=$1
-Rewriterule ^mi-perfil-online/?$ perfilonline.php
+Rewriterule ^crear-consulta-online/?$ perfilonline.php
+Rewriterule ^mis-consultas-online/?$ misconsultasonline.php
+Rewriterule ^mi-consulta/(.*)/?$ consulta.php?id=$1

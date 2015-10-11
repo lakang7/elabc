@@ -874,7 +874,7 @@
 	$result_eliminaARTICULOcat=mysql_query($sql_eliminaARTICULOcat,$con) or die(mysql_error());                
         $sql_eliminaARTICULO="delete from articulo where idarticulo='".$_GET["id"]."';";
 	$result_eliminaARTICULO=mysql_query($sql_eliminaARTICULO,$con) or die(mysql_error());        
-        
+        mysql_close($con); 
 	?>
             <script type="text/javascript" language="JavaScript" >
 		alert("Eliminacion Satisfactoria de Articulo");
@@ -967,7 +967,7 @@
             ));
 
             $mail = $smtp->send($to, $headers, $body);        
-            
+            mysql_close($con); 
             ?>
                 <script type="text/javascript" language="JavaScript" >
                     alert("Su registro ha sido satisfactorio, por favor confirma tu correo haciendo click en el enlace que le fue enviado al mail que registro.");
@@ -995,6 +995,7 @@
             if($paciente["estatuconfirmacion"]==0){
                 $sql_updatepa="update paciente set estatuconfirmacion=1 where codigoconfirmacion='".$_GET["codigo"]."'";
                 $result_updatepa=mysql_query($sql_updatepa,$con) or die(mysql_error());
+                mysql_close($con); 
                 ?>
                     <script type="text/javascript" language="JavaScript" >
                         alert("Felicitaciones! Tu cuenta ha sido activada satisfactoriamente.");
@@ -1024,12 +1025,13 @@
         $con =  Conexion();
         $sqlUsuario = "select * from paciente where email='".$_POST["inicorreo"]."' and contra='".$_POST["inicontra"]."'";
 	$resultUsuario = mysql_query($sqlUsuario,$con) or die(mysql_error());
+        mysql_close($con); 
         if(mysql_num_rows($resultUsuario)>0){
             $usuario = mysql_fetch_assoc($resultUsuario);
             $_SESSION['paciente']=$usuario["idpaciente"];
             ?>
                 <script type="text/javascript" language="JavaScript" >                    
-                    location.href="../../mi-perfil-online";
+                    location.href="../../crear-consulta-online";
                 </script>
             <?php           
         }else{
@@ -1039,8 +1041,47 @@
                     location.href="../../index.php";
                 </script>
             <?php 
-        }
+        }                
+    }    
+    
+    /*Registro de consulta*/
+    if($_GET["tarea"]==48){       
+        $con = Conexion();
+        $sql_insertCONUSLTA = "insert into consulta (idpaciente,titulo,fechacreacion,pregunta01,pregunta02,pregunta03,pregunta04,pregunta05,pregunta06) values ('".$_GET["id"]."','".$_POST["titulo"]."',now(),'".$_POST["pregunta01"]."','".$_POST["pregunta02"]."','".$_POST["pregunta03"]."','".$_POST["pregunta04"]."','".$_POST["pregunta05"]."','".$_POST["pregunta06"]."',0);";
+        $result_insertCONSULTA = mysql_query($sql_insertCONUSLTA,$con) or die(mysql_error());
+        mysql_close($con); 
+        ?>
+            <script type="text/javascript" language="JavaScript" >
+                alert("Tú consulta ha sido registrada satisfactoriamente, podras accesar a la misma a traves de la pagina web del abcnaturista o en tu correo electronico para leer tu respuesta.");
+                location.href="../../mi-perfil-online";
+            </script>
+        <?php       
+    }
+    
+    /*Registro de Mensaje como respuesta a consulta*/
+    if($_GET["tarea"]==49){
         
+        if($_POST["contenido"]!=""){
+            $con = Conexion();            
+            $sql_insertMensaje = "insert into mensaje (idconsulta,origen,idadministrador,fechaemision,contenido) values('".$_GET["id"]."','".$_GET["origen"]."',1,now(),'".$_POST["contenido"]."');";
+            $result_insertMensaje = mysql_query($sql_insertMensaje,$con) or die(mysql_error());
+            
+            $sql_update = "update consulta set estatus=1 where idconsulta='".$_GET["id"]."';";
+            $result_update = mysql_query($sql_update,$con) or die(mysql_error());
+            
+            ?>
+                <script type="text/javascript" language="JavaScript" >                
+                    alert("Mensaje registrado satisfactoriamente.");
+                    location.href="../responderconsulta.php?id=<?php echo $_GET["id"]; ?>";
+                </script>
+            <?php            
+        }else{
+        ?>
+            <script type="text/javascript" language="JavaScript" >                
+                location.href="../responderconsulta.php?id=<?php echo $_GET["id"]; ?>";
+            </script>
+        <?php                        
+        }
         
     }    
             
