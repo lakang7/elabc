@@ -94,11 +94,7 @@
             </script>
 	<?php            
     }    
-    
-  
-    
-    
-    
+                  
   /*Registro de Parte de la planta*/
     if($_GET["tarea"]==7){
         $con =  Conexion();
@@ -1101,6 +1097,157 @@
                 location.href="index.php";
             </script>
         <?php        
+    }  
+    
+    /*Registrar consejo*/
+    if($_GET["tarea"]==51){
+        $con =  Conexion();
+        $fp = fopen("../../recursos/precede.txt", "r");
+        $precede = fgets($fp);   
+        $atributos= fgets($fp);
+        $conecta=explode("|",$atributos);        
+        $sql_insertCONSEJO = "insert into consejo (titulo,descripcion) values ('".$_POST["titulo"]."','".$_POST["descripcion"]."');";	
+        $result_insertCONSEJO = mysql_query($sql_insertCONSEJO,$con) or die(mysql_error());
+        $sql_ultimoConsejo="SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '".$conecta[3]."' AND TABLE_NAME = 'consejo';";
+	$result_ultimoConsejo=mysql_query($sql_ultimoConsejo,$con) or die(mysql_error());	
+	$fila = mysql_fetch_assoc($result_ultimoConsejo);
+        $indice=intval($fila["AUTO_INCREMENT"]);
+        $indice=($indice-1);
+        
+        if($_FILES['imagenConsejo']['name']){
+            $target_path = "../../imagenes/consejos/";
+            $target_path = $target_path . basename( $_FILES['imagenConsejo']['name']); 
+            if(move_uploaded_file($_FILES['imagenConsejo']['tmp_name'], $target_path)) 
+            {             
+                $sql_updateConsejo="update consejo set imagen='".$_FILES['imagenConsejo']['name']."' where idconsejo='".$indice."'";
+                $result_updateConsejo = mysql_query($sql_updateConsejo,$con) or die(mysql_error());            
+            }                     
+        }  
+        
+        mysql_close($con);
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Registro Satisfactorio de Consejo");
+		location.href="../listarconsejo.php";
+            </script>
+	<?php                       
+    } 
+    
+    /*Editar consejo*/
+    if($_GET["tarea"]==52){
+        $con =  Conexion();
+        $sqlupdateConsejo="update consejo set titulo='".$_POST["titulo"]."', descripcion='".$_POST["descripcion"]."' where idconsejo='".$_GET["id"]."'";
+        $resultupdateConsejo = mysql_query($sqlupdateConsejo,$con) or die(mysql_error());
+        if($_FILES['imagenConsejo']['name']){
+            $target_path = "../../imagenes/consejos/";
+            $target_path = $target_path . basename( $_FILES['imagenConsejo']['name']); 
+            if(move_uploaded_file($_FILES['imagenConsejo']['tmp_name'], $target_path)) 
+            {             
+                $sql_updateConsejo="update consejo set imagen='".$_FILES['imagenConsejo']['name']."' where idconsejo='".$_GET["id"]."'";
+                $result_updateConsejo = mysql_query($sql_updateConsejo,$con) or die(mysql_error());            
+            }                     
+        }         
+        mysql_close($con);
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Edicion Satisfactoria de Consejo");
+		location.href="../listarconsejo.php";
+            </script>
+	<?php         
     }    
+    
+    /*Eliminar consejo*/
+    if($_GET["tarea"]==53){
+        $con =  Conexion();       
+        $sql_consejo="select * from consejo where idconsejo='".$_GET["id"]."'";
+        $result_consejo=mysql_query($sql_consejo,$con) or die(mysql_error()); 
+        $consejo = mysql_fetch_assoc($result_consejo);
+        unlink ("../../imagenes/consejos/".$consejo["imagen"]);
+        $sql_eliminaConsejo="delete from consejo where idconsejo='".$_GET["id"]."';";
+	$result_eliminaConsejo=mysql_query($sql_eliminaConsejo,$con) or die(mysql_error());       
+        mysql_close($con);
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Eliminacion Satisfactoria de Consejo");
+		location.href="../listarconsejo.php";
+            </script>
+	<?php         
+    }
+    
+    /*Registrar sabias que*/
+    if($_GET["tarea"]==54){
+        $con =  Conexion();
+        $fp = fopen("../../recursos/precede.txt", "r");
+        $precede = fgets($fp);   
+        $atributos= fgets($fp);
+        $conecta=explode("|",$atributos);        
+        $sql_insertSABIASQUE = "insert into sabiasque (descripcion) values ('".$_POST["descripcion"]."');";	
+        $result_insertSABIASQUE = mysql_query($sql_insertSABIASQUE,$con) or die(mysql_error());
+        $sql_ultimoSabiasque="SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '".$conecta[3]."' AND TABLE_NAME = 'sabiasque';";
+	$result_ultimoSabiasque=mysql_query($sql_ultimoSabiasque,$con) or die(mysql_error());	
+	$fila = mysql_fetch_assoc($result_ultimoSabiasque);
+        $indice=intval($fila["AUTO_INCREMENT"]);
+        $indice=($indice-1);
+        
+        if($_FILES['imagenSabiasque']['name']){
+            $target_path = "../../imagenes/sabiasque/";
+            $target_path = $target_path . basename( $_FILES['imagenSabiasque']['name']); 
+            if(move_uploaded_file($_FILES['imagenSabiasque']['tmp_name'], $target_path)) 
+            {             
+                $sql_updateSabiasque="update sabiasque set imagen='".$_FILES['imagenSabiasque']['name']."' where idsabiasque='".$indice."'";
+                $result_updateSabiasque = mysql_query($sql_updateSabiasque,$con) or die(mysql_error());            
+            }                     
+        }  
+        
+        mysql_close($con);
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Registro Satisfactorio de Sabias que");
+		location.href="../listarsabiasque.php";
+            </script>
+	<?php                       
+    } 
+    
+    /*Editar sabias que*/
+    if($_GET["tarea"]==55){
+        $con =  Conexion();
+        $sqlupdateSabiasque="update sabiasque set descripcion='".$_POST["descripcion"]."' where idsabiasque='".$_GET["id"]."'";
+        $resultupdateSabiasque = mysql_query($sqlupdateSabiasque,$con) or die(mysql_error());
+        if($_FILES['imagenSabiasque']['name']){
+            $target_path = "../../imagenes/sabiasque/";
+            $target_path = $target_path . basename( $_FILES['imagenSabiasque']['name']); 
+            if(move_uploaded_file($_FILES['imagenSabiasque']['tmp_name'], $target_path)) 
+            {             
+                $sql_updateSabiasque="update sabiasque set imagen='".$_FILES['imagenSabiasque']['name']."' where idsabiasque='".$_GET["id"]."'";
+                $result_updateSabiasque = mysql_query($sql_updateSabiasque,$con) or die(mysql_error());            
+            }                     
+        }         
+        mysql_close($con);
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Edicion Satisfactoria de Sabias que");
+		location.href="../listarsabiasque.php";
+            </script>
+	<?php         
+    }    
+    
+    /*Eliminar sabias que*/
+    if($_GET["tarea"]==56){
+        $con =  Conexion();
+        $sql_sabias="select * from sabiasque where idsabiasque='".$_GET["id"]."'";
+        $result_sabias=mysql_query($sql_sabias,$con) or die(mysql_error()); 
+        $sabias = mysql_fetch_assoc($result_sabias);
+        unlink ("../../imagenes/sabiasque/".$sabias["imagen"]);        
+        $sql_eliminaSabiasque="delete from sabiasque where idsabiasque='".$_GET["id"]."';";
+	$result_eliminaSabiasque=mysql_query($sql_eliminaSabiasque,$con) or die(mysql_error());
+        mysql_close($con);
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Eliminacion Satisfactoria de Sabias que");
+		location.href="../listarsabiasque.php";
+            </script>
+	<?php         
+    }    
+    
             
 ?>

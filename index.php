@@ -42,11 +42,29 @@
             </div>
             <div class="row">
                 <div class="col-md-3">
-                    <div class="col-md-12" style="padding: 0px">
-                        <img class="img-responsive center-block" src="imagenes/consejos/tomaragua.jpg" >
-                    </div>
-                    <div class="col-md-12" style="padding: 0px; font-family: 'Open Sans Condensed', sans-serif; font-size: 19px;"><b>Toma por lo menos 08 vasos de agua todos los días</b></div>
-                    <div class="col-md-12" style="padding: 0px; font-family: 'Open Sans Condensed', sans-serif; font-size: 18px;">Si usted anhela tener una piel suave que irradia juventud, es muy probable que en algún momento le hayan exhortado a tomar mucha agua, para lavar las toxinas y mantener su cutis sano.</div>                
+                    <?php
+                        $sqlConsejo="select * from consejo;";
+                        $resutlConsejo=mysql_query($sqlConsejo,$con) or die(mysql_error());
+                        $numeroConsejos=mysql_num_rows($resutlConsejo);
+                        //echo "El numero de consejos es: ".$numeroConsejos;
+                        if($numeroConsejos>0){
+                            $seleccionado=rand(0,($numeroConsejos-1));
+                            //echo "El numero random es: ".$seleccionado;
+                            $cont=0;
+                            $band=0;
+                            while ($consejo=mysql_fetch_assoc($resutlConsejo)) {
+                                if($cont==$seleccionado){                                    
+                                    echo "<div class='col-md-12' style='padding: 0px'>";
+                                    echo "<img class='img-responsive center-block' src='".trim($precede)."imagenes/consejos/".$consejo["imagen"]."' >";
+                                    echo "</div>";
+                                    echo "<div class='col-md-12' style=\"padding: 0px; font-family: 'Open Sans Condensed', sans-serif; font-size: 19px;text-align: justify; \"><b>".$consejo["titulo"]."</b></div>";
+                                    echo "<div class='col-md-12' style=\"padding: 0px; font-family: 'Open Sans Condensed', sans-serif; font-size: 18px;text-align: justify; \">".$consejo["descripcion"]."</div>";                                    
+                                }
+                                $cont++;
+                            }
+                        }
+                    ?>
+                
                 </div>
                 <div class="col-md-6" >                                                               
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">                    
@@ -86,9 +104,29 @@
         </div>
         <div class="row" >
             <div class="col-md-3">
-                <div class="col-md-12 subtitulo_principal">¿Sabias que?</div>
-                <div class="top4_resumen">Un diente de ajo licuado con jugo de limon todas las noches te puede ayudar a consiliar el sueño.</div>
-                <img class="img-responsive center-block" src="imagenes/sabiasque/elajo.jpg">                
+                
+                    <?php
+                        $sqlSabias="select * from sabiasque;";
+                        $resutlSabias=mysql_query($sqlSabias,$con) or die(mysql_error());
+                        $numeroSabias=mysql_num_rows($resutlSabias);
+                        //echo "El numero de consejos es: ".$numeroConsejos;
+                        if($numeroSabias>0){
+                            $seleccionado=rand(0,($numeroSabias-1));
+                            //echo "El numero random es: ".$seleccionado;
+                            $cont=0;
+                            $band=0;
+                            while ($sabias=mysql_fetch_assoc($resutlSabias)) {
+                                if($cont==$seleccionado){                                    
+                                    echo "<div class='col-md-12 subtitulo_principal'>¿Sabias que?</div>";
+                                    echo "<div class='top4_resumen'>".$sabias["descripcion"]."</div>";
+                                    echo "<img class='img-responsive center-block' src='".trim($precede)."imagenes/sabiasque/".$sabias["imagen"]."'>";
+                                }
+                                $cont++;
+                            }
+                        }
+                    ?>                
+                
+                
             </div>
             <div class="col-md-9"  >
                 <div class="col-md-12 subtitulo_principal">Nuestros Articulos Más Leidos</div>
@@ -101,8 +139,8 @@
                             $dirige = str_replace(" ","-",$masleido["titulo"]);
                             echo "<div class='col-md-3 opmenuprincipal' style='padding: 5px;' onclick=redirigir('".trim($precede)."articulo/".$dirige."/".$masleido["idarticulo"]."')>";
                             echo "<img class='img-responsive center-block' src='".trim($precede)."imagenes/blog/resumen/".$masleido["imaresumen"]."' >";
-                            echo "<div class='top4_titulo' style='margin-top: 5px;'><h4 style='float: left; font-size: 30px; line-height: 15px; margin-right: 5px;'>0".($cont+1)."</h4>".$masleido["titulo"]."</div>";
-                            echo "<div class='top4_resumen'>".$masleido["resumen"]."</div>";
+                            echo "<div class='top4_titulo' style='margin-top: 5px;text-align: justify'><h4 style='float: left; font-size: 45px; line-height: 15px; margin-right: 5px;'>0".($cont+1)."</h4>".$masleido["titulo"]."</div>";
+                            echo "<div class='top4_resumen' style='margin-top: 5px;'>".$masleido["resumen"]."</div>";
                             echo "</div>";                                                                                    
                             $cont++;
                         }   

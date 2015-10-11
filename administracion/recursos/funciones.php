@@ -26,6 +26,8 @@
         echo "<div class='col-md-12 itemMenu' onclick=redirigir('listardescibeasociacion.php')>Describe Asociacion</div>";
         echo "<div class='col-md-12 itemMenu' onclick=redirigir('listarcategoriablog.php')>Categorias del Blog</div>";
         echo "<div class='col-md-12 itemMenu' onclick=redirigir('listararticulo.php') >Articulos del Blog</div>";
+        echo "<div class='col-md-12 itemMenu' onclick=redirigir('listarconsejo.php') >Consejos</div>";
+        echo "<div class='col-md-12 itemMenu' onclick=redirigir('listarsabiasque.php') >Sabias que</div>";
         echo "<div class='col-md-12 itemMenu' onclick=redirigir('listarconsultas.php') style='border-bottom: 1px solid #CCCCCC' >Consultas On-line</div>";
     }
     

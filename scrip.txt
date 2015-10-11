@@ -259,3 +259,17 @@ CREATE TABLE mensaje (
     FOREIGN KEY (idadministrador) REFERENCES administrador(idadministrador) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+CREATE TABLE consejo (
+    idconsejo mediumint(8) unsigned auto_increment,
+    titulo VARCHAR(60) not null,
+    descripcion VARCHAR(200) not null,
+    imagen VARCHAR(60) not null,
+    PRIMARY KEY (idconsejo)
+);
+
+CREATE TABLE sabiasque (
+    idsabiasque mediumint(8) unsigned auto_increment,
+    descripcion VARCHAR(200) not null,
+    imagen VARCHAR(60) not null,
+    PRIMARY KEY (idsabiasque)
+);
