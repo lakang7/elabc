@@ -47,9 +47,18 @@
         <link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
         <link href="<?php echo $precede; ?>estilos/estiloestrucutra.css" rel='stylesheet' type='text/css'>
-                        
+               
     </head>
-    <body>                      
+    <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>  
+
         <div class="container">
             <div class="row" style="margin-bottom: 15px;">
                 <div class="col-md-3"><img onclick=redirigir("<?php echo trim($precede) ?>") class="img-responsive center-block opmenuprincipal" src="<?php echo $precede; ?>imagenes/logoelabcnaturista.png"></div>
@@ -64,9 +73,14 @@
             <div class="col-md-5">  
                 <div class="col-md-12 subtitulo_principal" style="border-bottom: 1px solid #CCCCCC; margin-bottom: 0px; font-weight: bold"><?php echo $planta["nombremostrar"] ?></div>
                 <div class="col-md-12 subtitulo_principal" style="font-size: 18px;"><?php echo $planta["nombrecientifico"] ?></div>
-                <img class="img-responsive center-block" src="<?php echo $precede; ?>imagenes/plantas/perfil/<?php echo $planta["imagenperfil"] ?>">
-                <div class="col-md-12" >                                                                                               
-                </div>
+                <img class="img-responsive center-block" src="<?php echo $precede; ?>imagenes/plantas/perfil/<?php echo $planta["imagenperfil"] ?>">                
+               
+                <div class="fb-like" data-href="<?php echo trim($precede); ?>propiedades-terapeuticas-y-medicinales/<?php echo str_replace(" ","-",trim($planta["nombremostrar"])) ?>/<?php echo $_GET["clave"]; ?>" data-layout="button_count" ></div>
+                <div style="margin-left: 5px;" class="fb-share-button" data-href="<?php echo trim($precede); ?>propiedades-terapeuticas-y-medicinales/<?php echo str_replace(" ","-",trim($planta["nombremostrar"])) ?>/<?php echo $_GET["clave"]; ?>" data-layout="button_count"></div>
+                <div style="margin-left: 5px; margin-right: 5px;" class="fb-send" data-href="<?php echo trim($precede); ?>propiedades-terapeuticas-y-medicinales/<?php echo str_replace(" ","-",trim($planta["nombremostrar"])) ?>/<?php echo $_GET["clave"]; ?>" ></div>                
+                <a href="https://twitter.com/share" class="twitter-share-button" data-via="elabcnaturista" data-lang="es">Twittear</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>                
+                    
                 <?php echo "<p>".$planta["descripcionperfil"]."</p>"; ?>
                 <div class="col-md-12" style="padding: 0px;">
                     <div class="col-md-3" style="padding: 0px"><img class="img-responsive center-block" src="<?php echo $precede; ?>imagenes/familiabotanica.png" ></div>
@@ -196,6 +210,7 @@
                 <?php
                 }
                 ?>
+
                 
             </div>
             <div class="col-md-7"  >                    
@@ -239,6 +254,8 @@
                         
                 
                 ?>
+
+                <div class="fb-comments" data-href="<?php echo trim($precede); ?>propiedades-terapeuticas-y-medicinales/<?php echo str_replace(" ","-",trim($planta["nombremostrar"])) ?>/<?php echo $_GET["clave"]; ?>" data-numposts="5" width="100%"></div>                
 
             </div>
         </div>

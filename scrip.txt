@@ -104,6 +104,7 @@ CREATE TABLE enfermedad (
     idorgano mediumint(8) unsigned not null,
     nombrecomun varchar(30) not null,
     nombrecientifico varchar(60) not null,
+    mostrar varchar(60) not null,
     descripcioncatalogo varchar(200) not null,
     descripcionperfil varchar(3000) not null,
     causas varchar(3000) not null,
