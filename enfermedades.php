@@ -54,6 +54,14 @@
                         
     </head>
     <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>        
         <div class="container">
             <div class="row" style="margin-bottom: 15px;">
                 <div class="col-md-3"><img onclick=redirigir("<?php echo trim($precede) ?>") class="img-responsive center-block opmenuprincipal" src="<?php echo $precede; ?>imagenes/logoelabcnaturista.png"></div>
@@ -127,18 +135,29 @@
                 $sql_listaENFERMEDAD="select * from planta order by nombrecomun";
                 $result_listaENFERMEDAD=mysql_query($sql_listaENFERMEDAD,$con) or die(mysql_error());
                 $numeroElmentos=mysql_num_rows($result_listaENFERMEDAD);                        
-                echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 20px;'>Catálogo de Enfermedades <small>[".$numeroElmentos." Enfermedades]</small></div>";
+                echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 10px;'>Catálogo de Enfermedades <small>[".$numeroElmentos." Enfermedades]</small></div>";
             }else if($tipoElemento=="sh"){
                 $sql_listaENFERMEDADES="select enfermedad.idenfermedad, enfermedad.nombrecomun, enfermedad.mostrar, enfermedad.descripcioncatalogo, organo.idorgano, sistema.idsistema from enfermedad,organo,sistema where enfermedad.idorgano = organo.idorgano and organo.idsistema = sistema.idsistema and sistema.idsistema='".$idElemento."'";
                 $result_listaENFERMEDADES=mysql_query($sql_listaENFERMEDADES,$con) or die(mysql_error());                        
                 $numeroElmentos=mysql_num_rows($result_listaENFERMEDADES);                        
-                echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 20px;'>Catálogo de Enfermedades del ".$auxsistema["mostrar"]." <small>[".$numeroElmentos." Plantas]</small></div>";
+                echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 10px;'>Catálogo de Enfermedades del ".$auxsistema["mostrar"]." <small>[".$numeroElmentos." Plantas]</small></div>";
             }else if($tipoElemento=="oh"){
                 $sql_listaENFERMEDADES="select enfermedad.idenfermedad, enfermedad.nombrecomun, enfermedad.mostrar, enfermedad.descripcioncatalogo from enfermedad where idorgano='".$idElemento."' order by nombrecomun";
                 $result_listaENFERMEDADES=mysql_query($sql_listaENFERMEDADES,$con) or die(mysql_error()); 
                 $numeroElmentos=mysql_num_rows($result_listaENFERMEDADES);
-                echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 20px;'>Catálogo de Enfermededades de  ".$auxorgano["mostrar"]." <small>[".$numeroElmentos." Plantas]</small></div>";
-            }             
+                echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 10px;'>Catálogo de Enfermededades de  ".$auxorgano["mostrar"]." <small>[".$numeroElmentos." Plantas]</small></div>";
+            } 
+            
+                    $url="http://".$_SERVER["HTTP_HOST"].$_SERVER['REQUEST_URI'];
+                    //echo $url."</br>";
+                    
+                ?>                 
+                <div class="fb-like" data-href="<?php echo $url; ?>" data-layout="button_count" ></div>
+                <div style="margin-left: 5px;" class="fb-share-button" data-href="<?php echo $url; ?>" data-layout="button_count"></div>
+                <div style="margin-left: 5px; margin-right: 5px;" class="fb-send" data-href="<?php echo $url; ?>" ></div>                
+                <a href="https://twitter.com/share" class="twitter-share-button" data-via="elabcnaturista" data-lang="es">Twittear</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>                                                    
+                <?php            
             
             $letras=array();
             $letras[0]="a"; $letras[11]="l";

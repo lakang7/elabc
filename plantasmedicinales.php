@@ -54,7 +54,15 @@
         <link href="<?php echo $precede; ?>estilos/estiloestrucutra.css" rel='stylesheet' type='text/css'>
                         
     </head>
-    <body>        
+    <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>        
         <div class="container">
             <div class="row" style="margin-bottom: 15px;">
                 <div class="col-md-3"><img onclick=redirigir("<?php echo trim($precede) ?>") class="img-responsive center-block opmenuprincipal" src="<?php echo $precede; ?>imagenes/logoelabcnaturista.png"></div>
@@ -97,19 +105,29 @@
                         $sql_listaPLANTA="select * from planta order by nombrecomun";
                         $result_listaPLANTA=mysql_query($sql_listaPLANTA,$con) or die(mysql_error());
                         $numeroElmentos=mysql_num_rows($result_listaPLANTA);                        
-                        echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 20px;'>Catálogo de Plantas Medicinales ".$complementaTitulo." <small>[".$numeroElmentos." Plantas]</small></div>";
+                        echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 10px;'>Catálogo de Plantas Medicinales ".$complementaTitulo." <small>[".$numeroElmentos." Plantas]</small></div>";
                     }else if($tipoElemento=="pf"){
                         $sql_listaPLANTA="select planta.idplanta, planta.imagencatalogo, planta.nombrecomun, planta.nombremostrar, planta.descripcioncatalogo from planta, planta_profarmacologica where planta.idplanta = planta_profarmacologica.idplanta and planta_profarmacologica.idprofarmacologica = ".$idElemento." order by planta.nombrecomun";
                         $result_listaPLANTA=mysql_query($sql_listaPLANTA,$con) or die(mysql_error());                        
                         $numeroElmentos=mysql_num_rows($result_listaPLANTA);                        
-                        echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 20px;'>Catálogo de Plantas Medicinales ".$complementaTitulo." <small>[".$numeroElmentos." Plantas]</small></div>";
+                        echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 10px;'>Catálogo de Plantas Medicinales ".$complementaTitulo." <small>[".$numeroElmentos." Plantas]</small></div>";
                     }else if($tipoElemento=="cq"){
                         $sql_listaPLANTA="select planta.idplanta, planta.imagencatalogo, planta.nombrecomun, planta.nombremostrar, planta.descripcioncatalogo from planta, planta_comquimica where planta.idplanta = planta_comquimica.idplanta and planta_comquimica.idcomquimica = ".$idElemento." order by planta.nombrecomun";
                         $result_listaPLANTA=mysql_query($sql_listaPLANTA,$con) or die(mysql_error()); 
                         $numeroElmentos=mysql_num_rows($result_listaPLANTA);
-                        echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 20px;'>Catálogo de Plantas Medicinales  ".$complementaTitulo." <small>[".$numeroElmentos." Plantas]</small></div>";
-                    } 
-                
+                        echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 10px;'>Catálogo de Plantas Medicinales  ".$complementaTitulo." <small>[".$numeroElmentos." Plantas]</small></div>";
+                    }
+                    
+                    $url="http://".$_SERVER["HTTP_HOST"].$_SERVER['REQUEST_URI'];
+                    //echo $url."</br>";
+                    
+                ?>    
+                <div class="fb-like" data-href="<?php echo $url; ?>" data-layout="button_count" ></div>
+                <div style="margin-left: 5px;" class="fb-share-button" data-href="<?php echo $url; ?>" data-layout="button_count"></div>
+                <div style="margin-left: 5px; margin-right: 5px;" class="fb-send" data-href="<?php echo $url; ?>" ></div>                
+                <a href="https://twitter.com/share" class="twitter-share-button" data-via="elabcnaturista" data-lang="es">Twittear</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>                                    
+                <?php
                 $letras=array();
                 $letras[0]="a"; $letras[11]="l";
                 $letras[1]="b"; $letras[12]="m";

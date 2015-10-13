@@ -42,6 +42,14 @@
                         
     </head>
     <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>        
         <div class="container">
             
             <div class="row" style="margin-bottom: 15px;">
@@ -71,7 +79,7 @@
                                     $autor = mysql_fetch_assoc($resultAUTOR);
                                     $dirige = str_replace(" ","-",$articulo["titulo"]);
                                     $dirige = trim($precede)."articulo/".$dirige."/".$articulo["idarticulo"];
-                                    echo "<div class='artencatalogo' onclick=redirigir('".$dirige."')>";
+                                    echo "<div class='artencatalogo' onclick=redirigir('".$dirige."') style='cursor:pointer'>";
                                     echo "<div class='col-md-12' style='padding: 0px;'><img src='".$precede."/imagenes/blog/catalogo/".$articulo["imacatalogo"]."' class='img-responsive center-block' ></div>";
                                     echo "<div class='col-md-12' style='padding: 0px;'><div class='col-md-12 blog_titulo'>".$articulo["titulo"]."</div></div>";                                
                                     echo "<div class='col-md-12' style='padding: 0px; margin-top: 10px;'>";
@@ -117,7 +125,7 @@
                                     $autor = mysql_fetch_assoc($resultAUTOR);
                                     $dirige = str_replace(" ","-",$articulo["titulo"]);
                                     $dirige = trim($precede)."articulo/".$dirige."/".$articulo["idarticulo"];
-                                    echo "<div class='artencatalogo' onclick=redirigir('".$dirige."')>";
+                                    echo "<div class='artencatalogo' onclick=redirigir('".$dirige."') style='cursor:pointer'>";
                                     echo "<div class='col-md-12' style='padding: 0px;'><img src='".$precede."/imagenes/blog/catalogo/".$articulo["imacatalogo"]."' class='img-responsive center-block' ></div>";
                                     echo "<div class='col-md-12' style='padding: 0px;'><div class='col-md-12 blog_titulo'>".$articulo["titulo"]."</div></div>";                                
                                     echo "<div class='col-md-12' style='padding: 0px; margin-top: 10px;'>";
@@ -169,23 +177,19 @@
                     }                     
                 ?>
                 
-            <div class="col-md-12" style="background-color: #eae6e7; padding-top: 10px; padding-bottom: 15px; margin-top: 15px;">
-                <div class="col-md-1"></div>
-                <div class="col-md-10 subscribete_tit">¡Subscribete y recibe notificaciones en tu correo cada vez que publiquemos un nuevo articulo!</div>                
-                <div class="col-md-12 subscribete_tit" style="margin-top: 10px; padding: 0px;"><input type="email" class="form-control" id="email" placeholder="Ingresa tú email"></div>
-                <div class="col-md-3"></div>
-                <div class="col-md-6 subscribete_boton" style="margin-top: 10px; background-color: #CCCCCC; padding-top: 5px; padding-bottom: 5px;">Suscribirse</div>                
-            </div>                
+                <div class="col-md-12" style="background-color: #eae6e7; padding-top: 10px; padding-bottom: 15px; margin-top: 15px; margin-bottom: 20px">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10 subscribete_tit">¡Subscribete y recibe notificaciones en tu correo cada vez que publiquemos un nuevo articulo!</div>                
+                    <div class="col-md-12 subscribete_tit" style="margin-top: 10px; padding: 0px;"><input type="email" class="form-control" id="email" placeholder="Ingresa tú email"></div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6 subscribete_boton" style="margin-top: 10px; background-color: #CCCCCC; padding-top: 5px; padding-bottom: 5px;">Suscribirse</div>                
+                </div> 
+                
+                
+                <div class="fb-page" data-href="https://www.facebook.com/elabcnaturista" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/elabcnaturista"><a href="https://www.facebook.com/elabcnaturista">Elabcnaturista</a></blockquote></div></div>
                 
             </div>            
-            <!--<div class="col-md-3" style="background-color: #eae6e7; padding-top: 10px; padding-bottom: 15px">
-                <div class="col-md-1"></div>
-                <div class="col-md-10 subscribete_tit">¡Subscribete y recibe notificaciones en tu correo cada vez que publiquemos un nuevo articulo!</div>                
-                <div class="col-md-12 subscribete_tit" style="margin-top: 10px; padding: 0px;"><input type="email" class="form-control" id="email" placeholder="Ingresa tú email"></div>
-                <div class="col-md-3"></div>
-                <div class="col-md-6 subscribete_boton" style="margin-top: 10px; background-color: #CCCCCC; padding-top: 5px; padding-bottom: 5px;">Suscribirse</div>
-                
-            </div>-->
+
         </div>      
             <?php piepagina(); ?>
         </div>

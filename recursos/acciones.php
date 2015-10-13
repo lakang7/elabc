@@ -24,7 +24,7 @@
                                     $autor = mysql_fetch_assoc($resultAUTOR);
                                     $dirige = str_replace(" ","-",$articulo["titulo"]);
                                     $dirige = trim($precede)."articulo/".$dirige."/".$articulo["idarticulo"];
-                                    echo "<div class='artencatalogo' onclick=redirigir('".$dirige."')>";                                    
+                                    echo "<div class='artencatalogo' onclick=redirigir('".$dirige."') style='cursor:pointer'>";                                    
                                     echo "<div class='col-md-12' style='padding: 0px;'><img src='".$precede."/imagenes/blog/catalogo/".$articulo["imacatalogo"]."' class='img-responsive center-block' ></div>";
                                     echo "<div class='col-md-12' style='padding: 0px;'><div class='col-md-12 blog_titulo'>".$articulo["titulo"]."</div></div>";                                
                                     echo "<div class='col-md-12' style='padding: 0px; margin-top: 10px;'>";
@@ -70,7 +70,7 @@
                                     $autor = mysql_fetch_assoc($resultAUTOR);
                                     $dirige = str_replace(" ","-",$articulo["titulo"]);
                                     $dirige = trim($precede)."articulo/".$dirige."/".$articulo["idarticulo"];
-                                    echo "<div class='artencatalogo' onclick=redirigir('".$dirige."')>";
+                                    echo "<div class='artencatalogo' onclick=redirigir('".$dirige."') style='cursor:pointer'>";
                                     echo "<div class='col-md-12' style='padding: 0px;'><img src='".$precede."/imagenes/blog/catalogo/".$articulo["imacatalogo"]."' class='img-responsive center-block' ></div>";
                                     echo "<div class='col-md-12' style='padding: 0px;'><div class='col-md-12 blog_titulo'>".$articulo["titulo"]."</div></div>";                                
                                     echo "<div class='col-md-12' style='padding: 0px; margin-top: 10px;'>";

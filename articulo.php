@@ -41,7 +41,18 @@
         <link href="<?php echo $precede; ?>estilos/estiloestrucutra.css" rel='stylesheet' type='text/css'>
                         
     </head>
+                    <?php
+                        $url="http://".$_SERVER["HTTP_HOST"].$_SERVER['REQUEST_URI'];
+                    ?>    
     <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>        
         <div class="container">
             <div class="row" style="margin-bottom: 15px;">
                 <div class="col-md-3"><img onclick=redirigir("<?php echo trim($precede) ?>") class="img-responsive center-block opmenuprincipal" src="<?php echo $precede; ?>imagenes/logoelabcnaturista.png"></div>
@@ -60,7 +71,21 @@
                     <img src="<?php echo trim($precede); ?>imagenes/blog/contenido/<?php echo $articulo["imacontenido"] ?>" class="img-responsive center-block" >
                 </div>
                 <div class="col-md-12" style="padding: 0px;">                    
-                    <div class="col-md-12 blog_titulo" style="" ><?php echo $articulo["titulo"]; ?></div>
+                    <div class="col-md-12 blog_titulo"  >
+                        <div class="col-md-12">
+                            <?php echo $articulo["titulo"]."</br>"; ?>
+                        </div>
+                        <div class="col-md-12" style="margin-top: -15px;">
+                        
+                            <div class="fb-like" data-href="<?php echo $url; ?>" data-layout="button_count" ></div>
+                            <div style="margin-left: 5px;" class="fb-share-button" data-href="<?php echo $url; ?>" data-layout="button_count"></div>
+                            <div style="margin-left: 5px; margin-right: 5px;" class="fb-send" data-href="<?php echo $url; ?>" ></div>
+                            <a href="https://twitter.com/share" class="twitter-share-button" data-via="elabcnaturista" data-lang="es">Twittear</a>
+                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>                            
+                            
+                        </div>
+                    </div>
+                                        
                 </div>
                 <div class="col-md-12" style="padding: 0px; margin-top: 10px;">                
                     <div class="col-md-4" style="padding: 0px;">
@@ -84,6 +109,10 @@
                     </div>                                    
                 </div>
                 <div class="col-md-12 blog_resumen" ><?php echo $articulo["contenido"]; ?></div>
+                
+                <div class="fb-comments" data-href="<?php echo $url; ?>" data-numposts="5" width="100%"></div>
+                    
+                
                                                
             </div>
             <div class="col-md-3">                
