@@ -274,3 +274,25 @@ CREATE TABLE sabiasque (
     imagen VARCHAR(60) not null,
     PRIMARY KEY (idsabiasque)
 );
+
+CREATE TABLE catterapia (
+    idcatterapia mediumint(8) unsigned auto_increment,
+    nombre VARCHAR(80) not null,
+    mostrar VARCHAR(80) not null,
+    descripcion VARCHAR(600) not null,
+    PRIMARY KEY (idcatterapia)
+);
+
+CREATE TABLE terapia (
+    idterapia mediumint(8) unsigned auto_increment,
+    idcatterapia mediumint(8) unsigned,
+    titulo VARCHAR(120) not null,
+    mostrar VARCHAR(120) not null,
+    imagencatalogo VARCHAR(60) not null,
+    imagenperfil VARCHAR(60) not null,
+    descripcioncatalogo VARCHAR(200) not null,
+    descripcionperfil VARCHAR(25000) not null,
+    numerolecturas mediumint(8) unsigned not null,
+    PRIMARY KEY (idterapia),
+    FOREIGN KEY (idcatterapia) REFERENCES catterapia(idcatterapia) ON UPDATE CASCADE ON DELETE RESTRICT
+);

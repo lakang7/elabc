@@ -1287,5 +1287,147 @@
         <?php        
     }    
     
+  /*Registro de categoria de terapia*/
+    if($_GET["tarea"]==59){
+        $con =  Conexion();
+        $sql_insertcatterapia = "insert into catterapia (nombre,mostrar,descripcion) values ('".$_POST["nombre"]."','".$_POST["mostrar"]."','".$_POST["descripcion"]."');";
+	$result_insertcatterapia = mysql_query($sql_insertcatterapia,$con) or die(mysql_error());	        
+        mysql_close($con);  
+        
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Registro Satisfactorio de Categoria de Terapia Alternativa");
+		location.href="../listarcatterapiaalternativa.php";
+            </script>
+	<?php                
+    }      
+    
+    
+    /*Edición de categoria de terapia*/
+    if($_GET["tarea"]==60){
+        $con =  Conexion();
+        $sql_updatecatterapia="update catterapia set nombre='".$_POST["nombre"]."', descripcion='".$_POST["descripcion"]."', mostrar='".$_POST["mostrar"]."' where idcatterapia='".$_GET["id"]."'";
+	$result_updatecatterapia = mysql_query($sql_updatecatterapia,$con) or die(mysql_error());	        
+        mysql_close($con);
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Edicion Satisfactoria de Categoria de Terapia Alternativa");
+		location.href="../listarcatterapiaalternativa.php";
+            </script>
+	<?php                 
+    }
+    
+    /*Eliminación de categoria de terapia*/
+    if($_GET["tarea"]==61){
+        $con =  Conexion();
+        $sql_eliminacatterapia="delete from catterapia where idcatterapia='".$_GET["id"]."';";
+	$result_eliminacatterapia=mysql_query($sql_eliminacatterapia,$con) or die(mysql_error());
+        mysql_close($con);
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Eliminacion Satisfactoria de Categoria de Terapia Alternativa");
+		location.href="../listarcatterapiaalternativa.php";
+            </script>
+	<?php            
+    }  
+    
+    /*registro de terapia alternativa*/
+    if($_GET["tarea"]==62){
+        $con =  Conexion();
+        $fp = fopen("../../recursos/precede.txt", "r");
+        $precede = fgets($fp);   
+        $atributos= fgets($fp);
+        $conecta=explode("|",$atributos);        
+        $sql_insertterapia = "insert into terapia (idcatterapia,titulo,mostrar,imagencatalogo,imagenperfil,descripcioncatalogo,descripcionperfil,numerolecturas) values ('".$_POST["categoria"]."','".$_POST["nombre"]."','".$_POST["mostrar"]."','','','".$_POST["catalogo"]."','".$_POST["contenido"]."',0);";	
+        $result_insertterapia = mysql_query($sql_insertterapia,$con) or die(mysql_error());
+        $sql_ultimaTerapia="SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '".$conecta[3]."' AND TABLE_NAME = 'terapia';";
+	$result_ultimaTerapia=mysql_query($sql_ultimaTerapia,$con) or die(mysql_error());	
+	$fila = mysql_fetch_assoc($result_ultimaTerapia);
+        $indice=intval($fila["AUTO_INCREMENT"]);
+        $indice=($indice-1); 
+        
+        if($_FILES['imagenCatalogo']['name']){
+            $target_path = "../../imagenes/terapias/catalogo/";
+            $target_path = $target_path . basename( $_FILES['imagenCatalogo']['name']); 
+            if(move_uploaded_file($_FILES['imagenCatalogo']['tmp_name'], $target_path)) 
+            {             
+                $sql_updateTerapia="update terapia set imagencatalogo='".$_FILES['imagenCatalogo']['name']."' where idterapia='".$indice."'";
+                $result_updateTerapia = mysql_query($sql_updateTerapia,$con) or die(mysql_error());            
+            }                     
+        }  
+        
+        if($_FILES['imagenContenido']['name']){
+            $target_path = "../../imagenes/terapias/perfil/";
+            $target_path = $target_path . basename( $_FILES['imagenContenido']['name']); 
+            if(move_uploaded_file($_FILES['imagenContenido']['tmp_name'], $target_path)) 
+            {             
+                $sql_updateTerapia="update terapia set imagenperfil='".$_FILES['imagenContenido']['name']."' where idterapia='".$indice."'";
+                $result_updateTerapia = mysql_query($sql_updateTerapia,$con) or die(mysql_error());            
+            }                     
+        }         
+        
+        mysql_close($con); 
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Registro Satisfactorio de Terapia Alternativa");
+		location.href="../listarterapiaalternativa.php";
+            </script>
+	<?php           
+    }
+    
+    /*edicion de terapia alternativa*/
+    if($_GET["tarea"]==63){
+        $con =  Conexion();
+        $sql_updatecatterapia="update terapia set idcatterapia='".$_POST["categoria"]."', titulo='".$_POST["nombre"]."', mostrar='".$_POST["mostrar"]."' , descripcioncatalogo='".$_POST["catalogo"]."', descripcionperfil='".$_POST["contenido"]."' where idterapia='".$_GET["id"]."'";
+	$result_updatecatterapia = mysql_query($sql_updatecatterapia,$con) or die(mysql_error());
+        
+        if($_FILES['imagenCatalogo']['name']){
+            $target_path = "../../imagenes/terapias/catalogo/";
+            $target_path = $target_path . basename( $_FILES['imagenCatalogo']['name']); 
+            if(move_uploaded_file($_FILES['imagenCatalogo']['tmp_name'], $target_path)) 
+            {             
+                $sql_updateTerapia="update terapia set imagencatalogo='".$_FILES['imagenCatalogo']['name']."' where idterapia='".$indice."'";
+                $result_updateTerapia = mysql_query($sql_updateTerapia,$con) or die(mysql_error());            
+            }                     
+        }  
+        
+        if($_FILES['imagenContenido']['name']){
+            $target_path = "../../imagenes/terapias/perfil/";
+            $target_path = $target_path . basename( $_FILES['imagenContenido']['name']); 
+            if(move_uploaded_file($_FILES['imagenContenido']['tmp_name'], $target_path)) 
+            {             
+                $sql_updateTerapia="update terapia set imagenperfil='".$_FILES['imagenContenido']['name']."' where idterapia='".$indice."'";
+                $result_updateTerapia = mysql_query($sql_updateTerapia,$con) or die(mysql_error());            
+            }                     
+        }         
+        
+        
+        mysql_close($con); 
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Edición Satisfactoria de Terapia Alternativa");
+		location.href="../listarterapiaalternativa.php";
+            </script>
+	<?php          
+    }
+    
+    /*Eliminar terapia alternativa*/
+    if($_GET["tarea"]==64){
+        $con =  Conexion();
+        $sql_terapia="select * from terapia where idterapia='".$_GET["id"]."'";
+        $result_terapia=mysql_query($sql_terapia,$con) or die(mysql_error()); 
+        $terapia = mysql_fetch_assoc($result_terapia);
+        unlink ("../../imagenes/terapias/catalogo/".$terapia["imagencatalogo"]); 
+        unlink ("../../imagenes/terapias/perfil/".$terapia["imagenperfil"]);
+        $sql_eliminaTerapia="delete from terapia where idterapia='".$_GET["id"]."';";
+	$result_eliminaTerapia=mysql_query($sql_eliminaTerapia,$con) or die(mysql_error());
+        mysql_close($con);
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Eliminación Satisfactoria de Terapia Alternativa");
+		location.href="../listarterapiaalternativa.php";
+            </script>
+	<?php         
+    }    
             
 ?>
