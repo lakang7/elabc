@@ -31,7 +31,7 @@
                             </div>
                         </div>   
                 
-                        <div class="col-md-2 opmenuprincipal" style="padding-left: 0px; border-bottom: 3px solid #9DEB00">
+                        <div class="col-md-2 opmenuprincipal" title="Terapias Alternativas" onclick=redirigir("<?php echo trim($precede)."terapias-alternativas" ?>") style="padding-left: 0px; border-bottom: 3px solid #9DEB00">
                             <div class="col-md-12">
                                 <img class="img-responsive center-block" src="<?php echo $precede;?>imagenes/terapiasalternativas.png">
                             </div>

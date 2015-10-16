@@ -89,11 +89,11 @@
                     </div> 
 
                     <div class="col-md-12 contiene_entrada">
-                        <div class="col-md-12 titulo_entrada">Imagen para el Catalogo [Tamaño recomendado 900x525px]</div>
+                        <div class="col-md-12 titulo_entrada">Imagen para el Catalogo [Tamaño recomendado 600x450px]</div>
                         <div class="col-md-12"><input class="form-control" name="imagenCatalogo" type="file" required="required"/></div>
                     </div> 
                     <div class="col-md-12 contiene_entrada">
-                        <div class="col-md-12 titulo_entrada">Imagen para el Contenido [Tamaño recomendado 1200x700px]</div>
+                        <div class="col-md-12 titulo_entrada">Imagen para el Contenido [Tamaño recomendado 600x600px]</div>
                         <div class="col-md-12"><input class="form-control" name="imagenContenido" type="file" required="required"/></div>
                     </div>                        
                     <div class="col-md-12 contiene_entrada">

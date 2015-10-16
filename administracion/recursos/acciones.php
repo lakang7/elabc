@@ -1386,7 +1386,7 @@
             $target_path = $target_path . basename( $_FILES['imagenCatalogo']['name']); 
             if(move_uploaded_file($_FILES['imagenCatalogo']['tmp_name'], $target_path)) 
             {             
-                $sql_updateTerapia="update terapia set imagencatalogo='".$_FILES['imagenCatalogo']['name']."' where idterapia='".$indice."'";
+                $sql_updateTerapia="update terapia set imagencatalogo='".$_FILES['imagenCatalogo']['name']."' where idterapia='".$_GET["id"]."'";
                 $result_updateTerapia = mysql_query($sql_updateTerapia,$con) or die(mysql_error());            
             }                     
         }  
@@ -1396,7 +1396,7 @@
             $target_path = $target_path . basename( $_FILES['imagenContenido']['name']); 
             if(move_uploaded_file($_FILES['imagenContenido']['tmp_name'], $target_path)) 
             {             
-                $sql_updateTerapia="update terapia set imagenperfil='".$_FILES['imagenContenido']['name']."' where idterapia='".$indice."'";
+                $sql_updateTerapia="update terapia set imagenperfil='".$_FILES['imagenContenido']['name']."' where idterapia='".$_GET["id"]."'";
                 $result_updateTerapia = mysql_query($sql_updateTerapia,$con) or die(mysql_error());            
             }                     
         }         

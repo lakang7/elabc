@@ -140,12 +140,12 @@
                 $sql_listaENFERMEDADES="select enfermedad.idenfermedad, enfermedad.nombrecomun, enfermedad.mostrar, enfermedad.descripcioncatalogo, organo.idorgano, sistema.idsistema from enfermedad,organo,sistema where enfermedad.idorgano = organo.idorgano and organo.idsistema = sistema.idsistema and sistema.idsistema='".$idElemento."'";
                 $result_listaENFERMEDADES=mysql_query($sql_listaENFERMEDADES,$con) or die(mysql_error());                        
                 $numeroElmentos=mysql_num_rows($result_listaENFERMEDADES);                        
-                echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 10px;'>Catálogo de Enfermedades del ".$auxsistema["mostrar"]." <small>[".$numeroElmentos." Plantas]</small></div>";
+                echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 10px;'>Catálogo de Enfermedades del ".$auxsistema["mostrar"]." <small>[".$numeroElmentos." Enfermedades]</small></div>";
             }else if($tipoElemento=="oh"){
                 $sql_listaENFERMEDADES="select enfermedad.idenfermedad, enfermedad.nombrecomun, enfermedad.mostrar, enfermedad.descripcioncatalogo from enfermedad where idorgano='".$idElemento."' order by nombrecomun";
                 $result_listaENFERMEDADES=mysql_query($sql_listaENFERMEDADES,$con) or die(mysql_error()); 
                 $numeroElmentos=mysql_num_rows($result_listaENFERMEDADES);
-                echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 10px;'>Catálogo de Enfermededades de  ".$auxorgano["mostrar"]." <small>[".$numeroElmentos." Plantas]</small></div>";
+                echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 10px;'>Catálogo de Enfermededades de  ".$auxorgano["mostrar"]." <small>[".$numeroElmentos." Enfermedades]</small></div>";
             } 
             
                     $url="http://".$_SERVER["HTTP_HOST"].$_SERVER['REQUEST_URI'];

@@ -16,13 +16,13 @@
             mysql_select_db($conecta[3], $con);
             $titulopagina="";
             if($_GET["clave"]=="0"){            
-                $titulopagina="Catálogo de Métodos de preparación de las plantas medicinales | elabcnaturista ";                
+                $titulopagina="Catálogo de Terapias Alternativas | elabcnaturista ";                
             }  else {
-                $sql_listaClAMET="select * from clasificacionmetodo where idclasificacionmetodo='".$_GET["clave"]."'";
+                $sql_listaClAMET="select * from catterapia where idcatterapia='".$_GET["clave"]."'";
                 $result_listaClAMET=mysql_query($sql_listaClAMET,$con) or die(mysql_error());   
                 $clasifica = mysql_fetch_assoc($result_listaClAMET); 
                 
-                $titulopagina="Catálogo Métodos de preparación ".$clasifica["nombre"]." de las plantas medicinales | elabcnaturista ";
+                $titulopagina="Catálogo de Terapias Alternativas enfocadas en ".$clasifica["nombre"]." | elabcnaturista ";
             }
         ?>
         <meta charset="UTF-8">
@@ -60,11 +60,11 @@
             <div class="col-md-3">  
                 <div class="col-md-12 subtitulo_principal" style="border-bottom: 1px solid #CCCCCC; margin-bottom: 0px;">Clasificación</div>                
                 <?php
-                    $sql_listaClAMET="select * from clasificacionmetodo order by nombre";
-                    $result_listaClAMET=mysql_query($sql_listaClAMET,$con) or die(mysql_error());
-                    if(mysql_num_rows($result_listaClAMET)>0){
-                        while ($fila = mysql_fetch_assoc($result_listaClAMET)) {
-                            $apunta=trim($precede)."metodos-preparacion-plantas-medicinales/".str_replace(" ","-",trim($fila["mostrar"]))."/".$fila["idclasificacionmetodo"];                           
+                    $sql_listacatterapia="select * from catterapia order by nombre";
+                    $result_listacatterapia=mysql_query($sql_listacatterapia,$con) or die(mysql_error());
+                    if(mysql_num_rows($result_listacatterapia)>0){
+                        while ($fila = mysql_fetch_assoc($result_listacatterapia)) {
+                            $apunta=trim($precede)."terapias-alternativas/".str_replace(" ","-",trim($fila["mostrar"]))."/".$fila["idcatterapia"];                           
                             echo "<div onclick=redirigir('".$apunta."') class='col-md-12 opcion_menu_lateral'  title='".$fila["descripcion"]."'>".$fila["mostrar"]."</div>";
                         }
                     }
@@ -74,18 +74,18 @@
                 <?php
                 
                     if($_GET["clave"]=="0"){
-                        $sql_listaMETODO="select * from metodo order by nombre";
-                        $result_listaMETODO=mysql_query($sql_listaMETODO,$con) or die(mysql_error());
-                        $numeroElmentos=mysql_num_rows($result_listaMETODO);                      
-                        echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 10px;'>Catálogo de Métodos de preparación de las plantas medicinales <small>[".$numeroElmentos." Métodos]</small></div>";
+                        $sql_listaTERAPIA="select * from terapia order by titulo";
+                        $result_listaTERAPIA=mysql_query($sql_listaTERAPIA,$con) or die(mysql_error());
+                        $numeroElmentos=mysql_num_rows($result_listaTERAPIA);                      
+                        echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 10px;'>Catálogo de Terapias Alternativas <small>[".$numeroElmentos." Terapias]</small></div>";
                     }else{
-                        $sql_listaMETODO="select * from metodo where idclasificacionmetodo='".$_GET["clave"]."' order by nombre";
-                        $result_listaMETODO=mysql_query($sql_listaMETODO,$con) or die(mysql_error());
-                        $numeroElmentos=mysql_num_rows($result_listaMETODO);
-                        $sql_listaClAMET="select * from clasificacionmetodo where idclasificacionmetodo='".$_GET["clave"]."'";
-                        $result_listaClAMET=mysql_query($sql_listaClAMET,$con) or die(mysql_error());   
-                        $clasifica = mysql_fetch_assoc($result_listaClAMET);
-                        echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 10px;'>Catálogo Métodos de preparación ".$clasifica["nombre"]." de las plantas medicinales  <small>[".$numeroElmentos." Métodos]</small></div>";                        
+                        $sql_listaTERAPIA="select * from terapia where idterapia='".$_GET["clave"]."' order by titulo";
+                        $result_listaTERAPIA=mysql_query($sql_listaTERAPIA,$con) or die(mysql_error());
+                        $numeroElmentos=mysql_num_rows($result_listaTERAPIA);
+                        $sql_listacatterapia="select * from catterapia where idcatterapia='".$_GET["clave"]."'";
+                        $result_listacatterapia=mysql_query($sql_listacatterapia,$con) or die(mysql_error());   
+                        $clasifica = mysql_fetch_assoc($result_listacatterapia);
+                        echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 10px;'>Catálogo de Terapias Alternativas enfocadas en ".$clasifica["nombre"]." <small>[".$numeroElmentos." Terapias]</small></div>";                        
                     }       
                     
                     $url="http://".$_SERVER["HTTP_HOST"].$_SERVER['REQUEST_URI'];
@@ -115,34 +115,34 @@
                     
                     if($_GET["clave"]=="0"){ 
                         for($i=0;$i<count($letras);$i++){
-                            $sql_listaMETODO="select * from metodo where nombre like '".$letras[$i]."%' order by nombre";
-                            $result_listaMETODO=mysql_query($sql_listaMETODO,$con) or die(mysql_error());
-                            if(mysql_num_rows($result_listaMETODO)>0){
+                            $sql_listaTERAPIA="select * from terapia where titulo like '".$letras[$i]."%' order by titulo";
+                            $result_listaTERAPIA=mysql_query($sql_listaTERAPIA,$con) or die(mysql_error());
+                            if(mysql_num_rows($result_listaTERAPIA)>0){
                                 echo "<div class='col-md-12 letra'>".strtoupper($letras[$i])."</div>";
                                 $cuentafila=0;
-                                while ($fila = mysql_fetch_assoc($result_listaMETODO)) {
-                                    $apunta=trim($precede)."metodo-de-preparacion/".str_replace(" ","-",trim($fila["mostrar"]))."/".$fila["idmetodo"];
+                                while ($fila = mysql_fetch_assoc($result_listaTERAPIA)) {
+                                    $apunta=trim($precede)."terapia-alternativa/".str_replace(" ","-",trim($fila["mostrar"]))."/".$fila["idterapia"];
                                     if($cuentafila==0){
                                         echo "<div class='col-md-12'>";
                                         echo "<div class='col-md-3 planta' onclick=redirigir('".$apunta."') style='padding: 5px;' >";
-                                        echo "<img class='img-responsive center-block' src='".$precede."imagenes/metodos/catalogo/".$fila["imagencatalogo"]."'>";
-                                        echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["nombre"]."</div>";
+                                        echo "<img class='img-responsive center-block' src='".$precede."imagenes/terapias/catalogo/".$fila["imagencatalogo"]."'>";
+                                        echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["titulo"]."</div>";
                                         echo "<div class='top4_resumen'>".$fila["descripcioncatalogo"]."</div>";
                                         echo "</div>";
                                         $cuentafila++;
                                     }
                                     else if($cuentafila==3){
                                         echo "<div class='col-md-3 planta' onclick=redirigir('".$apunta."') style='padding: 5px;' >";
-                                        echo "<img class='img-responsive center-block' src='".$precede."imagenes/metodos/catalogo/".$fila["imagencatalogo"]."'>";
-                                        echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["nombre"]."</div>";
+                                        echo "<img class='img-responsive center-block' src='".$precede."imagenes/terapias/catalogo/".$fila["imagencatalogo"]."'>";
+                                        echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["titulo"]."</div>";
                                         echo "<div class='top4_resumen'>".$fila["descripcioncatalogo"]."</div>";
                                         echo "</div>";
                                         echo "</div>";
                                         $cuentafila=0;
                                     }else{
                                         echo "<div class='col-md-3 planta' onclick=redirigir('".$apunta."') style='padding: 5px;' >";
-                                        echo "<img class='img-responsive center-block' src='".$precede."imagenes/metodos/catalogo/".$fila["imagencatalogo"]."'>";
-                                        echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["nombre"]."</div>";
+                                        echo "<img class='img-responsive center-block' src='".$precede."imagenes/terapias/catalogo/".$fila["imagencatalogo"]."'>";
+                                        echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["titulo"]."</div>";
                                         echo "<div class='top4_resumen'>".$fila["descripcioncatalogo"]."</div>";
                                         echo "</div>";                                    
                                         $cuentafila++;
@@ -155,34 +155,34 @@
                         }
                     }else{
                         for($i=0;$i<count($letras);$i++){
-                            $sql_listaMETODO="select * from metodo where nombre like '".$letras[$i]."%' and idclasificacionmetodo='".$_GET["clave"]."' order by nombre";
-                            $result_listaMETODO=mysql_query($sql_listaMETODO,$con) or die(mysql_error());
-                            if(mysql_num_rows($result_listaMETODO)>0){
+                            $sql_listaTERAPIA="select * from terapia where titulo like '".$letras[$i]."%' and idcatterapia='".$_GET["clave"]."' order by titulo";
+                            $result_listaTERAPIA=mysql_query($sql_listaTERAPIA,$con) or die(mysql_error());
+                            if(mysql_num_rows($result_listaTERAPIA)>0){
                                 echo "<div class='col-md-12 letra'>".strtoupper($letras[$i])."</div>";
                                 $cuentafila=0;
-                                while ($fila = mysql_fetch_assoc($result_listaMETODO)) {
-                                    $apunta=trim($precede)."metodo-de-preparacion/".str_replace(" ","-",trim($fila["mostrar"]))."/".$fila["idmetodo"];
+                                while ($fila = mysql_fetch_assoc($result_listaTERAPIA)) {
+                                    $apunta=trim($precede)."terapia-alternativa/".str_replace(" ","-",trim($fila["mostrar"]))."/".$fila["idterapia"];
                                     if($cuentafila==0){
                                         echo "<div class='col-md-12'>";
                                         echo "<div class='col-md-3 planta' onclick=redirigir('".$apunta."') style='padding: 5px;' >";
-                                        echo "<img class='img-responsive center-block' src='".$precede."imagenes/metodos/catalogo/".$fila["imagencatalogo"]."'>";
-                                        echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["nombre"]."</div>";
+                                        echo "<img class='img-responsive center-block' src='".$precede."imagenes/terapias/catalogo/".$fila["imagencatalogo"]."'>";
+                                        echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["titulo"]."</div>";
                                         echo "<div class='top4_resumen'>".$fila["descripcioncatalogo"]."</div>";
                                         echo "</div>";
                                         $cuentafila++;
                                     }
                                     else if($cuentafila==3){
                                         echo "<div class='col-md-3 planta' onclick=redirigir('".$apunta."') style='padding: 5px;' >";
-                                        echo "<img class='img-responsive center-block' src='".$precede."imagenes/metodos/catalogo/".$fila["imagencatalogo"]."'>";
-                                        echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["nombre"]."</div>";
+                                        echo "<img class='img-responsive center-block' src='".$precede."imagenes/terapias/catalogo/".$fila["imagencatalogo"]."'>";
+                                        echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["titulo"]."</div>";
                                         echo "<div class='top4_resumen'>".$fila["descripcioncatalogo"]."</div>";
                                         echo "</div>";
                                         echo "</div>";
                                         $cuentafila=0;
                                     }else{
                                         echo "<div class='col-md-3 planta' onclick=redirigir('".$apunta."') style='padding: 5px;' >";
-                                        echo "<img class='img-responsive center-block' src='".$precede."imagenes/metodos/catalogo/".$fila["imagencatalogo"]."'>";
-                                        echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["nombre"]."</div>";
+                                        echo "<img class='img-responsive center-block' src='".$precede."imagenes/terapias/catalogo/".$fila["imagencatalogo"]."'>";
+                                        echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["titulo"]."</div>";
                                         echo "<div class='top4_resumen'>".$fila["descripcioncatalogo"]."</div>";
                                         echo "</div>";                                    
                                         $cuentafila++;

@@ -24,3 +24,7 @@ Rewriterule ^crear-consulta-online/?$ perfilonline.php
 Rewriterule ^mis-consultas-online/?$ misconsultasonline.php
 Rewriterule ^mi-consulta/(.*)/?$ consulta.php?id=$1
 Rewriterule ^cerrar-sesion/?$ administracion/recursos/acciones.php?tarea=50
+
+Rewriterule ^terapias-alternativas/?$ terapiasalternativas.php?clave=0
+Rewriterule ^terapias-alternativas/(.*)/(.*)/?$ terapiasalternativas.php?clave=$2
+Rewriterule ^terapia-alternativa/(.*)/(.*)/?$ terapia.php?clave=$2
