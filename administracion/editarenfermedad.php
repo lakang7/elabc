@@ -40,7 +40,7 @@
                     <?php Menu(); ?>
                 </div>
                 <div class="col-md-9">
-                    <form method="post" id="form_CREARfambotanica" action="recursos/acciones.php?tarea=23&id=<?php echo $_GET["id"]; ?>">
+                    <form method="post" enctype="multipart/form-data" id="form_CREARfambotanica" action="recursos/acciones.php?tarea=23&id=<?php echo $_GET["id"]; ?>">
                         <div class="col-md-12 titulopagina" style="margin-top: 125px;">Enfermedad</div>
                     <div class="col-md-12">
                         <div class="btn-group" role="group" aria-label="...">
@@ -131,7 +131,16 @@
                     <div class="col-md-12 contiene_entrada">
                         <div class="col-md-12 titulo_entrada">Tipos de [Maximo 3000 Caracteres, cada una separa por "|"]</div>
                         <div class="col-md-12"><textarea class="form-control" rows="3" maxlength="3000"  id="tipos" name="tipos"><?php echo $enfermedad["tiposde"]; ?></textarea></div>
-                    </div>                        
+                    </div> 
+                        
+                    <div class="col-md-12 contiene_entrada">
+                        <div class="col-md-12 titulo_entrada">Imagen para el Catalogo [Tamaño recomendado 600x450px]</div>
+                        <div class="col-md-12"><input class="form-control" name="imagenCatalogo" type="file" /></div>
+                    </div> 
+                    <div class="col-md-12 contiene_entrada">
+                        <div class="col-md-12 titulo_entrada">Imagen para el Contenido [Tamaño recomendado 600x600px]</div>
+                        <div class="col-md-12"><input class="form-control" name="imagenContenido" type="file" /></div>
+                    </div>                         
  
                     <div class="col-md-12 contiene_entrada">
                         <div class="col-md-12"><button type="submit" class="btn btn-default">Submit</button></div>                        

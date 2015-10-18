@@ -404,8 +404,37 @@
     /*Insertar Enfermedad*/
     if($_GET["tarea"]==22){
         $con =  Conexion();
+        $fp = fopen("../../recursos/precede.txt", "r");
+        $precede = fgets($fp);   
+        $atributos= fgets($fp);
+        $conecta=explode("|",$atributos);         
         $sql_insertENFERMEDAD = "insert into enfermedad(idorgano,nombrecomun,nombrecientifico,mostrar,descripcioncatalogo,descripcionperfil,causas,sintomas,prevencion,diagnostico,ortodoxo,evitecomplicaciones,tiposde) values ('".$_POST["organo"]."','".$_POST["nombreComun"]."','".$_POST["nombreCientifico"]."','".$_POST["mostrar"]."','".$_POST["descripcionCatalogo"]."','".$_POST["descripcionPerfil"]."','".$_POST["causas"]."','".$_POST["sintomas"]."','".$_POST["prevencion"]."','".$_POST["diagnostico"]."','".$_POST["ortodoxo"]."','".$_POST["recomendaciones"]."','".$_POST["tipos"]."');";
-        $result_insertENFERMEDAD = mysql_query($sql_insertENFERMEDAD,$con) or die(mysql_error());	        
+        $result_insertENFERMEDAD = mysql_query($sql_insertENFERMEDAD,$con) or die(mysql_error());
+        $sql_ultimaEnfermedad="SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '".$conecta[3]."' AND TABLE_NAME = 'enfermedad';";
+	$result_ultimaEnfermedad=mysql_query($sql_ultimaEnfermedad,$con) or die(mysql_error());	
+	$fila = mysql_fetch_assoc($result_ultimaEnfermedad);
+        $indice=intval($fila["AUTO_INCREMENT"]);
+        $indice=($indice-1);        
+                
+        if($_FILES['imagenCatalogo']['name']){
+            $target_path = "../../imagenes/enfermedad/catalogo/";
+            $target_path = $target_path . basename( $_FILES['imagenCatalogo']['name']); 
+            if(move_uploaded_file($_FILES['imagenCatalogo']['tmp_name'], $target_path)) 
+            {             
+                $sql_updateEnfermedad="update enfermedad set imagencatalogo='".$_FILES['imagenCatalogo']['name']."' where idenfermedad='".$indice."'";
+                $result_updateEnfermedad = mysql_query($sql_updateEnfermedad,$con) or die(mysql_error());            
+            }                     
+        }  
+        
+        if($_FILES['imagenContenido']['name']){
+            $target_path = "../../imagenes/enfermedad/perfil/";
+            $target_path = $target_path . basename( $_FILES['imagenContenido']['name']); 
+            if(move_uploaded_file($_FILES['imagenContenido']['tmp_name'], $target_path)) 
+            {             
+                $sql_updateEnfermedad="update enfermedad set imagenperfil='".$_FILES['imagenContenido']['name']."' where idenfermedad='".$indice."'";
+                $result_updateEnfermedad = mysql_query($sql_updateEnfermedad,$con) or die(mysql_error());            
+            }                     
+        }        
         mysql_close($con);  
 	?>
             <script type="text/javascript" language="JavaScript" >
@@ -419,7 +448,28 @@
     if($_GET["tarea"]==23){
         $con =  Conexion();
         $sql_updateENFERMEDAD = "update enfermedad set idorgano='".$_POST["organo"]."',nombrecomun='".$_POST["nombreComun"]."',nombrecientifico='".$_POST["nombreCientifico"]."',mostrar='".$_POST["mostrar"]."',descripcioncatalogo='".$_POST["descripcionCatalogo"]."',descripcionperfil='".$_POST["descripcionPerfil"]."',causas='".$_POST["causas"]."',sintomas='".$_POST["sintomas"]."',prevencion='".$_POST["prevencion"]."',diagnostico='".$_POST["diagnostico"]."',ortodoxo='".$_POST["ortodoxo"]."',evitecomplicaciones='".$_POST["recomendaciones"]."',tiposde='".$_POST["tipos"]."' where idenfermedad='".$_GET["id"]."';";
-        $result_updateENFERMEDAD = mysql_query($sql_updateENFERMEDAD,$con) or die(mysql_error());	        
+        $result_updateENFERMEDAD = mysql_query($sql_updateENFERMEDAD,$con) or die(mysql_error());
+        
+        if($_FILES['imagenCatalogo']['name']){
+            $target_path = "../../imagenes/enfermedad/catalogo/";
+            $target_path = $target_path . basename( $_FILES['imagenCatalogo']['name']); 
+            if(move_uploaded_file($_FILES['imagenCatalogo']['tmp_name'], $target_path)) 
+            {             
+                $sql_updateEnfermedad="update enfermedad set imagencatalogo='".$_FILES['imagenCatalogo']['name']."' where idenfermedad='".$_GET["id"]."'";
+                $result_updateEnfermedad = mysql_query($sql_updateEnfermedad,$con) or die(mysql_error());            
+            }                     
+        }  
+        
+        if($_FILES['imagenContenido']['name']){
+            $target_path = "../../imagenes/enfermedad/perfil/";
+            $target_path = $target_path . basename( $_FILES['imagenContenido']['name']); 
+            if(move_uploaded_file($_FILES['imagenContenido']['tmp_name'], $target_path)) 
+            {             
+                $sql_updateEnfermedad="update enfermedad set imagenperfil='".$_FILES['imagenContenido']['name']."' where idenfermedad='".$_GET["id"]."'";
+                $result_updateEnfermedad = mysql_query($sql_updateEnfermedad,$con) or die(mysql_error());            
+            }                     
+        }        
+        
         mysql_close($con);  
 	?>
             <script type="text/javascript" language="JavaScript" >
@@ -432,8 +482,14 @@
     /*Eliminación de Enfermedad*/
     if($_GET["tarea"]==24){
         $con =  Conexion();
+        
+        $sql_enfermedad="select * from enfermedad where idenfermedad='".$_GET["id"]."'";
+        $result_enfermedad=mysql_query($sql_enfermedad,$con) or die(mysql_error()); 
+        $enfermedad = mysql_fetch_assoc($result_enfermedad);
+        unlink ("../../imagenes/enfermedad/catalogo/".$enfermedad["imagencatalogo"]); 
+        unlink ("../../imagenes/enfermedad/perfil/".$enfermedad["imagenperfil"]);                
         $sql_eliminaENFERMEDAD="delete from enfermedad where idenfermedad='".$_GET["id"]."';";
-	$result_eliminaENFERMEDAD=mysql_query($sql_eliminaENFERMEDAD,$con) or die(mysql_error());
+	$result_eliminaENFERMEDAD=mysql_query($sql_eliminaENFERMEDAD,$con) or die(mysql_error());                
         mysql_close($con);
 	?>
             <script type="text/javascript" language="JavaScript" >

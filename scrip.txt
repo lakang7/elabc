@@ -115,6 +115,8 @@ CREATE TABLE enfermedad (
     evitecomplicaciones varchar(3000),
     tiposde varchar(3000),
     numerolecturas mediumint(8) unsigned not null,
+    imagenperfil varchar(60),
+    imagencatalogo varchar(60),
     PRIMARY KEY (idenfermedad),
     FOREIGN KEY (idorgano) REFERENCES organo(idorgano) ON UPDATE CASCADE ON DELETE RESTRICT    
 );

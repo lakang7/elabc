@@ -56,6 +56,7 @@
             <div class="col-md-5">  
                 <div class="col-md-12 subtitulo_principal" style="border-bottom: 1px solid #CCCCCC; margin-bottom: 0px; font-weight: bold"><?php echo $enfermedad["nombrecomun"]; ?></div>
                 <div class="col-md-12 subtitulo_principal" style="font-size: 18px; font-weight: bold"><?php echo $enfermedad["nombrecientifico"]; ?></div>                
+                <img style="margin-bottom: 10px;" class="img-responsive center-block" src="<?php echo $precede; ?>imagenes/enfermedad/perfil/<?php echo $enfermedad["imagenperfil"] ?>">                                
                 
                 <div class="fb-like" data-href="<?php echo trim($precede); ?>causas-sintomas-prevencion-diagnostico-tratamiento/<?php echo str_replace(" ","-",trim($enfermedad["mostrar"])) ?>/<?php echo $_GET["clave"]; ?>" data-layout="button_count" ></div>
                 <div style="margin-left: 5px;" class="fb-share-button" data-href="<?php echo trim($precede); ?>causas-sintomas-prevencion-diagnostico-tratamiento/<?php echo str_replace(" ","-",trim($enfermedad["mostrar"])) ?>/<?php echo $_GET["clave"]; ?>" data-layout="button_count"></div>

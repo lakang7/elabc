@@ -98,7 +98,7 @@
             $("#myModal"+id).modal('show');
         }   
         function eliminar(id){
-            location.href="recursos/acciones.php?tarea=15&id="+id;
+            location.href="recursos/acciones.php?tarea=24&id="+id;
         }
     </script>    
 </html>

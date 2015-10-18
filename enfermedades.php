@@ -184,7 +184,8 @@
                             $apunta=trim($precede)."causas-sintomas-prevencion-diagnostico-tratamiento/".str_replace(" ","-",trim($fila["mostrar"]))."/".$fila["idenfermedad"];
                             if($cuentafila==0){
                                 echo "<div class='col-md-12'>";
-                                echo "<div class='col-md-3 planta' onclick=redirigir('".$apunta."') style='padding: 5px;' >";                                    
+                                echo "<div class='col-md-3 planta' onclick=redirigir('".$apunta."') style='padding: 5px;' >";  
+                                echo "<img class='img-responsive center-block' src='".$precede."imagenes/enfermedad/catalogo/".$fila["imagencatalogo"]."'>";                                
                                 echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["nombrecomun"]."</div>";
                                 echo "<div class='top4_resumen'>".$fila["descripcioncatalogo"]."</div>";
                                 echo "</div>";
@@ -192,6 +193,7 @@
                             }
                             else if($cuentafila==3){
                                 echo "<div class='col-md-3 planta' onclick=redirigir('".$apunta."') style='padding: 5px;' >";                                    
+                                echo "<img class='img-responsive center-block' src='".$precede."imagenes/enfermedad/catalogo/".$fila["imagencatalogo"]."'>";                                                                
                                 echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["nombrecomun"]."</div>";
                                 echo "<div class='top4_resumen'>".$fila["descripcioncatalogo"]."</div>";
                                 echo "</div>";
@@ -199,6 +201,7 @@
                                 $cuentafila=0;
                             }else{
                                 echo "<div class='col-md-3 planta' onclick=redirigir('".$apunta."') style='padding: 5px;' >";                                    
+                                echo "<img class='img-responsive center-block' src='".$precede."imagenes/enfermedad/catalogo/".$fila["imagencatalogo"]."'>";                                                                
                                 echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["nombrecomun"]."</div>";
                                 echo "<div class='top4_resumen'>".$fila["descripcioncatalogo"]."</div>";
                                 echo "</div>";                                    
@@ -212,7 +215,7 @@
                 }                 
             }else if($tipoElemento=="sh"){
                 for($i=0;$i<count($letras);$i++){                                                
-                    $sql_listaENFERMEDADES="select enfermedad.idenfermedad, enfermedad.nombrecomun, enfermedad.mostrar, enfermedad.descripcioncatalogo, organo.idorgano, sistema.idsistema from enfermedad,organo,sistema where enfermedad.idorgano = organo.idorgano and organo.idsistema = sistema.idsistema and sistema.idsistema='".$idElemento."' and enfermedad.nombrecomun like '".$letras[$i]."%'";
+                    $sql_listaENFERMEDADES="select enfermedad.idenfermedad, enfermedad.nombrecomun, enfermedad.mostrar, enfermedad.descripcioncatalogo, enfermedad.imagencatalogo, organo.idorgano, sistema.idsistema from enfermedad,organo,sistema where enfermedad.idorgano = organo.idorgano and organo.idsistema = sistema.idsistema and sistema.idsistema='".$idElemento."' and enfermedad.nombrecomun like '".$letras[$i]."%'";
                     $result_listaENFERMEDADES=mysql_query($sql_listaENFERMEDADES,$con) or die(mysql_error());
                     if(mysql_num_rows($result_listaENFERMEDADES)>0){
                         echo "<div class='col-md-12 letra'>".strtoupper($letras[$i])."</div>";
@@ -222,6 +225,7 @@
                             if($cuentafila==0){
                                 echo "<div class='col-md-12'>";
                                 echo "<div class='col-md-3 planta' onclick=redirigir('".$apunta."') style='padding: 5px;'>";                                    
+                                echo "<img class='img-responsive center-block' src='".$precede."imagenes/enfermedad/catalogo/".$fila["imagencatalogo"]."'>";                                                                
                                 echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["nombrecomun"]."</div>";
                                 echo "<div class='top4_resumen'>".$fila["descripcioncatalogo"]."</div>";
                                 echo "</div>";
@@ -229,6 +233,7 @@
                             }
                             else if($cuentafila==3){
                                 echo "<div class='col-md-3 planta' onclick=redirigir('".$apunta."') style='padding: 5px;'>";                                    
+                                echo "<img class='img-responsive center-block' src='".$precede."imagenes/enfermedad/catalogo/".$fila["imagencatalogo"]."'>";                                                                
                                 echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["nombrecomun"]."</div>";
                                 echo "<div class='top4_resumen'>".$fila["descripcioncatalogo"]."</div>";
                                 echo "</div>";
@@ -236,6 +241,7 @@
                                 $cuentafila=0;
                             }else{
                                 echo "<div class='col-md-3 planta' onclick=redirigir('".$apunta."') style='padding: 5px;'>";                                    
+                                echo "<img class='img-responsive center-block' src='".$precede."imagenes/enfermedad/catalogo/".$fila["imagencatalogo"]."'>";                                                                
                                 echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["nombrecomun"]."</div>";
                                 echo "<div class='top4_resumen'>".$fila["descripcioncatalogo"]."</div>";
                                 echo "</div>";                                    
@@ -249,7 +255,7 @@
                 }                   
             }else if($tipoElemento=="oh"){
                 for($i=0;$i<count($letras);$i++){                        
-                    $sql_listaENFERMEDADES="select enfermedad.idenfermedad, enfermedad.nombrecomun, enfermedad.mostrar, enfermedad.descripcioncatalogo from enfermedad where idorgano='".$idElemento."' and nombrecomun like '".$letras[$i]."%' order by nombrecomun";
+                    $sql_listaENFERMEDADES="select enfermedad.idenfermedad, enfermedad.nombrecomun, enfermedad.mostrar, enfermedad.descripcioncatalogo, enfermedad.imagencatalogo from enfermedad where idorgano='".$idElemento."' and nombrecomun like '".$letras[$i]."%' order by nombrecomun";
                     $result_listaENFERMEDADES=mysql_query($sql_listaENFERMEDADES,$con) or die(mysql_error());
                     if(mysql_num_rows($result_listaENFERMEDADES)>0){
                         echo "<div class='col-md-12 letra'>".strtoupper($letras[$i])."</div>";
@@ -259,6 +265,7 @@
                             if($cuentafila==0){
                                 echo "<div class='col-md-12'>";
                                 echo "<div class='col-md-3 planta' onclick=redirigir('".$apunta."') style='padding: 5px;'>";                                    
+                                echo "<img class='img-responsive center-block' src='".$precede."imagenes/enfermedad/catalogo/".$fila["imagencatalogo"]."'>";                                                                
                                 echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["nombrecomun"]."</div>";
                                 echo "<div class='top4_resumen'>".$fila["descripcioncatalogo"]."</div>";
                                 echo "</div>";
@@ -266,6 +273,7 @@
                             }
                             else if($cuentafila==3){
                                 echo "<div class='col-md-3 planta' onclick=redirigir('".$apunta."') style='padding: 5px;'>";                                    
+                                echo "<img class='img-responsive center-block' src='".$precede."imagenes/enfermedad/catalogo/".$fila["imagencatalogo"]."'>";                                                               
                                 echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["nombrecomun"]."</div>";
                                 echo "<div class='top4_resumen'>".$fila["descripcioncatalogo"]."</div>";
                                 echo "</div>";
@@ -273,6 +281,7 @@
                                 $cuentafila=0;
                             }else{
                                 echo "<div class='col-md-3 planta' onclick=redirigir('".$apunta."') style='padding: 5px;'>";                                    
+                                echo "<img class='img-responsive center-block' src='".$precede."imagenes/enfermedad/catalogo/".$fila["imagencatalogo"]."'>";                                                                
                                 echo "<div class='top4_titulo' style='margin-top: 7px; margin-bottom:5px;'>".$fila["nombrecomun"]."</div>";
                                 echo "<div class='top4_resumen'>".$fila["descripcioncatalogo"]."</div>";
                                 echo "</div>";                                    

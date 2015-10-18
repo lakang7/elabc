@@ -92,7 +92,7 @@
             <div class="col-md-2 opcpiepagina1" onclick=redirigir("<?php echo trim($precede)."plantas-medicinales" ?>")>Plantas Medicinales</div>
             <div class="col-md-2 opcpiepagina2" onclick=redirigir("<?php echo trim($precede)."lista-enfermedades" ?>")>Lista de Enfermedad</div>
             <div class="col-md-2 opcpiepagina3" onclick=redirigir("<?php echo trim($precede)."metodos-preparacion-plantas-medicinales" ?>")>Metodos de Preparación</div>
-            <div class="col-md-2 opcpiepagina4">Terapias Alternativas</div>
+            <div class="col-md-2 opcpiepagina4" onclick=redirigir("<?php echo trim($precede)."terapias-alternativas" ?>")>Terapias Alternativas</div>
             <div class="col-md-2 opcpiepagina5">Consulta un Naturopara</div>
             <div class="col-md-2 opcpiepagina6" onclick=redirigir("<?php echo trim($precede)."blog-medicina-natural" ?>")>Nuestras Publicaciones</div>
         </div>
