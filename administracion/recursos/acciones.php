@@ -969,102 +969,122 @@
     /*Registro de paciente*/
     if($_GET["tarea"]==45){ 
         
-        require_once "Mail.php";
-        include 'Mail/mime.php';  
+        if(isset($_POST['g-recaptcha-response'])){
+            $captcha=$_POST['g-recaptcha-response'];
+       
+            $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6LcEEA8TAAAAAIfhJ3s_EZHsjfc8d7iyyVq3oEry&response=".$captcha."&remoteip=".$_SERVER['REMOTE_ADDR']);            
+            $decoded_response = json_decode($response, true);
+            
+            if($decoded_response["success"] === true) 
+            {
+                require_once "Mail.php";
+                include 'Mail/mime.php';  
         
-        $fp = fopen("../../recursos/precede.txt", "r");
-        $precede = fgets($fp);        
+                $fp = fopen("../../recursos/precede.txt", "r");
+                $precede = fgets($fp);        
         
-        $letras= array();
-        $letras[0]="A";
-        $letras[1]="B";
-        $letras[2]="C";
-        $letras[3]="D";
-        $letras[4]="E";
-        $letras[5]="F";
-        $letras[6]="G";
-        $letras[7]="H";
-        $letras[8]="I";
-        $letras[9]="J";
-        $letras[10]="K";
-        $letras[11]="L";
-        $letras[12]="M";
-        $letras[13]="N";
-        $letras[14]="O";
-        $letras[15]="P";
-        $letras[16]="Q";
-        $letras[17]="R";
-        $letras[18]="S";
-        $letras[19]="T";
-        $letras[20]="U";
-        $letras[21]="V";
-        $letras[22]="W";
-        $letras[23]="X";
-        $letras[24]="Y";
-        $letras[25]="Z";
-        $letras[26]="0";
-        $letras[27]="1";
-        $letras[28]="2";
-        $letras[29]="3";
-        $letras[30]="4";
-        $letras[31]="5";
-        $letras[32]="6";
-        $letras[33]="7";
-        $letras[34]="8";
-        $letras[35]="9";
+                $letras= array();
+                $letras[0]="A";
+                $letras[1]="B";
+                $letras[2]="C";
+                $letras[3]="D";
+                $letras[4]="E";
+                $letras[5]="F";
+                $letras[6]="G";
+                $letras[7]="H";
+                $letras[8]="I";
+                $letras[9]="J";
+                $letras[10]="K";
+                $letras[11]="L";
+                $letras[12]="M";
+                $letras[13]="N";
+                $letras[14]="O";
+                $letras[15]="P";
+                $letras[16]="Q";
+                $letras[17]="R";
+                $letras[18]="S";
+                $letras[19]="T";
+                $letras[20]="U";
+                $letras[21]="V";
+                $letras[22]="W";
+                $letras[23]="X";
+                $letras[24]="Y";
+                $letras[25]="Z";
+                $letras[26]="0";
+                $letras[27]="1";
+                $letras[28]="2";
+                $letras[29]="3";
+                $letras[30]="4";
+                $letras[31]="5";
+                $letras[32]="6";
+                $letras[33]="7";
+                $letras[34]="8";
+                $letras[35]="9";
+                    
+                $codigo="";
+                for($i=0;$i<20;$i++){
+                    $codigo=$codigo.$letras[rand(0,34)];
+                }
         
-        $codigo="";
-        for($i=0;$i<20;$i++){
-            $codigo=$codigo.$letras[rand(0,34)];
-        }
+                $con =  Conexion();
+                $sql_selectpa = "select * from paciente where email='".$_POST["correo"]."'";
+        	$result_selectpa = mysql_query($sql_selectpa,$con) or die(mysql_error());        
         
-        $con =  Conexion();
-        $sql_selectpa = "select * from paciente where email='".$_POST["correo"]."'";
-	$result_selectpa = mysql_query($sql_selectpa,$con) or die(mysql_error());        
-        
-        if(mysql_num_rows($result_selectpa)==0){                                                
-            $sql_insertPACIENTE = "insert into paciente (nombre,fechanacimiento,sexo,email,contra,ocupacion,pais,direccion,fecharegistro,codigoconfirmacion,estatuconfirmacion) values ('".$_POST["nombre"]."','".$_POST["fechanacimiento"]."','".$_POST["sexo"]."','".$_POST["correo"]."','".$_POST["contra01"]."','".$_POST["ocupacion"]."','".$_POST["pais"]."','".$_POST["direccion"]."',now(),'".$codigo."',0);";
-            $result_insertPACIENTE = mysql_query($sql_insertPACIENTE,$con) or die(mysql_error());        
-        
-            $from = '<contacto@elabcnaturista.com>';
-            $to = '<'.$_POST["correo"].'>';
-            $subject = 'Confirme su registro en el sistema de consultas online del @elabcnaturista!';
+                if(mysql_num_rows($result_selectpa)==0){                                                
+                    $sql_insertPACIENTE = "insert into paciente (nombre,fechanacimiento,sexo,email,contra,ocupacion,pais,direccion,fecharegistro,codigoconfirmacion,estatuconfirmacion) values ('".$_POST["nombre"]."','".$_POST["fechanacimiento"]."','".$_POST["sexo"]."','".$_POST["correo"]."','".$_POST["contra01"]."','".$_POST["ocupacion"]."','".$_POST["pais"]."','".$_POST["direccion"]."',now(),'".$codigo."',0);";
+                    $result_insertPACIENTE = mysql_query($sql_insertPACIENTE,$con) or die(mysql_error());        
+                        
+                    $from = '<contacto@elabcnaturista.com>';
+                    $to = '<'.$_POST["correo"].'>';
+                    $subject = 'Confirme su registro en el sistema de consultas online del @elabcnaturista!';
+                    
+                    $headers = array(
+                        'From' => $from,
+                        'To' => $to,
+                        'Subject' => $subject
+                    );
 
-            $headers = array(
-                'From' => $from,
-                'To' => $to,
-                'Subject' => $subject
-            );
+                    $mime = new Mail_mime();
+                    $mime -> setHTMLBody("Hola ".$_POST["nombre"]."!, es para nosotros todo un gusto que hayas decidido registrarte en nuestro sistema de consultas online, lo unico que debes hacer para poder llevar a cabo tu primera consulta, es hacer click sobre el siguiente enlace ".trim($precede)."confirma-tu-correo-electronico/".trim($codigo)." con el proposito de que podamos confirmar tu email.\n");
+                    $body = $mime->get();
+                    $headers = $mime -> headers($headers);
 
-            $mime = new Mail_mime();
-            $mime -> setHTMLBody("Hola ".$_POST["nombre"]."!, es para nosotros todo un gusto que hayas decidido registrarte en nuestro sistema de consultas online, lo unico que debes hacer para poder llevar a cabo tu primera consulta, es hacer click sobre el siguiente enlace ".trim($precede)."confirma-tu-correo-electronico/".trim($codigo)." con el proposito de que podamos confirmar tu email.\n");
-            $body = $mime->get();
-            $headers = $mime -> headers($headers);
+                    $smtp = Mail::factory('smtp', array(
+                        'host' => 'mail.elabcnaturista.com',
+                        'port' => '26',
+                        'auth' => true,
+                        'username' => 'contacto@elabcnaturista.com',
+                        'password' => '5346179guillermo'
+                    ));
 
-            $smtp = Mail::factory('smtp', array(
-                'host' => 'mail.elabcnaturista.com',
-                'port' => '26',
-                'auth' => true,
-                'username' => 'contacto@elabcnaturista.com',
-                'password' => '5346179guillermo'
-            ));
+                    $mail = $smtp->send($to, $headers, $body);        
+                    mysql_close($con); 
+                    ?>
+                        <script type="text/javascript" language="JavaScript" >
+                            alert("Su registro ha sido satisfactorio, por favor confirma tu correo haciendo click en el enlace que le fue enviado al mail que registro.");
+                            location.href="../../";
+                        </script>
+                    <?php 
+                }else{
+                    ?>
+                        <script type="text/javascript" language="JavaScript" >
+                            alert("El email que nos suministro ya se encuentra registrado en nuestra base de datos, por favor usa otro.");
+                            location.href="../../";
+                        </script>
+                    <?php             
+                }                
+                                                                                
+            }else{
+                ?>
+                    <script type="text/javascript" language="JavaScript" >
+                        alert("No hemos podido comprobar que eres humano, por favor verifica la capcha y el formulario de registro de nuevo.");
+                        location.href="../../";
+                    </script>
+                <?php                 
+            }                                                           
+        }                        
+        
 
-            $mail = $smtp->send($to, $headers, $body);        
-            mysql_close($con); 
-            ?>
-                <script type="text/javascript" language="JavaScript" >
-                    alert("Su registro ha sido satisfactorio, por favor confirma tu correo haciendo click en el enlace que le fue enviado al mail que registro.");
-                    location.href="../../";
-                </script>
-            <?php 
-        }else{
-            ?>
-                <script type="text/javascript" language="JavaScript" >
-                    alert("El email que nos suministro ya se encuentra registrado en nuestra base de datos, por favor usa otro.");
-                    location.href="../../";
-                </script>
-            <?php             
-        }
     }  
     
     /*Activación de cuenta*/

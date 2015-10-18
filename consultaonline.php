@@ -40,6 +40,17 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="<?php echo trim($precede); ?>administracion/recursos/dist/js/bootstrap-select.js"></script>         
         <script src="http://oss.maxcdn.com/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>            
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-69008521-1', 'auto');
+  ga('send', 'pageview');
+
+</script>        
         
     </head>
     <body>
@@ -105,7 +116,9 @@
                     <div class="col-md-12"><input type="password" class="form-control" style="font-size: 17px;"  id="contra01" name="contra01" maxlength="12"  required="required" /></div>
                     <div class="col-md-12">Confirme su Contraseña</div>
                     <div class="col-md-12"><input type="password" class="form-control" style="font-size: 17px;"  id="contra02" name="contra02" maxlength="12" required="required" /></div>
-                    
+                    <div class="col-md-12" style="margin-top: 15px;">
+                        <div class="g-recaptcha" data-sitekey="6LcEEA8TAAAAAEtN5v9dWGLQNdXXdvCcvL5yGNfk" required="required" ></div>
+                    </div>
                     <div class="col-md-12" style="margin-top: 10px;"><button type="submit" class="btn btn-default" style="font-size: 17px;">Registrarme</button></div>                    
                     </form>
                 </div>
