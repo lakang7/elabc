@@ -9,7 +9,7 @@
         $conecta=explode("|",$atributos);        
         $conexion = mysql_connect($conecta[0],$conecta[1],$conecta[2]);
 	mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'", $conexion);
-        mysql_select_db("elabcnaturista", $conexion);	        
+        mysql_select_db($conecta[3], $conexion);	        
 	return $conexion;
     }       
     
@@ -191,7 +191,11 @@
         $con =  Conexion();
         $sql_insertPLANTA = "insert into planta (idfambotanica,nombrecomun,nombrecientifico,nombremostrar,organografia,originariode,imagenperfil,imagencatalogo,descripcionperfil,descripcioncatalogo,conocidacomo,precaucionesplanta,propiedadesmagicas,numerolecturas) values ('".$_POST["familiaBotanica"]."','".$_POST["nombreComun"]."','".$_POST["nombreCientifico"]."','".$_POST["nombreMostrar"]."','".$_POST["organografia"]."','".$_POST["originarioDe"]."','a','b','".$_POST["descripcionPerfil"]."','".$_POST["descripcionCatalogo"]."','".$_POST["conocidaComo"]."','".$_POST["precauciones"]."','".$_POST["propiedadesMagicas"]."',0);";	
         $result_insertPLANTA = mysql_query($sql_insertPLANTA,$con) or die(mysql_error());
-        $sql_ultimaPLANTA="SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'elabcnaturista' AND TABLE_NAME = 'planta';";
+        $fp = fopen("../../recursos/precede.txt", "r");
+        $precede = fgets($fp);   
+        $atributos= fgets($fp);
+        $conecta=explode("|",$atributos);                  
+        $sql_ultimaPLANTA="SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '".$conecta[3]."' AND TABLE_NAME = 'planta';";
 	$result_ultimaPLANTA=mysql_query($sql_ultimaPLANTA,$con) or die(mysql_error());	
 	$fila = mysql_fetch_assoc($result_ultimaPLANTA);
         $indice=intval($fila["AUTO_INCREMENT"]);
@@ -292,6 +296,12 @@
     /*Eliminar Planta*/
     if($_GET["tarea"]==15){
         $con =  Conexion();
+        $sql_planta="select * from planta where idplanta='".$_GET["id"]."'";
+        $result_planta=mysql_query($sql_planta,$con) or die(mysql_error()); 
+        $planta = mysql_fetch_assoc($result_planta);
+        unlink ("../../imagenes/plantas/catalogo/".$planta["imagencatalogo"]); 
+        unlink ("../../imagenes/plantas/perfil/".$planta["imagenperfil"]);        
+        
         $sql_eliminaPARPLA="delete from planta_parplanta where idplanta='".$_GET["id"]."';";
 	$result_eliminaPARPLA=mysql_query($sql_eliminaPARPLA,$con) or die(mysql_error());
         
@@ -547,8 +557,12 @@
     if($_GET["tarea"]==28){
         $con =  Conexion();
         $sql_insertMETODO = "insert into metodo (idclasificacionmetodo,nombre,mostrar,descripcioncatalogo,descripcionperfil,imagenperfil,imagencatalogo,ingredientes,procedimiento) values ('".$_POST["tipodemetodo"]."','".$_POST["nombre"]."','".$_POST["mostrar"]."','".$_POST["descripcionCatalogo"]."','".$_POST["descripcionPerfil"]."','','','".$_POST["ingredientes"]."','".$_POST["procedimiento"]."');";
-	$result_insertMETODO = mysql_query($sql_insertMETODO,$con) or die(mysql_error());
-        $sql_ultimoMETODO="SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'elabcnaturista' AND TABLE_NAME = 'metodo';";
+	$result_insertMETODO = mysql_query($sql_insertMETODO,$con) or die(mysql_error());        
+        $fp = fopen("../../recursos/precede.txt", "r");
+        $precede = fgets($fp);   
+        $atributos= fgets($fp);
+        $conecta=explode("|",$atributos);                
+        $sql_ultimoMETODO="SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '".$conecta[3]."' AND TABLE_NAME = 'metodo';";
 	$result_ultimoMETODO=mysql_query($sql_ultimoMETODO,$con) or die(mysql_error());	
 	$fila = mysql_fetch_assoc($result_ultimoMETODO);
         $indice=intval($fila["AUTO_INCREMENT"]);
@@ -616,8 +630,15 @@
     } 
     
     /*Eliminación de metodo de preparación*/
-    if($_GET["tarea"]==30){        
+    if($_GET["tarea"]==30){                   
         $con =  Conexion();
+        
+        $sql_metodo="select * from metodo where idmetodo='".$_GET["id"]."'";
+        $result_metodo=mysql_query($sql_metodo,$con) or die(mysql_error()); 
+        $metodo = mysql_fetch_assoc($result_metodo);
+        unlink ("../../imagenes/metodos/catalogo/".$metodo["imagencatalogo"]); 
+        unlink ("../../imagenes/metodos/perfil/".$metodo["imagenperfil"]);        
+        
         $sql_eliminaTMETODO="delete from tiposmetodo where idmetodo='".$_GET["id"]."';";
 	$result_eliminaTMETODO=mysql_query($sql_eliminaTMETODO,$con) or die(mysql_error());        
         $sql_eliminaMETODO="delete from metodo where idmetodo='".$_GET["id"]."';";
@@ -676,11 +697,14 @@
     
     /*Registro de asociación*/
     if($_GET["tarea"]==34){
-        $con =  Conexion();
+        $con =  Conexion();                
         $sql_insertASOCIACION = "insert into asociacion (idplanta,idmetodo,descripcion) values ('".$_POST["planta"]."','".$_POST["metodo"]."','".$_POST["descripcion"]."');";
 	$result_insertASOCIACION = mysql_query($sql_insertASOCIACION,$con) or die(mysql_error());	        
-        
-        $sql_ultimaAsociacion="SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'elabcnaturista' AND TABLE_NAME = 'asociacion';";
+        $fp = fopen("../../recursos/precede.txt", "r");
+        $precede = fgets($fp);   
+        $atributos= fgets($fp);
+        $conecta=explode("|",$atributos);                                
+        $sql_ultimaAsociacion="SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '".$conecta[3]."' AND TABLE_NAME = 'asociacion';";
 	$result_ultimaAsociacion=mysql_query($sql_ultimaAsociacion,$con) or die(mysql_error());	
 	$fila = mysql_fetch_assoc($result_ultimaAsociacion);
         $indice=intval($fila["AUTO_INCREMENT"]);
@@ -818,8 +842,11 @@
         $con =  Conexion();
         $sql_insertARTICULO = "insert into articulo (idadministrador,titulo,fechacreacion,fechapublicacion,resumen,catalogo,contenido,imaresumen,imacatalogo,imacontenido,numerolecturas) values (1,'".$_POST["titulo"]."',now(),now(),'".$_POST["resumen"]."','".$_POST["catalogo"]."','".$_POST["contenido"]."','','','',0);";
 	$result_insertARTICULO = mysql_query($sql_insertARTICULO,$con) or die(mysql_error());	
-        
-        $sql_ultimoArticulo="SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'elabcnaturista' AND TABLE_NAME = 'articulo';";
+        $fp = fopen("../../recursos/precede.txt", "r");
+        $precede = fgets($fp);   
+        $atributos= fgets($fp);
+        $conecta=explode("|",$atributos);        
+        $sql_ultimoArticulo="SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '".$conecta[3]."' AND TABLE_NAME = 'articulo';";
 	$result_ultimoArticulo=mysql_query($sql_ultimoArticulo,$con) or die(mysql_error());	
 	$fila = mysql_fetch_assoc($result_ultimoArticulo);
         $indice=intval($fila["AUTO_INCREMENT"]);
