@@ -968,7 +968,6 @@
     
     /*Registro de paciente*/
     if($_GET["tarea"]==45){ 
-        
         if(isset($_POST['g-recaptcha-response'])){
             $captcha=$_POST['g-recaptcha-response'];
        
@@ -1028,15 +1027,15 @@
         
                 $con =  Conexion();
                 $sql_selectpa = "select * from paciente where email='".$_POST["correo"]."'";
-        	$result_selectpa = mysql_query($sql_selectpa,$con) or die(mysql_error());        
-        
-                if(mysql_num_rows($result_selectpa)==0){                                                
+        	$result_selectpa = mysql_query($sql_selectpa,$con) or die(mysql_error()); 
+                
+                if(mysql_num_rows($result_selectpa)==0){ 
                     $sql_insertPACIENTE = "insert into paciente (nombre,fechanacimiento,sexo,email,contra,ocupacion,pais,direccion,fecharegistro,codigoconfirmacion,estatuconfirmacion) values ('".$_POST["nombre"]."','".$_POST["fechanacimiento"]."','".$_POST["sexo"]."','".$_POST["correo"]."','".$_POST["contra01"]."','".$_POST["ocupacion"]."','".$_POST["pais"]."','".$_POST["direccion"]."',now(),'".$codigo."',0);";
-                    $result_insertPACIENTE = mysql_query($sql_insertPACIENTE,$con) or die(mysql_error());        
-                        
+                    $result_insertPACIENTE = mysql_query($sql_insertPACIENTE,$con) or die(mysql_error());         
+                    
                     $from = '<contacto@elabcnaturista.com>';
                     $to = '<'.$_POST["correo"].'>';
-                    $subject = 'Confirme su registro en el sistema de consultas online del @elabcnaturista!';
+                    $subject = 'Confirme su registro en el sistema de consultas online del @elabcnaturista!';                  
                     
                     $headers = array(
                         'From' => $from,
@@ -1044,8 +1043,8 @@
                         'Subject' => $subject
                     );
 
-                    $mime = new Mail_mime();
-                    $mime -> setHTMLBody("Hola ".$_POST["nombre"]."!, es para nosotros todo un gusto que hayas decidido registrarte en nuestro sistema de consultas online, lo unico que debes hacer para poder llevar a cabo tu primera consulta, es hacer click sobre el siguiente enlace ".trim($precede)."confirma-tu-correo-electronico/".trim($codigo)." con el proposito de que podamos confirmar tu email.\n");
+                    $mime = new Mail_mime();                    
+                    $mime -> setHTMLBody("Hola ".$_POST["nombre"]."!, es para nosotros todo un gusto que hayas decidido registrarte en nuestro sistema de consultas online, lo unico que debes hacer para poder llevar a cabo tu primera consulta, es ir a la siguiente direccion <a href='www.elabcnaturista.com/confirma-tu-correo-electronico/".trim($codigo)."'>Confirmar Correo</a> con el proposito de que podamos confirmar tus datos.\n");
                     $body = $mime->get();
                     $headers = $mime -> headers($headers);
 
@@ -1057,7 +1056,7 @@
                         'password' => '5346179guillermo'
                     ));
 
-                    $mail = $smtp->send($to, $headers, $body);        
+                    $mail = $smtp->send($to, $headers, $body);                       
                     mysql_close($con); 
                     ?>
                         <script type="text/javascript" language="JavaScript" >
