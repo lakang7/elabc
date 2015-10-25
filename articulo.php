@@ -48,7 +48,9 @@
   ga('create', 'UA-69008521-1', 'auto');
   ga('send', 'pageview');
 
-</script>                        
+</script>  
+
+    <?php header('Content-Type: text/html; charset=UTF-8'); ?>
     </head>
                     <?php
                         $url="http://".$_SERVER["HTTP_HOST"].$_SERVER['REQUEST_URI'];

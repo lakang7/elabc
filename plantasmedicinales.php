@@ -61,7 +61,8 @@
   ga('create', 'UA-69008521-1', 'auto');
   ga('send', 'pageview');
 
-</script>                        
+</script> 
+    <?php header('Content-Type: text/html; charset=UTF-8'); ?>
     </head>
     <body>
 <div id="fb-root"></div>
