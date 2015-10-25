@@ -1149,13 +1149,14 @@
     /*Registro de consulta*/
     if($_GET["tarea"]==48){       
         $con = Conexion();
-        $sql_insertCONUSLTA = "insert into consulta (idpaciente,titulo,fechacreacion,pregunta01,pregunta02,pregunta03,pregunta04,pregunta05,pregunta06) values ('".$_GET["id"]."','".$_POST["titulo"]."',now(),'".$_POST["pregunta01"]."','".$_POST["pregunta02"]."','".$_POST["pregunta03"]."','".$_POST["pregunta04"]."','".$_POST["pregunta05"]."','".$_POST["pregunta06"]."',0);";
+        $sql_insertCONUSLTA = "insert into consulta (idpaciente,titulo,fechacreacion,pregunta01,pregunta02,pregunta03,pregunta04,pregunta05,pregunta06,estatus) values ('".$_GET["id"]."','".$_POST["titulo"]."',now(),'".$_POST["pregunta01"]."','".$_POST["pregunta02"]."','".$_POST["pregunta03"]."','".$_POST["pregunta04"]."','".$_POST["pregunta05"]."','".$_POST["pregunta06"]."',0);";
+        echo $sql_insertCONUSLTA."</br>";
         $result_insertCONSULTA = mysql_query($sql_insertCONUSLTA,$con) or die(mysql_error());
         mysql_close($con); 
         ?>
             <script type="text/javascript" language="JavaScript" >
                 alert("Tú consulta ha sido registrada satisfactoriamente, podras accesar a la misma a traves de la pagina web del abcnaturista o en tu correo electronico para leer tu respuesta.");
-                location.href="../../mi-perfil-online";
+                location.href="../../crear-consulta-online";
             </script>
         <?php       
     }

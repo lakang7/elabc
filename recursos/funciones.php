@@ -76,11 +76,11 @@
             <div class="col-md-12">
                 <div class="col-md-4" >
                     <div class="col-md-12"><img class="img-responsive center-block" src="<?php echo $precede;?>imagenes/localizacion.png"></div>
-                    <div class="col-md-12" style="text-align: center">Calle 2-17, La Grita Edo. Táchira Venezuela</div>
+                    <div class="col-md-12" style="text-align: center">Calle 2 Numero 9-81, La Grita Edo. Táchira Venezuela</div>
                 </div>
                 <div class="col-md-4" >
                     <div class="col-md-12"><img class="img-responsive center-block" src="<?php echo $precede;?>imagenes/telefono.png"></div>
-                    <div class="col-md-12" style="text-align: center">04167760764 / 02778811207</div>                                        
+                    <div class="col-md-12" style="text-align: center">02778814589 / 04167760764</div>                                        
                 </div>
                 <div class="col-md-4" >
                     <div class="col-md-12"><img class="img-responsive center-block" src="<?php echo $precede;?>imagenes/arroba.png"></div>
