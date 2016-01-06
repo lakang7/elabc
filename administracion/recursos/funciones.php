@@ -31,6 +31,8 @@
         echo "<div class='col-md-12 itemMenu' onclick=redirigir('listarterapiaalternativa.php')>Terapias Alternativa</div>";
         echo "<div class='col-md-12 itemMenu' onclick=redirigir('listarconsejo.php') >Consejos</div>";
         echo "<div class='col-md-12 itemMenu' onclick=redirigir('listarsabiasque.php') >Sabias que</div>";
+        echo "<div class='col-md-12 itemMenu' onclick=redirigir('listarcatmetododepreparacion.php') >Categoria Metodo de Preparación</div>";
+        echo "<div class='col-md-12 itemMenu' onclick=redirigir('listarmetododepreparacion.php') >Metodos de Preparación</div>";
         echo "<div class='col-md-12 itemMenu' onclick=redirigir('listarconsultas.php') style='border-bottom: 1px solid #CCCCCC' >Consultas On-line</div>";
     }
     

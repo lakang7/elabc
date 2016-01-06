@@ -227,19 +227,19 @@
                 <div class="col-md-12 subtitulo_principal" style="border-bottom: 1px solid #CCCCCC; margin-bottom: 0px; font-weight: bold">Aplicaciones Medicinales para <?php echo $planta["nombremostrar"]; ?></div>                                      
                 
                 <?php
-                    $sql_listaASOCIACION="SELECT asociacion.idasociacion, asociacion.descripcion, planta.idplanta, planta.nombrecomun as planta, metodo.idmetodo, metodo.nombre as metodo FROM asociacion, planta, metodo WHERE asociacion.idmetodo= metodo.idmetodo and asociacion.idplanta = planta.idplanta and asociacion.idplanta='".$_GET["clave"]."' order by metodo";
+                    $sql_listaASOCIACION="SELECT asociacion.idasociacion, asociacion.descripcion, planta.idplanta, planta.nombrecomun as planta, metodopre.idmetodopre, metodopre.titulo as metodo FROM asociacion, planta, metodopre WHERE asociacion.idmetodopre= metodopre.idmetodopre and asociacion.idplanta = planta.idplanta and asociacion.idplanta='".$_GET["clave"]."' order by metodo";
                     $result_listaASOCIACION=mysql_query($sql_listaASOCIACION,$con) or die(mysql_error());
                     $cont=0;
                     if(mysql_num_rows($result_listaASOCIACION)>0){
                         while ($asociacion = mysql_fetch_assoc($result_listaASOCIACION)) {
-                            $sqlMetodo="select * from metodo where idmetodo='".$asociacion["idmetodo"]."'";
+                            $sqlMetodo="select * from metodopre where idmetodopre='".$asociacion["idmetodopre"]."'";
                             $resultMetodo=mysql_query($sqlMetodo,$con) or die(mysql_error());
                             $Metodo = mysql_fetch_assoc($resultMetodo);
                             
                             if($cont==0){
-                                echo "<div class='col-md-12 planta_titpre'>".$Metodo["nombre"]."</div>";
+                                echo "<div class='col-md-12 planta_titpre'>".$Metodo["titulo"]."</div>";
                             }else{
-                                echo "<div class='col-md-12 planta_titpre' style='margin-top: 15px'>".$Metodo["nombre"]."</div>";
+                                echo "<div class='col-md-12 planta_titpre' style='margin-top: 15px'>".$Metodo["titulo"]."</div>";
                             }
                             
                             echo "<div class='col-md-12 plata_preparacion'>".$asociacion["descripcion"]."</div>";

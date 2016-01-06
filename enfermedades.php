@@ -142,7 +142,7 @@
             <?php
                 
             if($_GET["clave"]=="0"){
-                $sql_listaENFERMEDAD="select * from planta order by nombrecomun";
+                $sql_listaENFERMEDAD="select * from enfermedad order by nombrecomun";
                 $result_listaENFERMEDAD=mysql_query($sql_listaENFERMEDAD,$con) or die(mysql_error());
                 $numeroElmentos=mysql_num_rows($result_listaENFERMEDAD);                        
                 echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 10px;'>Catálogo de Enfermedades <small>[".$numeroElmentos." Enfermedades]</small></div>";

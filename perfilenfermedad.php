@@ -200,7 +200,7 @@
             <div class="col-md-7" style="">
                 <div class="col-md-12 subtitulo_principal" style="border-bottom: 1px solid #CCCCCC; margin-bottom: 0px; font-weight: bold">Plantas Medicinales para <?php echo $enfermedad["mostrar"] ?></div>
                 <?php
-                $sqlaux01 = "select planta.idplanta as idplanta, planta.nombrecomun as planta, metodo.nombre as metodo, metodo.idmetodo as idmetodo, enfermedad.nombrecomun as enfermedad from planta, metodo, enfermedad, asociacion, asociacion_enf where asociacion.idasociacion = asociacion_enf.idasociacion and planta.idplanta = asociacion.idplanta and metodo.idmetodo = asociacion.idmetodo and enfermedad.idenfermedad = asociacion_enf.idenfermedad and enfermedad.idenfermedad='".$_GET["clave"]."' order by planta.nombrecomun, metodo.nombre, enfermedad.nombrecomun";
+                $sqlaux01 = "select planta.idplanta as idplanta, planta.nombrecomun as planta, metodopre.titulo as metodo, metodopre.idmetodopre as idmetodo, enfermedad.nombrecomun as enfermedad from planta, metodopre, enfermedad, asociacion, asociacion_enf where asociacion.idasociacion = asociacion_enf.idasociacion and planta.idplanta = asociacion.idplanta and metodopre.idmetodopre = asociacion.idmetodopre and enfermedad.idenfermedad = asociacion_enf.idenfermedad and enfermedad.idenfermedad='".$_GET["clave"]."' order by planta.nombrecomun, metodopre.titulo, enfermedad.nombrecomun";
                 $resultaux01 = mysql_query($sqlaux01,$con) or die(mysql_error());
                 $listaPlantas = array();
                 if(mysql_num_rows($resultaux01)>0){
@@ -231,7 +231,7 @@
                     $resultaux01 = mysql_query($sqlaux01,$con) or die(mysql_error());
                     while($aux01 = mysql_fetch_assoc($resultaux01)){
                         if($listaPlantas[$i]==$aux01["planta"]){ 
-                           $sqlDes="select planta.idplanta as idplanta, planta.nombrecomun as planta, metodo.idmetodo as idmetodo ,metodo.nombre as metodo, enfermedad.nombrecomun as enfermedad, asociacion_enf.descripcion as descripcion from planta, metodo, enfermedad, asociacion, asociacion_enf where asociacion.idasociacion = asociacion_enf.idasociacion and planta.idplanta = asociacion.idplanta and metodo.idmetodo = asociacion.idmetodo and enfermedad.idenfermedad = asociacion_enf.idenfermedad and asociacion_enf.idenfermedad ='".$_GET["clave"]."' and planta.idplanta='".$planta["idplanta"]."' and metodo.idmetodo='".$aux01["idmetodo"]."' order by planta.nombrecomun, metodo.nombre, enfermedad.nombrecomun";
+                           $sqlDes="select planta.idplanta as idplanta, planta.nombrecomun as planta, metodopre.idmetodopre as idmetodo , metodopre.titulo as metodo, enfermedad.nombrecomun as enfermedad, asociacion_enf.descripcion as descripcion from planta, metodopre, enfermedad, asociacion, asociacion_enf where asociacion.idasociacion = asociacion_enf.idasociacion and planta.idplanta = asociacion.idplanta and metodopre.idmetodopre = asociacion.idmetodopre and enfermedad.idenfermedad = asociacion_enf.idenfermedad and asociacion_enf.idenfermedad ='".$_GET["clave"]."' and planta.idplanta='".$planta["idplanta"]."' and metodopre.idmetodopre='".$aux01["idmetodo"]."' order by planta.nombrecomun, metodopre.titulo, enfermedad.nombrecomun";
                            $resultDes = mysql_query($sqlDes,$con) or die(mysql_error());
                            $aux02 = mysql_fetch_assoc($resultDes);
                            echo "<div class='col-md-1' style='padding: 0px;'></div>";

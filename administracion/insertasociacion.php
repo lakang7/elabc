@@ -76,11 +76,11 @@
                         <select id="metodo" name="metodo" class="selectpicker show-tick" data-live-search="true" data-width="100%" required="required">
                             <?php
                                 $con=Conexion();
-                                $sql_listaMETODO="select * from metodo order by nombre";
+                                $sql_listaMETODO="select * from metodopre order by titulo";
                                 $result_listaMETODO=mysql_query($sql_listaMETODO,$con) or die(mysql_error());
                                 if(mysql_num_rows($result_listaMETODO)>0){
                                     while ($fila = mysql_fetch_assoc($result_listaMETODO)) {
-                                        echo "<option value='".$fila["idmetodo"]."'>".$fila["nombre"]."</option>";
+                                        echo "<option value='".$fila["idmetodopre"]."'>".$fila["titulo"]."</option>";
                                     }
                                 }
                                 mysql_close($con);

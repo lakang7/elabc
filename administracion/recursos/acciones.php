@@ -698,7 +698,7 @@
     /*Registro de asociación*/
     if($_GET["tarea"]==34){
         $con =  Conexion();                
-        $sql_insertASOCIACION = "insert into asociacion (idplanta,idmetodo,descripcion) values ('".$_POST["planta"]."','".$_POST["metodo"]."','".$_POST["descripcion"]."');";
+        $sql_insertASOCIACION = "insert into asociacion (idplanta,idmetodopre,descripcion) values ('".$_POST["planta"]."','".$_POST["metodo"]."','".$_POST["descripcion"]."');";
 	$result_insertASOCIACION = mysql_query($sql_insertASOCIACION,$con) or die(mysql_error());	        
         $fp = fopen("../../recursos/precede.txt", "r");
         $precede = fgets($fp);   
@@ -726,7 +726,7 @@
     /*Edición de asociacion*/
     if($_GET["tarea"]==35){
         $con =  Conexion();
-        $sql_updateASOCIACION="update asociacion set idplanta='".$_POST["planta"]."', idmetodo='".$_POST["metodo"]."', descripcion='".$_POST["descripcion"]."' where idasociacion='".$_GET["id"]."'";
+        $sql_updateASOCIACION="update asociacion set idplanta='".$_POST["planta"]."', idmetodopre='".$_POST["metodo"]."', descripcion='".$_POST["descripcion"]."' where idasociacion='".$_GET["id"]."'";
 	$result_updateASOCIACION = mysql_query($sql_updateASOCIACION,$con) or die(mysql_error());	        
                
         for($i=0;$i<count($_POST["enfermedad"]);$i++){
@@ -1532,5 +1532,149 @@
             </script>
 	<?php         
     }    
+    
+  /*Registro de categoria de metodo de preparacion*/
+    if($_GET["tarea"]==65){
+        $con =  Conexion();
+        $sql_insertcatmetodo = "insert into catmetodo (nombre,mostrar,descripcion) values ('".$_POST["nombre"]."','".$_POST["mostrar"]."','".$_POST["descripcion"]."');";
+	$result_insertcatmetodo = mysql_query($sql_insertcatmetodo,$con) or die(mysql_error());	        
+        mysql_close($con);  
+        
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Registro Satisfactorio de Categoria de Metodo de Preparacion");
+		location.href="../listarcatmetododepreparacion.php";
+            </script>
+	<?php                
+    }       
+    
+    /*Edición de categoria de metodo de preparacion*/
+    if($_GET["tarea"]==66){
+        $con =  Conexion();
+        $sql_updatecatterapia="update catmetodo set nombre='".$_POST["nombre"]."', descripcion='".$_POST["descripcion"]."', mostrar='".$_POST["mostrar"]."' where idcatmetodo='".$_GET["id"]."'";
+	$result_updatecatterapia = mysql_query($sql_updatecatterapia,$con) or die(mysql_error());	        
+        mysql_close($con);
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Edicion Satisfactoria de Categoria de Metodo de Preparacion");
+		location.href="../listarcatmetododepreparacion.php";
+            </script>
+	<?php                 
+    }  
+    
+    /*Eliminación de categoria de metodo de preparacion*/
+    if($_GET["tarea"]==67){
+        $con =  Conexion();
+        $sql_eliminacatterapia="delete from catmetodo where idcatmetodo='".$_GET["id"]."';";
+	$result_eliminacatterapia=mysql_query($sql_eliminacatterapia,$con) or die(mysql_error());
+        mysql_close($con);
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Eliminacion Satisfactoria de Categoria de de Metodo de Preparacion");
+		location.href="../listarcatmetododepreparacion.php";
+            </script>
+	<?php            
+    }    
             
+    
+    /*registro de metodo de preparacion*/
+    if($_GET["tarea"]==68){
+        $con =  Conexion();
+        $fp = fopen("../../recursos/precede.txt", "r");
+        $precede = fgets($fp);   
+        $atributos= fgets($fp);
+        $conecta=explode("|",$atributos);        
+        $sql_insertterapia = "insert into metodopre (idcatmetodo,titulo,mostrar,imagencatalogo,imagenperfil,descripcioncatalogo,descripcionperfil,numerolecturas) values ('".$_POST["categoria"]."','".$_POST["nombre"]."','".$_POST["mostrar"]."','','','".$_POST["catalogo"]."','".$_POST["contenido"]."',0);";	
+        $result_insertterapia = mysql_query($sql_insertterapia,$con) or die(mysql_error());
+        //echo "pasa 0.5</br>";
+        $sql_ultimaTerapia="SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '".$conecta[3]."' AND TABLE_NAME = 'metodopre';";
+	$result_ultimaTerapia=mysql_query($sql_ultimaTerapia,$con) or die(mysql_error());	
+	$fila = mysql_fetch_assoc($result_ultimaTerapia);
+        $indice=intval($fila["AUTO_INCREMENT"]);
+        $indice=($indice-1); 
+        //echo "pasa 01</br>";
+        if($_FILES['imagenCatalogo']['name']){
+            $target_path = "../../imagenes/metodos/catalogo/";
+            $target_path = $target_path . basename( $_FILES['imagenCatalogo']['name']); 
+            if(move_uploaded_file($_FILES['imagenCatalogo']['tmp_name'], $target_path)) 
+            {             
+                $sql_updateTerapia="update metodopre set imagencatalogo='".$_FILES['imagenCatalogo']['name']."' where idmetodopre='".$indice."'";
+                $result_updateTerapia = mysql_query($sql_updateTerapia,$con) or die(mysql_error());            
+            }                     
+        }  
+        //echo "pasa 02</br>";
+        if($_FILES['imagenContenido']['name']){
+            $target_path = "../../imagenes/metodos/perfil/";
+            $target_path = $target_path . basename( $_FILES['imagenContenido']['name']); 
+            if(move_uploaded_file($_FILES['imagenContenido']['tmp_name'], $target_path)) 
+            {             
+                $sql_updateTerapia="update metodopre set imagenperfil='".$_FILES['imagenContenido']['name']."' where idmetodopre='".$indice."'";
+                $result_updateTerapia = mysql_query($sql_updateTerapia,$con) or die(mysql_error());            
+            }                     
+        }         
+        //echo "pasa 03</br>";
+        mysql_close($con); 
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Registro Satisfactorio de Metodo de Preparacion");
+		location.href="../listarmetododepreparacion.php";
+            </script>
+	<?php           
+    }
+    
+    /*edicion de metodo de preparacion*/
+    if($_GET["tarea"]==69){
+        $con =  Conexion();
+        $sql_updatecatterapia="update metodopre set idcatmetodo='".$_POST["categoria"]."', titulo='".$_POST["nombre"]."', mostrar='".$_POST["mostrar"]."' , descripcioncatalogo='".$_POST["catalogo"]."', descripcionperfil='".$_POST["contenido"]."' where idmetodopre='".$_GET["id"]."'";
+	$result_updatecatterapia = mysql_query($sql_updatecatterapia,$con) or die(mysql_error());
+        
+        if($_FILES['imagenCatalogo']['name']){
+            $target_path = "../../imagenes/metodos/catalogo/";
+            $target_path = $target_path . basename( $_FILES['imagenCatalogo']['name']); 
+            if(move_uploaded_file($_FILES['imagenCatalogo']['tmp_name'], $target_path)) 
+            {             
+                $sql_updateTerapia="update metodopre set imagencatalogo='".$_FILES['imagenCatalogo']['name']."' where idmetodopre='".$_GET["id"]."'";
+                $result_updateTerapia = mysql_query($sql_updateTerapia,$con) or die(mysql_error());            
+            }                     
+        }  
+        
+        if($_FILES['imagenContenido']['name']){
+            $target_path = "../../imagenes/metodos/perfil/";
+            $target_path = $target_path . basename( $_FILES['imagenContenido']['name']); 
+            if(move_uploaded_file($_FILES['imagenContenido']['tmp_name'], $target_path)) 
+            {             
+                $sql_updateTerapia="update metodopre set imagenperfil='".$_FILES['imagenContenido']['name']."' where idmetodopre='".$_GET["id"]."'";
+                $result_updateTerapia = mysql_query($sql_updateTerapia,$con) or die(mysql_error());            
+            }                     
+        }         
+        
+        
+        mysql_close($con); 
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Edición Satisfactoria de Metodo de Preparacion");
+		location.href="../listarmetododepreparacion.php";
+            </script>
+	<?php          
+    } 
+    
+    
+    /*Eliminar metodo de preparacion*/
+    if($_GET["tarea"]==70){
+        $con =  Conexion();
+        $sql_terapia="select * from metodopre where idmetodopre='".$_GET["id"]."'";
+        $result_terapia=mysql_query($sql_terapia,$con) or die(mysql_error()); 
+        $terapia = mysql_fetch_assoc($result_terapia);
+        unlink ("../../imagenes/metodos/catalogo/".$terapia["imagencatalogo"]); 
+        unlink ("../../imagenes/metodos/perfil/".$terapia["imagenperfil"]);
+        $sql_eliminaTerapia="delete from metodopre where idmetodopre='".$_GET["id"]."';";
+	$result_eliminaTerapia=mysql_query($sql_eliminaTerapia,$con) or die(mysql_error());
+        mysql_close($con);
+	?>
+            <script type="text/javascript" language="JavaScript" >
+		alert("Eliminación Satisfactoria de Metodo de Preparacion");
+		location.href="../listarmetododepreparacion.php";
+            </script>
+	<?php         
+    }      
 ?>

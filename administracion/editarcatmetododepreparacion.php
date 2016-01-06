@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
         <link href="../administracion/recursos/administracion.css" rel='stylesheet' type='text/css'>
-        <title>Editar | Describe Asociación</title> 
+        <title>Editar | Categoria Metodos de Preparacion</title> 
         <script type="text/javascript" language="JavaScript" >
             function redirigir(direccion){
                 location.href=direccion;
@@ -24,7 +24,7 @@
         </script>        
         
         <?php
-            header('Content-Type: text/html; charset=UTF-8');
+            header('Content-Type: text/html; charset=UTF-8');        
             require_once("../administracion/recursos/funciones.php");
         ?>              
     </head>
@@ -36,11 +36,12 @@
                     <?php Menu(); ?>
                 </div>
                 <div class="col-md-9">
-                    <form method="post" id="form_CREARcomposicionquimica" action="recursos/acciones.php?tarea=37&id=<?php echo $_GET["id"]; ?>">
-                        <div class="col-md-12 titulopagina" style="margin-top: 125px;">Describe Asociación</div>
+                    <form method="post" id="form_CREARcomposicionquimica" action="recursos/acciones.php?tarea=66&id=<?php echo $_GET["id"]; ?>">
+                        <div class="col-md-12 titulopagina" style="margin-top: 125px;">Categoria Metodos de Preparacion</div>
                     <div class="col-md-12">
-                        <div class="btn-group" role="group" aria-label="...">                            
-                            <button type="button" onclick=redirigir("listardescibeasociacion.php")  class="btn btn-default boton">Listar Elementos</button>
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button type="button" onclick=redirigir("insertcatmetododepreparacion.php") class="btn btn-default boton">Crear Nuevo Elemento +</button>
+                            <button type="button" onclick=redirigir("listarcatmetododepreparacion.php")  class="btn btn-default boton">Listar Elementos</button>
                         </div>
                     </div>
                     <div class="col-md-12 subtitulopagina">
@@ -48,24 +49,23 @@
                     </div>
                     <?php
                         $con=Conexion();
-                        $sql_ASOCIACION="SELECT asociacion_enf.idasociacion_enf as id, asociacion_enf.descripcion as descripcion, planta.nombrecomun as planta, metodopre.titulo as metodo, enfermedad.nombrecomun as enfermedad from asociacion, asociacion_enf, planta, metodopre, enfermedad where asociacion_enf.idasociacion = asociacion.idasociacion and asociacion.idplanta = planta.idplanta and asociacion.idmetodopre = metodopre.idmetodopre and asociacion_enf.idenfermedad = enfermedad.idenfermedad and asociacion_enf.idasociacion_enf='".$_GET["id"]."' order by planta.nombrecomun, metodopre.titulo, enfermedad.nombrecomun;";
-			$result_ASOCIACION=mysql_query($sql_ASOCIACION,$con) or die(mysql_error()); 
-                        if(mysql_num_rows($result_ASOCIACION)>0){
-                            $asociacion = mysql_fetch_assoc($result_ASOCIACION);                                                            
+                        $sql_CATTERAPIA="select * from catmetodo where idcatmetodo='".$_GET["id"]."'";
+			$result_CATTERAPIA=mysql_query($sql_CATTERAPIA,$con) or die(mysql_error()); 
+                        if(mysql_num_rows($result_CATTERAPIA)>0){
+                            $fila = mysql_fetch_assoc($result_CATTERAPIA);                                                            
                         }                    
                     ?>
                     <div class="col-md-12 contiene_entrada">
-                        <div class="col-md-12 titulo_entrada">Planta: <?php echo $asociacion["planta"]; ?></div>                        
+                        <div class="col-md-12 titulo_entrada">Nombre de Categoria de Metodo de Preparacion</div>
+                        <div class="col-md-12"><input type="text" value="<?php echo $fila["nombre"]; ?>" class="form-control"  id="nombre" name="nombre" maxlength="80" required="required" /></div>
                     </div>
                     <div class="col-md-12 contiene_entrada">
-                        <div class="col-md-12 titulo_entrada">Metodo de Preparacion: <?php echo $asociacion["metodo"]; ?> </div>                        
-                    </div>   
+                        <div class="col-md-12 titulo_entrada">Nombre para mostrar de la Categoria</div>
+                        <div class="col-md-12"><input type="text" value="<?php echo $fila["mostrar"]; ?>" class="form-control"  id="mostrar" name="mostrar" maxlength="80" required="required" /></div>
+                    </div>                        
                     <div class="col-md-12 contiene_entrada">
-                        <div class="col-md-12 titulo_entrada">Enfermedad: <?php echo $asociacion["enfermedad"]; ?> </div>                        
-                    </div>                         
-                    <div class="col-md-12 contiene_entrada">
-                        <div class="col-md-12 titulo_entrada">Descripción de la Asociación</div>
-                        <div class="col-md-12"><textarea class="form-control" maxlength="3000" rows="3"  id="descripcion" name="descripcion" required="required"><?php echo $asociacion["descripcion"]; ?></textarea></div>
+                        <div class="col-md-12 titulo_entrada">Descripción de la Categoria</div>
+                        <div class="col-md-12"><textarea class="form-control" rows="3"  id="descripcion" name="descripcion"><?php echo $fila["descripcion"]; ?></textarea></div>
                     </div> 
                     <div class="col-md-12 contiene_entrada">
                         <div class="col-md-12"><button type="submit" class="btn btn-default">Submit</button></div>                        

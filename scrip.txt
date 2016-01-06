@@ -159,11 +159,11 @@ CREATE TABLE tiposmetodo (
 CREATE TABLE asociacion (
     idasociacion mediumint(8) unsigned auto_increment,
     idplanta mediumint(8) unsigned not null,
-    idmetodo mediumint(8) unsigned not null,
+    idmetodopre mediumint(8) unsigned not null,
     descripcion varchar(2000) not null,
     PRIMARY KEY (idasociacion),
     FOREIGN KEY (idplanta) REFERENCES planta(idplanta) ON UPDATE CASCADE ON DELETE RESTRICT,
-    FOREIGN KEY (idmetodo) REFERENCES metodo(idmetodo) ON UPDATE CASCADE ON DELETE RESTRICT
+    FOREIGN KEY (idmetodopre) REFERENCES metodopre(idmetodopre) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 
@@ -297,4 +297,26 @@ CREATE TABLE terapia (
     numerolecturas mediumint(8) unsigned not null,
     PRIMARY KEY (idterapia),
     FOREIGN KEY (idcatterapia) REFERENCES catterapia(idcatterapia) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE catmetodo (
+    idcatmetodo mediumint(8) unsigned auto_increment,
+    nombre VARCHAR(80) not null,
+    mostrar VARCHAR(80) not null,
+    descripcion VARCHAR(600) not null,
+    PRIMARY KEY (idcatmetodo)
+);
+
+CREATE TABLE metodopre (
+    idmetodopre mediumint(8) unsigned auto_increment,
+    idcatmetodo mediumint(8) unsigned,
+    titulo VARCHAR(120) not null,
+    mostrar VARCHAR(120) not null,
+    imagencatalogo VARCHAR(60) not null,
+    imagenperfil VARCHAR(60) not null,
+    descripcioncatalogo VARCHAR(200) not null,
+    descripcionperfil VARCHAR(25000) not null,
+    numerolecturas mediumint(8) unsigned not null,
+    PRIMARY KEY (idmetodopre),
+    FOREIGN KEY (idcatmetodo) REFERENCES catmetodo(idcatmetodo) ON UPDATE CASCADE ON DELETE RESTRICT
 );

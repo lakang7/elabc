@@ -14,20 +14,21 @@
             $con = mysql_connect($conecta[0],$conecta[1],$conecta[2]);
             mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'", $con);
             mysql_select_db($conecta[3], $con); 
+                        
             
-            $sql_METODO="select * from metodo where idmetodo='".$_GET["clave"]."'";
-            $result_METODO=mysql_query($sql_METODO,$con) or die(mysql_error());
-            if(mysql_num_rows($result_METODO)>0){
-                $metodo = mysql_fetch_assoc($result_METODO);
+            $sql_TERAPIA="select * from metodopre where idmetodopre='".$_GET["clave"]."'";
+            $result_TERAPIA=mysql_query($sql_TERAPIA,$con) or die(mysql_error());
+            if(mysql_num_rows($result_TERAPIA)>0){
+                $terapia = mysql_fetch_assoc($result_TERAPIA);
             } 
             
-            $sql_TMETODO="select * from tiposmetodo where idmetodo='".$_GET["clave"]."'";
+            /*$sql_TMETODO="select * from tiposmetodo where idmetodo='".$_GET["clave"]."'";
             $result_TMETODO=mysql_query($sql_TMETODO,$con) or die(mysql_error());            
-            $numeroSubtipos=mysql_num_rows($result_TMETODO);
+            $numeroSubtipos=mysql_num_rows($result_TMETODO);*/
             
         ?>
         <meta charset="UTF-8">
-        <title>Metodo de Preparación <?php echo $metodo["nombre"]; ?></title>    
+        <title>Terapia Alternativa <?php echo $terapia["titulo"]; ?></title>    
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo $precede; ?>bootstrap/js/bootstrap.js"></script>
         <script type="text/javascript" src="<?php echo $precede; ?>bootstrap/js/bootstrap.min.js"></script>
@@ -68,88 +69,33 @@
                 </div>
             </div>
         <div class="row" style="margin-bottom: 100px;">
-            <div class="col-md-5">  
-                <div class="col-md-12 subtitulo_principal" style="border-bottom: 1px solid #CCCCCC; margin-bottom: 0px; font-weight: bold"><?php echo $metodo["nombre"]; ?></div>                
-                <img class="img-responsive center-block" src="<?php echo $precede; ?>imagenes/metodos/perfil/<?php echo $metodo["imagenperfil"]; ?>" style="margin-bottom: 10px;">
-
-                <div class="fb-like" data-href="<?php echo trim($precede); ?>metodo-de-preparacion/<?php echo str_replace(" ","-",trim($metodo["mostrar"])) ?>/<?php echo $_GET["clave"]; ?>" data-layout="button_count" ></div>
-                <div style="margin-left: 5px;" class="fb-share-button" data-href="<?php echo trim($precede); ?>metodo-de-preparacion/<?php echo str_replace(" ","-",trim($metodo["mostrar"])) ?>/<?php echo $_GET["clave"]; ?>" data-layout="button_count"></div>
-                <div style="margin-left: 5px; margin-right: 5px;" class="fb-send" data-href="<?php echo trim($precede); ?>metodo-de-preparacion/<?php echo str_replace(" ","-",trim($metodo["mostrar"])) ?>/<?php echo $_GET["clave"]; ?>" ></div>                
+            <div class="col-md-12 subtitulo_principal" style="border-bottom: 1px solid #CCCCCC; margin-bottom: 0px; font-weight: bold"><?php echo $terapia["titulo"]; ?></div>
+            <div class="col-md-12" style="margin-top: 10px">
+                <?php $url="http://".$_SERVER["HTTP_HOST"].$_SERVER['REQUEST_URI']; ?> 
+                <div class="fb-like" data-href="<?php echo $url; ?>" data-layout="button_count" ></div>
+                <div style="margin-left: 5px;" class="fb-share-button" data-href="<?php echo $url; ?>" data-layout="button_count"></div>
+                <div style="margin-left: 5px; margin-right: 5px;" class="fb-send" data-href="<?php echo $url; ?>" ></div>                
                 <a href="https://twitter.com/share" class="twitter-share-button" data-via="elabcnaturista" data-lang="es">Twittear</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>                                
-                <?php echo $metodo["descripcionperfil"]; ?>                           
-                
-                
-                
-                                
-                
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>                                    
+            </div>            
+            <div class="col-md-12" style="margin-top: 10px">  
+                <div style="font-family: 'Open Sans Condensed', sans-serif; font-size: 18px; text-align: justify"><img class="img-responsive col-md-5"  src="<?php echo trim($precede) ?>imagenes/metodos/perfil/<?php echo $terapia["imagenperfil"]; ?>" style="float: left; margin-right: 30px; margin-bottom: 10px; padding: 0px"><?php echo $terapia["descripcionperfil"]; ?></div>                 
             </div>
-            <div class="col-md-7" > 
-                <?php
-                if($numeroSubtipos>0){
-                    echo "<div class='col-md-12 subtitulo_principal' style='border-bottom: 1px solid #CCCCCC; margin-bottom: 0px; font-weight: bold'>Tipos de ".$metodo["nombre"]."</div>";
-                    while ($tmetodo = mysql_fetch_assoc($result_TMETODO)) {
-                        echo "<div style='margin-bottom: 15px; float:left'>";
-                        echo "<div class='col-md-12 planta_titpre'>".$tmetodo["nombre"]."</div>";
-                        echo "<div class='col-md-12 plata_preparacion' style='margin-bottom: 0px'>".$tmetodo["descripcion"]."</div>";
-                        
-                        if($tmetodo["ingredientes"]!=""){
-                            $listaIngredientes=explode("|",$tmetodo["ingredientes"]);
-                            echo "<div class='col-md-12' style='padding: 0px; margin-top: 10px;'>";
-                            echo "<div class='col-md-12 subtitulo_principal' style='padding: 0px; border-bottom: 0px solid #CCCCCC; font-weight: bold; font-size: 18px;'>Ingredientes</div>";
-                            for($i=0;$i<count($listaIngredientes);$i++){
-                                echo "<div class='col-md-12 precaucion' style='padding: 0px; text-align: justify; font-size: 16px;'>- ".$listaIngredientes[$i]."</div>";
-                            }
-                            echo "</div>";
-                        }
-                        
-                        if($tmetodo["procedimientos"]!=""){
-                            $listaProcedimientos=explode("|",$tmetodo["procedimientos"]);
-                            echo "<div class='col-md-12' style='padding: 0px; margin-top: 10px;'>";
-                            echo "<div class='col-md-12 subtitulo_principal' style='padding: 0px; border-bottom: 0px solid #CCCCCC; font-weight: bold; font-size: 18px;'>Descripción de La Preparación</div>";
-                            for($i=0;$i<count($listaProcedimientos);$i++){
-                                echo "<div class='col-md-12 precaucion' style='padding: 0px; text-align: justify; font-size: 16px;'>- ".$listaProcedimientos[$i]."</div>";
-                            }
-                            echo "</div>";
-                        }
-                        echo "</div>";
-                    }
-                }else{
-                        if($metodo["ingredientes"]!=""){
-                            $listaIngredientes=explode("|",$metodo["ingredientes"]);
-                            echo "<div class='col-md-12' style='padding: 0px; margin-top: 10px;'>";
-                            echo "<div class='col-md-12 subtitulo_principal' style='padding: 0px; border-bottom: 0px solid #CCCCCC; font-weight: bold; font-size: 18px;'>Ingredientes</div>";
-                            for($i=0;$i<count($listaIngredientes);$i++){
-                                echo "<div class='col-md-12 precaucion' style='padding: 0px; text-align: justify; font-size: 16px;'>- ".$listaIngredientes[$i]."</div>";
-                            }
-                            echo "</div>";
-                        } 
-                        
-                        if($metodo["procedimiento"]!=""){
-                            $listaProcedimientos=explode("|",$metodo["procedimiento"]);
-                            echo "<div class='col-md-12' style='padding: 0px; margin-top: 10px;'>";
-                            echo "<div class='col-md-12 subtitulo_principal' style='padding: 0px; border-bottom: 0px solid #CCCCCC; font-weight: bold; font-size: 18px;'>Descripción de La Preparación</div>";
-                            for($i=0;$i<count($listaProcedimientos);$i++){
-                                echo "<div class='col-md-12 precaucion' style='padding: 0px; text-align: justify; font-size: 16px;'>- ".$listaProcedimientos[$i]."</div>";
-                            }
-                            echo "</div>";
-                        }                        
-                }
-                
-                ?>
-                <div class="fb-comments" data-href="<?php echo trim($precede); ?>metodo-de-preparacion/<?php echo str_replace(" ","-",trim($metodo["mostrar"])) ?>/<?php echo $_GET["clave"]; ?>" data-numposts="5" width="100%"></div>                
-            </div>
+
         </div>
+            <div class="row">
+                <div class="fb-comments" data-href="<?php echo trim($precede); ?>metodo-de-preparacion/<?php echo str_replace(" ","-",trim($metodo["mostrar"])) ?>/<?php echo $_GET["clave"]; ?>" data-numposts="5" width="100%"></div>                            
+            </div>
         <?php piepagina();  ?>
         </div>         
     </body>
         <?php
             if (!isset($_SESSION['metodo'][$_GET["clave"]])) { 
-                $_SESSION['metodo'][$_GET["clave"]]=1;
+               /* $_SESSION['metodo'][$_GET["clave"]]=1;
                 $visitasActuales=$metodo["numerolecturas"];
                 $visitasActuales++;
                 $sqlCuenta="update metodo set numerolecturas='".$visitasActuales."' where idmetodo='".$_GET["clave"]."'";
-                $resultCuenta=mysql_query($sqlCuenta,$con) or die(mysql_error());
+                $resultCuenta=mysql_query($sqlCuenta,$con) or die(mysql_error());*/
             }              
         ?>     
         <?php mysql_close($con); ?>

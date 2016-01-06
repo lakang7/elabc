@@ -196,7 +196,8 @@
         $(document).ready(function() {
             
             function cargardatos(){
-                $.get("//127.0.0.1:8080/elabc/recursos/acciones.php?tarea=1&clave="+document.getElementById("categoactual").value+"&pagina="+document.getElementById("paginaactual").value,
+                //$.get("//127.0.0.1:8080/elabc/recursos/acciones.php?tarea=1&clave="+document.getElementById("categoactual").value+"&pagina="+document.getElementById("paginaactual").value,
+                $.get("<?php echo trim($precede); ?>recursos/acciones.php?tarea=1&clave="+document.getElementById("categoactual").value+"&pagina="+document.getElementById("paginaactual").value,
                 function(data){
                    if (data != "") {
                         $(".artencatalogo:last").after(data);

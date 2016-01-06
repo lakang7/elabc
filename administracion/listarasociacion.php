@@ -63,7 +63,7 @@
                                 <tbody style="border-top: 0px;">
                                     <?php
                                         $con=Conexion();
-                                        $sql_listaASOCIACION="select asociacion.idasociacion, planta.nombrecomun as planta, metodo.nombre as metodo from asociacion, planta, metodo where asociacion.idplanta = planta.idplanta and asociacion.idmetodo = metodo.idmetodo order by planta, metodo;";
+                                        $sql_listaASOCIACION="select asociacion.idasociacion, planta.nombrecomun as planta, metodopre.titulo as metodo from asociacion, planta, metodopre where asociacion.idplanta = planta.idplanta and asociacion.idmetodopre = metodopre.idmetodopre order by planta, metodo;";
 					$result_listaASOCIACION=mysql_query($sql_listaASOCIACION,$con) or die(mysql_error()); 
                                         
                                         
