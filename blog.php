@@ -59,6 +59,18 @@
                 <!--<div class="col-md-9" style="text-align: right; font-family: 'Open Sans Condensed', sans-serif; font-size: 14px; margin-bottom: 10px">Ciudad de Mexico, 18 de Agosto de 2015</div>-->
                 <div class="col-md-9">
                     <div class="row">
+                        <div class="col-md-12" style="margin-top: 10px; margin-bottom: 10px">                                                    
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Baner Sobre el Menú -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2217467265480616"
+     data-ad-slot="2240864283"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>                                                                                   
+                        </div>                        
                         <?php menu(); ?>                                              
                     </div>                                        
                 </div>
@@ -177,16 +189,21 @@
                             echo "<div onclick=redirigir('".$apunta."') class='col-md-12 opcion_menu_lateral'  title='".$fila["descripcion"]."'>".$fila["nombre"]."</div>";
                         }
                     }                     
-                ?>
+                ?>                                
+
+                <div class="col-md-12" style="border: 0px solid #CCCCCC; margin-top: 15px">                    
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- baner de blog -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2217467265480616"
+     data-ad-slot="5355781086"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>                                       
+                </div>
                 
-               <!--<div class="col-md-12" style="background-color: #eae6e7; padding-top: 10px; padding-bottom: 15px; margin-top: 15px; margin-bottom: 20px">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-10 subscribete_tit">¡Subscribete y recibe notificaciones en tu correo cada vez que publiquemos un nuevo articulo!</div>                
-                    <div class="col-md-12 subscribete_tit" style="margin-top: 10px; padding: 0px;"><input type="email" class="form-control" id="email" placeholder="Ingresa tú email"></div>
-                    <div class="col-md-3"></div>
-                    <div class="col-md-6 subscribete_boton" style="margin-top: 10px; background-color: #CCCCCC; padding-top: 5px; padding-bottom: 5px;">Suscribirse</div>                
-                </div> -->
-                                                
             </div>            
 
         </div>      

@@ -62,6 +62,18 @@
                 <!--<div class="col-md-9" style="text-align: right; font-family: 'Open Sans Condensed', sans-serif; font-size: 14px; margin-bottom: 10px">Ciudad de Mexico, 18 de Agosto de 2015</div>                                -->
                 <div class="col-md-9">
                     <div class="row">
+                        <div class="col-md-12" style="margin-top: 10px; margin-bottom: 10px">                                                    
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Baner Sobre el Menú -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2217467265480616"
+     data-ad-slot="2240864283"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>                                                                                    
+                        </div>                        
                          <?php menu(); ?>                                             
                     </div>                                        
                 </div>
@@ -210,6 +222,23 @@
                 
             </div>
         </div>
+            <div class="row">
+                <div class="col-md-3">
+                    
+                </div>
+                <div class="col-md-9">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- horizontal index 01 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2217467265480616"
+     data-ad-slot="7450976286"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>                    
+                </div>                
+            </div>            
         <?php piepagina(); ?>
         </div>
     <script type="text/javascript">

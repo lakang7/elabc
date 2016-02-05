@@ -28,7 +28,7 @@
             
         ?>
         <meta charset="UTF-8">
-        <title>Terapia Alternativa <?php echo $terapia["titulo"]; ?></title>    
+        <title>Metodo de Preparación <?php echo $terapia["titulo"]; ?></title>    
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo $precede; ?>bootstrap/js/bootstrap.js"></script>
         <script type="text/javascript" src="<?php echo $precede; ?>bootstrap/js/bootstrap.min.js"></script>
@@ -64,11 +64,23 @@
                 <!--<div class="col-md-9" style="text-align: right; font-family: 'Open Sans Condensed', sans-serif; font-size: 14px; margin-bottom: 10px">Ciudad de Mexico, 18 de Agosto de 2015</div>                                -->
                 <div class="col-md-9">
                     <div class="row">
+                        <div class="col-md-12" style="margin-top: 10px; margin-bottom: 10px">                                                    
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Baner Sobre el Menú -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2217467265480616"
+     data-ad-slot="2240864283"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>                                                                                   
+                        </div>                        
                         <?php menu(); ?>                                             
                     </div>                                        
                 </div>
             </div>
-        <div class="row" style="margin-bottom: 100px;">
+            <div class="row" style="margin-bottom: 20px;" >
             <div class="col-md-12 subtitulo_principal" style="border-bottom: 1px solid #CCCCCC; margin-bottom: 0px; font-weight: bold"><?php echo $terapia["titulo"]; ?></div>
             <div class="col-md-12" style="margin-top: 10px">
                 <?php $url="http://".$_SERVER["HTTP_HOST"].$_SERVER['REQUEST_URI']; ?> 
@@ -83,6 +95,20 @@
             </div>
 
         </div>
+            <div class="row" style="margin-bottom: 100px;">
+                <div class="col-md-12">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- horizontal index 01 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2217467265480616"
+     data-ad-slot="7450976286"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>                    
+                </div>
+            </div>                 
             <div class="row">
                 <div class="fb-comments" data-href="<?php echo trim($precede); ?>metodo-de-preparacion/<?php echo str_replace(" ","-",trim($metodo["mostrar"])) ?>/<?php echo $_GET["clave"]; ?>" data-numposts="5" width="100%"></div>                            
             </div>

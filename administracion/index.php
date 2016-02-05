@@ -38,6 +38,22 @@
       		</form>    			        			    			
     		</div>    		    		
     	</div>
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" style="border: 1px solid #CCCCCC">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Baner Sobre el Menú -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-2217467265480616"
+     data-ad-slot="2240864283"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>                
+            </div>
+            <div class="col-md-2"></div>
+        </div>
     </div> 
     </body>
 </html>
