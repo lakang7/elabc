@@ -18,7 +18,7 @@
             
             $titulo="Blog @elabcnaturista Consejos de Medicina Natural, Nutrición y Dietetica";
             if($_GET["clave"]!="0"){
-                $sqlcate="select * from catblog where idcatblog='".$_GET["clave"]."'";
+                $sqlcate="select * from catblog where idcatblog='".mysql_real_escape_string($_GET["clave"])."'";
                 $resultcate=mysql_query($sqlcate,$con) or die(mysql_error()); 
                 $cate = mysql_fetch_assoc($resultcate);
                 $titulo="Blog @elabcnaturista Consejos de Medicina Natural, Nutrición y Dietetica | ".$cate["nombre"];
